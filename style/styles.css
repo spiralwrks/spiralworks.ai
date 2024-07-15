@@ -13,15 +13,18 @@ b {
 .container {
     display: flex;
     flex-direction: column;
-    max-height: 58em;
+    min-height: 100vh;
 }
 
 .canvas-container {
     flex: 1;
+    min-height: 250px;
     overflow: hidden;
+    position: relative;
 }
 
 .webgl {
+    position: absolute;
     width: 100%;
     height: 100%;
     display: block;
@@ -75,22 +78,6 @@ b {
     padding-right: 21em;
 }
 
-@media (max-width: 50em) {
-    .wintermute-container {
-        flex-direction: column;
-    }
-
-    .content-2 {
-        text-align: center;
-        padding-right: 0;
-        margin-bottom: 1em;
-    }
-
-    .pure-u-md-1-4 img {
-        width: 25em;
-    }
-}
-
 hr.divider {
     width: 65%;
     border: none;
@@ -105,4 +92,49 @@ a {
 .footer-content {
     font-family: 'Montserrat', sans-serif;
     font-size: 0.8em;
+}
+
+@media (max-width: 980px) {
+    .canvas-container {
+        min-height: 30vh;
+    }
+
+    .text-container {
+        background-color: rgba(255, 255, 255, 0);
+        z-index: -1;
+        padding-left: 3em;
+        padding-right: 2em;
+    }
+
+    .wintermute-container {
+        flex-direction: column-reverse;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .content-2 {
+        padding-left: 2em;
+        padding-right: 1em;
+        margin-bottom: 1em;
+    }
+
+    .pure-u-md-1-4 img {
+        width: 90%;
+        max-width: 25em;
+        padding-right: 0;
+        margin-bottom: 1em;
+    }
+
+    .content-1 {
+        font-size: 0.9em;
+    }
+
+    .content-2 {
+        font-size: 0.9em;
+    }
+
+    hr.divider {
+      width: 75%;
+    }
+
 }

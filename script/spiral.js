@@ -7,11 +7,15 @@ const canvas = document.querySelector('canvas.webgl');
 // scene
 const scene = new THREE.Scene();
 
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 // parameters
 const parameters = {
     count: 100000,
-    size: 0.014,
-    radius: 1.5,
+    size: isMobile() ? 0.013 : 0.014,
+    radius: isMobile() ? 1.2 : 1.5,
     branches: 8,
     spin: 1,
     randomness: 0.2,
