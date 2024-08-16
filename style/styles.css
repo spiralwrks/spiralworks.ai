@@ -1,9 +1,7 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    font-family: 'Montserrat', sans-serif;
 }
 
 b {
@@ -17,124 +15,67 @@ b {
 }
 
 .canvas-container {
-    flex: 1;
-    min-height: 250px;
+    height: 30vh;
     overflow: hidden;
-    position: relative;
 }
 
 .webgl {
-    position: absolute;
     width: 100%;
     height: 100%;
     display: block;
-}   
+}
 
 .text-container {
-    padding-left: 15em;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em;
 }
 
 .content-1 {
-    font-family: 'Montserrat', sans-serif;
     font-size: 1em;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    margin-bottom: 1em;
 }
 
 .content-1 img {
-    width: 1.1em; 
+    width: 1.1em;
     height: 1.1em;
     vertical-align: middle;
+    margin-right: 0.2em;
+    margin-bottom: 0.2em;
 }
 
-.wintermute-container {
-    padding-left: 9em;
-    display: flex;
-    align-items: center;
-}
-
-.content-2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1em;
-    padding-left: 6em;
-    padding-right: 7em;
-    flex: 3;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-.pure-u-md-1-4 {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pure-u-md-1-4 img {
-    width: 30em;
-    height: auto;
-    border-radius: 25px;
-    border-top-right-radius: 25px;
-    padding-right: 21em;
-}
-
-hr.divider {
-    width: 65%;
+.divider {
+    width: 100%;
+    max-width: 795px;
+    margin: 2em auto;
     border: none;
     border-top: 1px solid black;
-    margin: 0 auto;
 }
 
 a {
     color: black;
 }
 
-.footer-content {
-    font-family: 'Montserrat', sans-serif;
+.footer {
+    text-align: center;
+    padding: 1em;
     font-size: 0.8em;
 }
 
 @media (max-width: 980px) {
     .canvas-container {
-        min-height: 30vh;
+        height: 25vh;
     }
 
     .text-container {
-        background-color: rgba(255, 255, 255, 0);
-        z-index: -1;
-        padding-left: 3em;
-        padding-right: 2em;
-    }
-
-    .wintermute-container {
-        flex-direction: column-reverse;
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-
-    .content-2 {
-        padding-left: 2em;
-        padding-right: 1em;
-        margin-bottom: 1em;
-    }
-
-    .pure-u-md-1-4 img {
-        width: 90%;
-        max-width: 25em;
-        padding-right: 0;
-        margin-bottom: 1em;
+        padding: 3em;
     }
 
     .content-1 {
         font-size: 0.9em;
     }
 
-    .content-2 {
-        font-size: 0.9em;
+    .divider {
+        width: 78%;
     }
-
-    hr.divider {
-      width: 75%;
-    }
-
 }
