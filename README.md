@@ -4,22 +4,20 @@ built using pure.css, three.js, vite, node, and gh-pages
 
 ## deploying
 
-```
-npm run build
-```
-
-```
-git add .
+build
+```shell
+$ npm run build
 ```
 
-```
-git commit -m "commit msg"
+push to github:
+```shell
+$ git add .
+$ git commit -m "commit msg"
+$ git push -u origin main
+$ npm run deploy
 ```
 
-```
-git push -u origin main
-```
-
-```
-npm run deploy
+deploy:
+```shell
+$ npm run deploy
 ```
