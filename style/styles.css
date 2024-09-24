@@ -68,7 +68,9 @@ a {
     }
 
     .text-container {
-        padding: 3em;
+        padding-left: 3em;
+        padding-right: 3em;
+        padding-top: 1.5em;
     }
 
     .content-1 {
