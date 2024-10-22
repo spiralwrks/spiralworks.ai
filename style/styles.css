@@ -25,6 +25,57 @@ b {
     display: block;
 }
 
+.nav-bar {
+    text-align: center;
+}
+
+.nav-bar a {
+    position: relative;
+    text-decoration: none;
+    padding: 0.5em;
+    display: inline-block;
+    color: black;
+}
+
+
+/* Tooltip styling */
+.coming-soon .tooltip {
+    visibility: hidden;
+    background-color: #8622c9;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 4px;
+    position: absolute;
+    bottom: -20px; /* position the tooltip below the link */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 1;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.coming-soon .tooltip::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #8622c9 transparent;
+}
+
+/* Show the tooltip on hover */
+.coming-soon:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
 .text-container {
     max-width: 800px;
     margin: 0 auto;
