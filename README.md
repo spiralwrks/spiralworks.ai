@@ -2,6 +2,13 @@
 
 built using pure.css, three.js, vite, node, and gh-pages
 
+## development
+
+test locally:
+```shell
+$ npx vite
+```
+
 ## deploying
 
 build:
