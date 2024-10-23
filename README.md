@@ -6,8 +6,9 @@ This project is a React-based website for Spiral Works, a research and product l
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/spiralwrks/spiralworks.ai-react.git
-   cd spiralworks.ai-react
+   git clone https://github.com/spiralwrks/spiralworks.ai.git
+   git checkout react
+   cd spiralworks.ai
    ```
 
 2. Install dependencies:
