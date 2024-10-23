@@ -26,7 +26,7 @@ function Layout() {
         <Outlet />
 
         <footer className="footer">
-          @ 2024 Spiral Works, Inc. All Rights Reserved
+          &copy; 2024 Spiral Works, Inc. All Rights Reserved
         </footer>
       </div>
     </div>

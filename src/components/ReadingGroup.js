@@ -30,7 +30,7 @@ function ReadingGroup() {
   };
   return (
     <div className="pure-g text-container">
-      <div className="pure-u-1 pure-u-md-1">
+      <div className="pure-u-1 pure-u-md-1 reading-group-text">
        <p className="content-1">
           At <img src={logoImage} alt="logo" /> <b>Spiral Works</b> we believe in pushing the boundaries of artificial intelligence by exploring computational creativity and interdisciplinary approaches to generalization. The <b>Spiral Works Reading Group</b> is an open forum for researchers, enthusiasts, and innovators to explore the intersections of mathematics, philosophy, psychology, and computer science in AI.
         </p>

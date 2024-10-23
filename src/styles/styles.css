@@ -33,14 +33,7 @@ b {
   display: block;
 }
 
-.nav-bar {
-  position: sticky;
-  top: 0;
-  z-index: 3;
-  text-align: center;
-  padding: 1em 0;
-  background-color: rgba(255, 255, 255, 0.8);
-}
+
 
 /* Mobile devices */
 @media (max-width: 767px) {
@@ -57,18 +50,33 @@ b {
     min-height: 300px;
   }
 }
-
-.nav-bar a {
-    position: relative;
-    text-decoration: none;
-    padding: 0.5em;
-    display: inline-block;
-    color: black;
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 3000;
+  text-align: center;
+  padding: 1em 0;
+  background-color: rgba(255, 255, 255, 0.5); /* Adjust alpha for transparency */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
 }
 
+/* Ensure the links are visible against the blurred background */
+.nav-bar a {
+  color: rgba(0, 0, 0, 0.8); /* Darken text color for better contrast */
+  transition: color 0.3s ease;
+}
+
+.nav-bar a:hover,
 .nav-bar a.active {
-    font-weight: bold;
-    color: #8622c9;
+  color: #8622c9; /* Your existing active color */
+}
+
+/* For browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .nav-bar {
+    background-color: rgba(255, 255, 255, 0.9); /* Fallback with more opacity */
+  }
 }
 
 .coming-soon .tooltip {
@@ -110,6 +118,8 @@ b {
     padding: 0 1rem; /* Add this line */
     max-width: 800px; /* Add this line */
     margin: 0 auto; /* Add this line */
+    z-index: 1000; /* Very high z-index */
+    position: relative;
 }
 
 .content-1 {
@@ -173,18 +183,20 @@ a {
         width: 78%;
     }
 }
-
+.reading-group-text {
+  margin-bottom: 4rem; /* Adjust this value as needed */
+}
 /* Form styling */
-.elegant-form {
+  .elegant-form {
     max-width: 400px;
-    margin: 2rem auto;
+    margin: 4em auto; /* Increased top margin */
     padding: 2rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     backdrop-filter: blur(10px);
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
     position: relative;
-    z-index: 1000; /* Very high z-index */
+    z-index: 1000;
   }
   
   .form-group {
