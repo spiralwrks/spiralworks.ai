@@ -1,30 +1,38 @@
-# spiralworks.ai
+# Spiral Works Website
 
-built using pure.css, three.js, vite, node, and gh-pages
+This project is a React-based website for Spiral Works, a research and product lab focused on computational creativity and AI.
 
-## development
+## Setup Instructions
 
-test locally:
-```shell
-$ npx vite
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/spiralwrks/spiralworks.ai-react.git
+   cd spiralworks.ai-react
+   ```
 
-## deploying
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-build:
-```shell
-$ npm run build
-```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-push to github:
-```shell
-$ git add .
-$ git commit -m "commit msg"
-$ git push -u origin main
-$ npm run deploy
-```
+4. Open your browser and visit `http://localhost:3000` to view the website.
 
-deploy:
-```shell
-$ npm run deploy
-```
+## Available Scripts
+
+In the project directory, you can run:
+
+- `npm start`: Runs the app in development mode.
+- `npm test`: Launches the test runner.
+- `npm run build`: Builds the app for production.
+
+## Project Structure
+
+- `src/components`: React components
+- `src/styles`: CSS stylesheets
+- `src/assets`: Images and other static assets
+
