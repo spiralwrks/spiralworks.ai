@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDiscordWebhook } from '../utils/webhook';
 import logoImage from '../assets/sprworks_black.png';
 
 function ReadingGroup() {
-  const [formData, setFormData] = useState({ name: '', email: '' });
-  const { sendToDiscord, status } = useDiscordWebhook();
+  const [formData, setFormData] = useState({ name: '', affiliation: '', email: '' });
+  const { sendToDiscord, status, resetStatus } = useDiscordWebhook();
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,11 +15,19 @@ function ReadingGroup() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     await sendToDiscord(formData);
-    if (status.success) {
-      setFormData({ name: '', email: '' });
-    }
   };
 
+  useEffect(() => {
+    if (status.success) {
+      setFormData({ name: '', affiliation: '', email: '' });
+      setShowModal(true);
+    }
+  }, [status.success]);
+
+  const closeModal = () => {
+    setShowModal(false);
+    resetStatus(); // Reset the status after closing the modal
+  };
   return (
     <div className="pure-g text-container">
       <div className="pure-u-1 pure-u-md-1">
@@ -37,44 +46,61 @@ function ReadingGroup() {
           If you are passionate about understanding the <b>philosophical underpinnings of AI</b>, <b>mathematical structures for generalization</b>, or simply want to collaborate with like-minded individuals, our reading group provides the platform to do so.
         </p>
         
-        <form className="pure-form pure-form-stacked form-signup" onSubmit={handleSubmit}>
-          <fieldset>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input 
-                id="name" 
-                type="text" 
-                placeholder="Your Name" 
-                name="name" 
-                value={formData.name}
-                onChange={handleChange}
-                required 
-              />
-            </div>
+        <form className="elegant-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input 
+              id="name" 
+              type="text" 
+              name="name" 
+              value={formData.name}
+              onChange={handleChange}
+              required 
+            />
+            <label htmlFor="name">Name</label>
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input 
-                id="email" 
-                type="email" 
-                placeholder="Your Email" 
-                name="email" 
-                value={formData.email}
-                onChange={handleChange}
-                required 
-              />
-            </div>
+          <div className="form-group">
+            <input 
+              id="affiliation" 
+              type="text" 
+              name="affiliation" 
+              value={formData.affiliation}
+              onChange={handleChange}
+              required 
+            />
+            <label htmlFor="affiliation">Affiliation</label>
+          </div>
 
-            <div className="form-group">
-              <button type="submit" className="pure-button pure-button-primary" disabled={status.loading}>
-                {status.loading ? 'Signing Up...' : 'Sign Up'}
-              </button>
-            </div>
-          </fieldset>
-        </form>
-        {status.success && <p>Thank you for signing up!</p>}
-        {status.error && <p>There was an error submitting the form. Please try again.</p>}
+          <div className="form-group">
+            <input 
+              id="email" 
+              type="email" 
+              name="email" 
+              value={formData.email}
+              onChange={handleChange}
+              required 
+            />
+            <label htmlFor="email">Email</label>
+          </div>
+
+          <div className="form-group">
+            <button type="submit" className="submit-button" disabled={status.loading}>
+              {status.loading ? 'Signing Up...' : 'Sign Up'}
+            </button>
+          </div>
+          </form>
+        {status.error && <p className="error-message">There was an error submitting the form. Please try again.</p>}
       </div>
+
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close-button" onClick={closeModal}>&times;</span>
+            <h2>Thank you for signing up!</h2>
+            <p>We'll be in touch soon with more information about the reading group.</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -17,15 +17,62 @@ b {
 }
 
 .canvas-container {
-    height: 38vh;
-    overflow: hidden;
-    position: relative;
+  height: 38vh;
+  min-height: 300px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
 .webgl {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff; /* or any background color you prefer */
+}
+
+/* Mobile devices */
+@media (max-width: 767px) {
+  .canvas-container {
+    height: 50vh;
+    min-height: 350px;
+  }
+
+  .content-wrapper {
+    margin-top: -50px;
+    padding-top: 50px;
+  }
+}
+
+/* Tablet devices */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .canvas-container {
+    height: 40vh;
+    min-height: 350px;
+  }
+
+  .content-wrapper {
+    margin-top: -40px;
+    padding-top: 40px;
+  }
+}
+
+/* Desktop devices */
+@media (min-width: 1024px) {
+  .canvas-container {
+    height: 38vh;
+    min-height: 300px;
+  }
+
+  .content-wrapper {
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 
 .nav-bar {
@@ -45,7 +92,6 @@ b {
 .nav-bar a.active {
     font-weight: bold;
     color: #8622c9;
-    border-bottom: 2px solid #8622c9;
 }
 
 .coming-soon .tooltip {
@@ -84,14 +130,23 @@ b {
 }
 
 .text-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1em;
+    padding: 0 1rem; /* Add this line */
+    max-width: 800px; /* Add this line */
+    margin: 0 auto; /* Add this line */
 }
 
 .content-1 {
     font-size: 1em;
     margin-bottom: 1em;
+}
+@media (max-width: 768px) {
+    .text-container {
+      padding: 0 0.5rem;
+    }
+  
+    .content-1 {
+      font-size: 0.9rem; /* Adjust font size for smaller screens */
+    }
 }
 
 .content-1 img {
@@ -121,72 +176,6 @@ a {
     margin-top: auto;
 }
 
-/* Form styling */
-.form-signup {
-    max-width: 400px;
-    margin: 2em auto;
-    padding: 1.5em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-signup fieldset {
-    border: none;
-}
-
-.form-signup legend {
-    font-size: 1.2em;
-    margin-bottom: 1em;
-    font-weight: bold;
-    color: #8622c9;
-}
-
-.form-signup .form-group {
-    margin-bottom: 1em;
-}
-
-.form-signup label {
-    font-size: 1em;
-    font-weight: 600;
-    margin-bottom: 0.5em;
-    display: block;
-    color: #333;
-}
-
-.form-signup input[type="text"],
-.form-signup input[type="email"] {
-    width: 100%;
-    padding: 0.8em;
-    margin: 0.2em 0 0.5em;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    font-size: 1em;
-}
-
-.form-signup input:focus {
-    border-color: #8622c9;
-    outline: none;
-    box-shadow: 0 0 5px rgba(134, 34, 201, 0.3);
-}
-
-.form-signup button {
-    display: inline-block;
-    padding: 0.8em 1.2em;
-    font-size: 1em;
-    font-weight: bold;
-    color: white;
-    background-color: #8622c9;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.form-signup button:hover {
-    background-color: #6d1aa6;
-}
 
 @media (max-width: 980px) {
     .canvas-container {
@@ -207,3 +196,138 @@ a {
         width: 78%;
     }
 }
+
+/* Form styling */
+.elegant-form {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  }
+  
+  .form-group {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    border: none;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+    transition: 0.3s;
+  }
+  
+  .form-group label {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    font-size: 16px;
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s;
+  }
+  
+  .form-group input:focus ~ label,
+  .form-group input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #8622c9;
+    font-size: 12px;
+  }
+  
+  .form-group input:focus {
+    border-bottom: 1px solid #8622c9;
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 10px 20px;
+    background: #8622c9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .submit-button:hover {
+    background: #6a1b9a;
+  }
+  
+  .submit-button:disabled {
+    background: #b39ddb;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: #ff3d00;
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+
+/* Modal styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  .modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-out;
+    position: relative; /* Add this line */
+    max-width: 80%; /* Add this line to limit width */
+    width: 400px; /* Add this line for a specific width */
+  }
+  
+  .modal-content h2 {
+    color: #8622c9;
+    margin-bottom: 1rem;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px; /* Reduced from 48px for better fit */
+    cursor: pointer;
+    color: #8622c9;
+    transition: color 0.3s ease;
+    line-height: 1; /* Add this line to vertically center the × */
+  }
+  
+  .close-button:hover {
+    color: #6a1b9a;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }

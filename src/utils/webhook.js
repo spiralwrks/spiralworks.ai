@@ -3,13 +3,12 @@ import { useState } from 'react';
 const WEBHOOK_URL = 'https://discord.com/api/webhooks/1298088307141513256/rwd6jYfXxVn7swWCeZBnOEmJ89EOcNFIShr8uBTeBYSI9yOY7ONRTaXjL2DmOK89tsC4';
 
 export const useDiscordWebhook = () => {
-  const [status, setStatus] = useState({ loading: false, error: null, success: false });
+  const [status, setStatus] = useState({ loading: false, success: false, error: null });
 
   const sendToDiscord = async (formData) => {
-    setStatus({ loading: true, error: null, success: false });
-
+    setStatus({ loading: true, success: false, error: null });
     const payload = {
-      content: `**New Signup!**\nName: ${formData.name}\nEmail: ${formData.email}`,
+      content: `**New Signup!**\nName: ${formData.name}\nAffiliation: ${formData.affiliation}\nEmail: ${formData.email}`,
       username: 'Signup Bot',
     };
 
@@ -26,12 +25,15 @@ export const useDiscordWebhook = () => {
         throw new Error('Failed to send data to Discord');
       }
 
-      setStatus({ loading: false, error: null, success: true });
+      setStatus({ loading: false, success: true, error: null });
     } catch (error) {
-      console.error('Error sending to Discord webhook:', error);
-      setStatus({ loading: false, error: error.message, success: false });
+      setStatus({ loading: false, success: false, error: error.message });
     }
   };
 
-  return { sendToDiscord, status };
+  const resetStatus = () => {
+    setStatus({ loading: false, success: false, error: null });
+  };
+
+  return { sendToDiscord, status, resetStatus };
 };
