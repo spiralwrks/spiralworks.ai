@@ -1,34 +1,34 @@
 import React from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
-import '../styles/navbar.css'; // We'll create this file for navbar styles
+import { NavLink, Outlet } from 'react-router-dom';
+import '../styles/navbar.css';
 import Galaxy from './Galaxy';
 
 function Layout() {
-  const location = useLocation();
-
   return (
-    <div className="container">
-        <div className="canvas-container">
-            <Galaxy />
-        </div>
-      <nav className="nav-bar">
-        <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
-          <span>Home</span>
-        </Link>
-        <Link to="/reading-group" className={`nav-link ${location.pathname === '/reading-group' ? 'active' : ''}`}>
-          <span>Reading Group</span>
-        </Link>
-        <span className="nav-link coming-soon">
-          <span>Blog</span>
-          <span className="tooltip">COMING SOON</span>
-        </span>
-      </nav>
+    <div className="app-container">
+      <div className="canvas-container">
+        <Galaxy />
+      </div>
+      <div className="content-wrapper">
+        <nav className="nav-bar">
+          <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>
+            <span>Home</span>
+          </NavLink>
+          <NavLink to="/reading-group" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <span>Reading Group</span>
+          </NavLink>
+          <span className="nav-link coming-soon">
+            <span>Blog</span>
+            <span className="tooltip">COMING SOON</span>
+          </span>
+        </nav>
 
-      <Outlet />
+        <Outlet />
 
-      <footer className="footer">
-        @ 2024 Spiral Works, Inc. All Rights Reserved
-      </footer>
+        <footer className="footer">
+          @ 2024 Spiral Works, Inc. All Rights Reserved
+        </footer>
+      </div>
     </div>
   );
 }

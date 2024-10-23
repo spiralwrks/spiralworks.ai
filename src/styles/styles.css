@@ -3,6 +3,7 @@
 body, html {
     margin: 0;
     padding: 0;
+    height: 100%;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -10,18 +11,20 @@ b {
     color: #8622c9;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .canvas-container {
+  position: relative;
+  top: 0;
+  left: 0;
   height: 38vh;
   min-height: 300px;
-  overflow: hidden;
-  position: relative;
   width: 100%;
+  z-index: 1;
 }
 
 .webgl {
@@ -30,55 +33,29 @@ b {
   display: block;
 }
 
-.content-wrapper {
-  position: relative;
-  z-index: 1;
-  background-color: #ffffff; /* or any background color you prefer */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  text-align: center;
+  padding: 1em 0;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Mobile devices */
 @media (max-width: 767px) {
   .canvas-container {
-    height: 50vh;
-    min-height: 350px;
-  }
-
-  .content-wrapper {
-    margin-top: -50px;
-    padding-top: 50px;
+    height: 30vh;
+    min-height: 250px;
   }
 }
 
 /* Tablet devices */
 @media (min-width: 768px) and (max-width: 1023px) {
   .canvas-container {
-    height: 40vh;
-    min-height: 350px;
-  }
-
-  .content-wrapper {
-    margin-top: -40px;
-    padding-top: 40px;
-  }
-}
-
-/* Desktop devices */
-@media (min-width: 1024px) {
-  .canvas-container {
-    height: 38vh;
+    height: 35vh;
     min-height: 300px;
   }
-
-  .content-wrapper {
-    margin-top: 0;
-    padding-top: 0;
-  }
-}
-
-.nav-bar {
-    text-align: center;
-    padding: 1em 0;
-    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .nav-bar a {
