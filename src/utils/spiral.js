@@ -18,12 +18,12 @@ export const initializeGalaxy = (canvasRef) => {
   const isMobile = /Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   const parameters = {
-    count: isMobile ? 50000 : 100000,
-    size: isMobile ? 0.013 : 0.014,
-    radius: isMobile ? 1.2 : 1.5,
+    count: isMobile ? 45000 : 90000, // Slightly reduced particle count
+    size: isMobile ? 0.011 : 0.012, // Reduced particle size
+    radius: isMobile ? 1.0 : 1.3, // Reduced galaxy radius
     branches: 8,
     spin: 1,
-    randomness: 0.2,
+    randomness: 0.18, // Slightly reduced randomness
     randomnessPower: 2.5,
     insideColor: '#8622c9',
     outsideColor: '#3222c9'
@@ -88,8 +88,8 @@ export const initializeGalaxy = (canvasRef) => {
   };
 
   const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-  camera.position.set(0, 4, 5);
-  camera.lookAt(0, -6, 0);
+  camera.position.set(0, 3.5, 4.5); // Adjusted camera position
+  camera.lookAt(0, -5, 0); // Adjusted look-at point
   scene.add(camera);
 
   const renderer = new THREE.WebGLRenderer({

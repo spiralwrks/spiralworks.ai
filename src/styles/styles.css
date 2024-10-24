@@ -1,14 +1,24 @@
 @import 'navbar.css';
 
+:root {
+  --primary-color: #8622c9;
+  --text-color: #333;
+  --background-color: #ffffff;
+}
+
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
 }
 
 b {
-    color: #8622c9;
+  color: var(--primary-color);
 }
 
 .app-container {
@@ -21,8 +31,9 @@ b {
   position: relative;
   top: 0;
   left: 0;
-  height: 38vh;
-  min-height: 300px;
+  height: 38vh; /* Changed from fixed height */
+  min-height: 200px; /* Reduced minimum height */
+  max-height: 400px; /* Added maximum height */
   width: 100%;
   z-index: 1;
 }
@@ -33,292 +44,349 @@ b {
   display: block;
 }
 
-
-
-/* Mobile devices */
-@media (max-width: 767px) {
-  .canvas-container {
-    height: 30vh;
-    min-height: 250px;
-  }
-}
-
-/* Tablet devices */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .canvas-container {
-    height: 35vh;
-    min-height: 300px;
-  }
-}
 .nav-bar {
   position: sticky;
   top: 0;
   z-index: 3000;
   text-align: center;
   padding: 1em 0;
-  background-color: rgba(255, 255, 255, 0.5); /* Adjust alpha for transparency */
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  -webkit-backdrop-filter: blur(10px);
 }
 
-/* Ensure the links are visible against the blurred background */
 .nav-bar a {
-  color: rgba(0, 0, 0, 0.8); /* Darken text color for better contrast */
+  color: rgba(0, 0, 0, 0.8);
   transition: color 0.3s ease;
 }
 
 .nav-bar a:hover,
 .nav-bar a.active {
-  color: #8622c9; /* Your existing active color */
+  color: var(--primary-color);
 }
 
-/* For browsers that don't support backdrop-filter */
 @supports not (backdrop-filter: blur(10px)) {
   .nav-bar {
-    background-color: rgba(255, 255, 255, 0.9); /* Fallback with more opacity */
+    background-color: rgba(255, 255, 255, 0.9);
   }
 }
 
 .coming-soon .tooltip {
-    visibility: hidden;
-    background-color: #8622c9;
-    color: white;
-    text-align: center;
-    padding: 5px 10px;
-    border-radius: 4px;
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    z-index: 1;
-    font-size: 12px;
-    font-weight: bold;
-    opacity: 0;
-    transition: opacity 0.3s;
+  visibility: hidden;
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  position: absolute;
+  bottom: -2em;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  z-index: 1;
+  font-size: 0.75em;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .coming-soon .tooltip::after {
-    content: "";
-    position: absolute;
-    top: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #8622c9 transparent;
+  content: "";
+  position: absolute;
+  top: -0.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0.5em;
+  border-style: solid;
+  border-color: transparent transparent var(--primary-color) transparent;
 }
 
 .coming-soon:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
 
 .text-container {
-    padding: 0 1rem; /* Add this line */
-    max-width: 800px; /* Add this line */
-    margin: 0 auto; /* Add this line */
-    z-index: 1000; /* Very high z-index */
-    position: relative;
+  padding: 0 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  z-index: 1000;
+  position: relative;
+  width: 100%; /* Add this line to ensure full width */
+  box-sizing: border-box; /* Add this line to include padding in width calculation */
 }
 
+
+
 .content-1 {
-    font-size: 1em;
-    margin-bottom: 1em;
-}
-@media (max-width: 768px) {
-    .text-container {
-      padding: 0 0.5rem;
-    }
-  
-    .content-1 {
-      font-size: 0.9rem; /* Adjust font size for smaller screens */
-    }
+  font-size: 0.8em;
+  margin-bottom: 1em;
+  line-height: 1.6;
 }
 
 .content-1 img {
-    width: 1.1em;
-    height: 1.1em;
-    vertical-align: middle;
-    margin-right: 0.2em;
-    margin-bottom: 0.2em;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+  margin-right: 0.2em;
+  margin-bottom: 0.2em;
 }
 
 .divider {
-    width: 100%;
-    max-width: 795px;
-    margin: 2em auto;
-    border: none;
-    border-top: 1px solid black;
+  width: 100%;
+  max-width: 795px;
+  margin: 2em auto;
+  border: none;
+  border-top: 1px solid var(--text-color);
 }
 
 a {
-    color: black;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
 }
 
 .footer {
-    text-align: center;
-    padding: 1em;
-    font-size: 0.8em;
-    margin-top: auto;
+  text-align: center;
+  padding: 1em;
+  font-size: 0.8em;
+  margin-top: auto;
 }
 
-
-@media (max-width: 980px) {
-    .canvas-container {
-        height: 25vh;
-    }
-
-    .text-container {
-        padding-left: 3em;
-        padding-right: 3em;
-        padding-top: 1.5em;
-    }
-
-    .content-1 {
-        font-size: 0.9em;
-    }
-
-    .divider {
-        width: 78%;
-    }
-}
 .reading-group-text {
-  margin-bottom: 4rem; /* Adjust this value as needed */
+  margin-bottom: 4rem;
 }
-/* Form styling */
-  .elegant-form {
-    max-width: 400px;
-    margin: 4em auto; /* Increased top margin */
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-    position: relative;
-    z-index: 1000;
-  }
-  
-  .form-group {
-    position: relative;
-    margin-bottom: 2rem;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #333;
-    border: none;
-    border-bottom: 1px solid #999;
-    outline: none;
-    background: transparent;
-    transition: 0.3s;
-  }
-  
-  .form-group label {
-    position: absolute;
-    top: 10px;
-    left: 0;
-    font-size: 16px;
-    color: #999;
-    pointer-events: none;
-    transition: 0.3s;
-  }
-  
-  .form-group input:focus ~ label,
-  .form-group input:valid ~ label {
-    top: -20px;
-    left: 0;
-    color: #8622c9;
-    font-size: 12px;
-  }
-  
-  .form-group input:focus {
-    border-bottom: 1px solid #8622c9;
-  }
-  
-  .submit-button {
-    width: 100%;
-    padding: 10px 20px;
-    background: #8622c9;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .submit-button:hover {
-    background: #6a1b9a;
-  }
-  
-  .submit-button:disabled {
-    background: #b39ddb;
-    cursor: not-allowed;
-  }
-  
-  .error-message {
-    color: #ff3d00;
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
 
-/* Modal styling */
+.elegant-form {
+  max-width: 400px;
+  margin: 4em auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  position: relative;
+  z-index: 1000;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.625rem 0; /* 10px to rem */
+  font-size: 0.9rem; /* 16px to rem */
+  color: #333;
+  border: none;
+  border-bottom: 0.0625rem solid #999; /* 1px to rem */
+  outline: none;
+  background: transparent;
+  transition: 0.3s;
+}
+
+.form-group label {
+  position: absolute;
+  top: 0.625rem; /* 10px to rem */
+  left: 0;
+  font-size: 0.8rem; /* 16px to rem */
+  color: #999;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.form-group input:focus ~ label,
+.form-group input:valid ~ label {
+  top: -1.25rem; /* -20px to rem */
+  left: 0;
+  color: #8622c9;
+  font-size: 0.75rem; /* 12px to rem */
+}
+
+.form-group input:focus {
+  border-bottom: 0.0625rem solid #8622c9; /* 1px to rem */
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.625rem 1.25rem; /* 10px 20px to rem */
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.3125rem; /* 5px to rem */
+  font-size: 0.8em; /* Already relative, can keep as is */
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submit-button:hover {
+  background: #6a1b9a;
+}
+
+.submit-button:disabled {
+  background: #b39ddb;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #ff3d00;
+  text-align: center;
+  margin-top: 1rem;
+}
+
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+  max-width: 80%;
+  width: 400px;
+}
+
+.modal-content h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.875em;
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: #6a1b9a;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  body, html {
+    font-size: 14px;
   }
-  
-  .modal-content {
-    background-color: rgba(255, 255, 255, 0.9);
+
+  .canvas-container {
+    height: 30vh;
+    min-height: 250px;
+  }
+
+  .text-container {
+    padding: 0 0.5rem;
+  }
+
+  .content-1 {
+    font-size: 0.9em;
+  }
+
+  .elegant-form {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .canvas-container {
+    height: 35vh;
+    min-height: 300px;
+  }
+}
+
+@media (min-width: 1025px) {
+  body, html {
+    font-size: 18px;
+  }
+}
+
+
+@media (max-height: 1080px) {
+  .canvas-container {
+    height: 35vh;
+    min-height: 300px;
+  }
+}
+
+@media (max-height: 900px) {
+  .canvas-container {
+    height: 35vh;
+    min-height: 250px;
+  }
+}
+
+@media (max-height: 800px) {
+  .canvas-container {
+    height: 35vh;
+    min-height: 200px;
+  }
+}
+
+@media (max-height: 600px) {
+  .canvas-container {
+    height: 35vh;
+    min-height: 150px;
+  }
+}
+
+@media (max-height: 400px) {
+  .canvas-container {
+    height: 35vh;
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  body, html {
+    font-size: 14px;
+  }
+
+  .canvas-container {
+    height: 30vh;
+    min-height: 250px;
+  }
+
+  .text-container {
+    padding: 0 2rem; /* Increased padding for mobile */
+  }
+
+  .content-1 {
+    font-size: 0.9em;
+  }
+
+  .elegant-form {
     padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: slideIn 0.3s ease-out;
-    position: relative; /* Add this line */
-    max-width: 80%; /* Add this line to limit width */
-    width: 400px; /* Add this line for a specific width */
+    margin: 2em auto; /* Reduced top and bottom margin for mobile */
   }
-  
-  .modal-content h2 {
-    color: #8622c9;
-    margin-bottom: 1rem;
-  }
-  
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 30px; /* Reduced from 48px for better fit */
-    cursor: pointer;
-    color: #8622c9;
-    transition: color 0.3s ease;
-    line-height: 1; /* Add this line to vertically center the × */
-  }
-  
-  .close-button:hover {
-    color: #6a1b9a;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideIn {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
+}
