@@ -2,13 +2,14 @@ function sendToDiscord(event) {
     event.preventDefault(); // Prevent the form from submitting normally
 
     const name = document.getElementById('name').value;
+    const affiliation = document.getElementById('affiliation').value;
     const email = document.getElementById('email').value;
 
     const webhookURL = 'https://discord.com/api/webhooks/1298088307141513256/rwd6jYfXxVn7swWCeZBnOEmJ89EOcNFIShr8uBTeBYSI9yOY7ONRTaXjL2DmOK89tsC4'; // Replace with your webhook URL
 
     // Construct the message payload
     const payload = {
-        content: `**New Signup!**\nName: ${name}\nEmail: ${email}`,
+        content: `**New Signup!**\nName: ${name}\nAffiliation: ${affiliation}\nEmail: ${email}`,
         username: 'Signup Bot',
     };
 

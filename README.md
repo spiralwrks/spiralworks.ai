@@ -21,7 +21,6 @@ push to github:
 $ git add .
 $ git commit -m "commit msg"
 $ git push -u origin main
-$ npm run deploy
 ```
 
 deploy:
