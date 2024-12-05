@@ -10,26 +10,11 @@ class Router {
     }
 
     async initialize() {
-        // Always start by loading the base HTML structure
-        await this.loadBaseStructure();
-        
         // Initialize routing
         this.initializeRouter();
         
         // Load the current route content
         await this.loadRouteContent(window.location.pathname);
-    }
-
-    async loadBaseStructure() {
-        try {
-            const indexResponse = await fetch('/index.html');
-            const indexHtml = await indexResponse.text();
-            
-            // Insert the entire index.html content
-            document.documentElement.innerHTML = indexHtml;
-        } catch (error) {
-            console.error('Failed to load index.html:', error);
-        }
     }
 
     initializeRouter() {
