@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -104,6 +104,25 @@ const PostContainer = styled.article`
   }
 `;
 
+const ImageWrapper = styled.div`
+  margin: 2rem auto;
+  text-align: center;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 0 auto;
+  }
+  
+  .caption {
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9em;
+    font-style: italic;
+  }
+`;
+
 const Meta = styled.div`
   margin-bottom: 2rem;
   color: var(--text-muted);
@@ -146,56 +165,62 @@ const ImageErrorMessage = styled(ErrorMessage)`
   margin: 0.5rem 0;
 `;
 
+const ImageComponent = ({ alt, src, ...props }) => {
+  return (
+    <ImageWrapper>
+      <img
+        src={src}
+        alt={alt || ''}
+        loading="lazy"
+        style={{ 
+          maxWidth: '100%',
+          height: 'auto',
+          margin: '2rem auto',
+          borderRadius: '4px',
+          display: 'block'
+        }}
+        {...props}
+      />
+      {alt && (
+        <div className="caption">
+          {alt}
+        </div>
+      )}
+    </ImageWrapper>
+  );
+};
+
 const BlogPost = () => {
-  const { slug, '*': restPath } = useParams();
+  const { slug } = useParams();
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [imageStates, setImageStates] = useState({});
 
   useEffect(() => {
-    const loadPost = async () => {
+    const fetchPost = async () => {
       try {
-        setError(null);
-        const fullPath = restPath ? `${slug}/${restPath}` : slug;
-        const decodedPath = decodeURIComponent(fullPath);
-        
-        const response = await fetch(`/content/blog/${decodedPath}.json`);
-        if (!response.ok) {
-          throw new Error(`Post not found (${response.status})`);
-        }
+        const response = await fetch(`/content/blog/${slug}.json`);
+        if (!response.ok) throw new Error('Post not found');
         const data = await response.json();
         setPost(data);
-      } catch (error) {
-        console.error('Error loading blog post:', error);
-        setError(error.message);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
-    if (slug) {
-      loadPost();
-    }
-  }, [slug, restPath]);
+    fetchPost();
+  }, [slug]);
 
-  const processContent = (content) => {
-    // First replace image markdown with HTML
-    const withImages = content.replace(
-      /!\[(.*?)\]\((.*?)\)/g,
-      (match, alt, src) => {
-        const imagePath = src.startsWith('/') ? src.slice(1) : src;
-        return `<img src="/content/blog/${imagePath}" alt="${alt || ''}" />`;
-      }
-    );
-    return withImages;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!post) return <div>Post not found</div>;
+
+  const components = {
+    img: ImageComponent
   };
-
-  if (error) {
-    return <ErrorMessage>Error: {error}</ErrorMessage>;
-  }
-
-  if (!post) {
-    return <LoadingMessage>Loading...</LoadingMessage>;
-  }
-
-  const processedContent = processContent(post.content);
 
   return (
     <PostContainer>
@@ -214,11 +239,12 @@ const BlogPost = () => {
           </Tags>
         )}
       </Meta>
-      <ReactMarkdown 
+      <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex, rehypeRaw]}
+        components={components}
       >
-        {processedContent}
+        {post.content}
       </ReactMarkdown>
     </PostContainer>
   );
