@@ -123,106 +123,114 @@ async function getAuthenticatedUrl(browser, githubUrl) {
   }
 }
 
-async function processMarkdownContent(browser, content, targetAssetsDir) {
-  // Match GitHub asset URLs
-  const githubAssetRegex = /!\[(.*?)\]\((https:\/\/github\.com\/spiralwrks\/obsidian\/assets\/\d+\/[a-f0-9-]+)\)/g;
-  let match;
-  let processedContent = content;
-  
-  while ((match = githubAssetRegex.exec(content)) !== null) {
-    const [fullMatch, altText, githubUrl] = match;
-    
-    // Generate a filename from the GitHub URL
-    const urlParts = githubUrl.split('/');
-    const filename = `${urlParts[urlParts.length - 2]}-${urlParts[urlParts.length - 1]}.png`;
-    const localPath = path.join(targetAssetsDir, filename);
-    const relativeLocalPath = `/content/blog/assets/${filename}`;
-    
-    try {
-      // Get authenticated URL and download the image
-      console.log(`Processing image: ${githubUrl}`);
-      const authenticatedUrl = await getAuthenticatedUrl(browser, githubUrl);
-      
-      if (authenticatedUrl) {
-        const success = await downloadGitHubImage(authenticatedUrl, localPath);
-        if (success) {
-          // Replace GitHub URL with local path in markdown
-          processedContent = processedContent.replace(
-            fullMatch,
-            `![${altText}](${relativeLocalPath})`
-          );
-          console.log(`Successfully processed image: ${githubUrl}`);
-        } else {
-          console.error(`Failed to download image: ${githubUrl}`);
-        }
-      } else {
-        console.error(`Failed to get authenticated URL for: ${githubUrl}`);
-      }
-    } catch (error) {
-      console.error(`Error processing image ${githubUrl}:`, error.message);
-      // Keep the original GitHub URL in case of error
-      console.log(`Keeping original URL for: ${githubUrl}`);
-    }
-  }
-  
-  return processedContent;
-}
-
-async function downloadAuthenticatedImages(targetAssetsDir) {
-  try {
-    // Check if authenticatedUrls.json exists
-    const urlsPath = path.join(__dirname, 'authenticatedUrls.json');
-    if (!fs.existsSync(urlsPath)) {
-      console.log('\nNo authenticatedUrls.json found. Please create it with the authenticated URLs.');
-      return;
-    }
-    
-    const urlsContent = await fs.promises.readFile(urlsPath, 'utf8');
-    const authenticatedUrls = JSON.parse(urlsContent);
-    
-    for (const [githubUrl, authenticatedUrl] of Object.entries(authenticatedUrls)) {
-      const urlParts = githubUrl.split('/');
-      const filename = `${urlParts[urlParts.length - 2]}-${urlParts[urlParts.length - 1]}.png`;
-      const localPath = path.join(targetAssetsDir, filename);
-      
-      console.log(`Downloading image from authenticated URL to: ${localPath}`);
-      const response = await fetch(authenticatedUrl);
-      if (!response.ok) {
-        throw new Error(`Failed to download image: ${response.status} ${response.statusText}`);
-      }
-      
-      const buffer = await response.arrayBuffer();
-      await fs.promises.writeFile(localPath, Buffer.from(buffer));
-      console.log(`Successfully downloaded image to: ${localPath}`);
-    }
-  } catch (error) {
-    console.error('Error downloading authenticated images:', error);
-  }
-}
-
 async function copyAllImages(tempDir, targetAssetsDir) {
   try {
     // Create assets directory if it doesn't exist
     await fs.promises.mkdir(targetAssetsDir, { recursive: true });
     
-    // Copy images from the Obsidian repo's image directory
+    // Handle images from the repository's image directory
     const imagesDir = path.join(tempDir, '03 imgs');
-    const files = await fs.promises.readdir(imagesDir);
-    
-    for (const file of files) {
-      const sourcePath = path.join(imagesDir, file);
-      const targetPath = path.join(targetAssetsDir, file);
+    if (fs.existsSync(imagesDir)) {
+      const files = await fs.promises.readdir(imagesDir);
       
-      await fs.promises.copyFile(sourcePath, targetPath);
-      console.log(`Copied image: ${file}`);
+      for (const file of files) {
+        if (file.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
+          const sourcePath = path.join(imagesDir, file);
+          const targetPath = path.join(targetAssetsDir, file);
+          
+          await fs.promises.copyFile(sourcePath, targetPath);
+          console.log(`Copied repository image: ${file}`);
+        }
+      }
+    }
+
+    // Handle embedded images (Pasted images) from each markdown directory
+    const dirs = await fs.promises.readdir(tempDir, { withFileTypes: true });
+    for (const dir of dirs) {
+      if (dir.isDirectory() && !dir.name.startsWith('.')) {
+        const dirPath = path.join(tempDir, dir.name);
+        const files = await fs.promises.readdir(dirPath);
+        
+        for (const file of files) {
+          if (file.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
+            const sourcePath = path.join(dirPath, file);
+            const targetPath = path.join(targetAssetsDir, file);
+            
+            await fs.promises.copyFile(sourcePath, targetPath);
+            console.log(`Copied embedded image: ${file}`);
+          }
+        }
+      }
     }
   } catch (error) {
     console.error('Error copying images:', error);
   }
 }
 
+async function processMarkdownContent(browser, content, targetAssetsDir, currentDir) {
+  let processedContent = content;
+  
+  // 1. Process GitHub asset URLs
+  const githubAssetRegex = /!\[(.*?)\]\((https:\/\/github\.com\/spiralwrks\/obsidian\/assets\/\d+\/[a-f0-9-]+)\)/g;
+  let match;
+  
+  while ((match = githubAssetRegex.exec(content)) !== null) {
+    const [fullMatch, altText, githubUrl] = match;
+    const urlParts = githubUrl.split('/');
+    const filename = `${urlParts[urlParts.length - 2]}-${urlParts[urlParts.length - 1]}.png`;
+    const localPath = path.join(targetAssetsDir, filename);
+    const relativeLocalPath = `/content/blog/assets/${filename}`;
+    
+    try {
+      console.log(`Processing GitHub image: ${githubUrl}`);
+      const authenticatedUrl = await getAuthenticatedUrl(browser, githubUrl);
+      
+      if (authenticatedUrl && await downloadGitHubImage(authenticatedUrl, localPath)) {
+        processedContent = processedContent.replace(
+          fullMatch,
+          `![${altText}](${relativeLocalPath})`
+        );
+        console.log(`Successfully processed GitHub image: ${githubUrl}`);
+      }
+    } catch (error) {
+      console.error(`Error processing GitHub image ${githubUrl}:`, error.message);
+    }
+  }
+  
+  // 2. Process local image references
+  const localImageRegex = /!\[(.*?)\]\(((?!https?:\/\/)[^)]+\.(png|jpg|jpeg|gif|svg))\)/gi;
+  while ((match = localImageRegex.exec(content)) !== null) {
+    const [fullMatch, altText, imagePath] = match;
+    const imageFilename = path.basename(imagePath);
+    const relativeLocalPath = `/content/blog/assets/${imageFilename}`;
+    
+    // Copy the image if it exists in the current directory
+    const sourcePath = path.join(currentDir, imageFilename);
+    const targetPath = path.join(targetAssetsDir, imageFilename);
+    
+    try {
+      if (fs.existsSync(sourcePath)) {
+        await fs.promises.copyFile(sourcePath, targetPath);
+        console.log(`Copied local image: ${imageFilename}`);
+      }
+    } catch (error) {
+      console.error(`Error copying local image ${imageFilename}:`, error.message);
+    }
+    
+    // Replace the local path with the new public path
+    processedContent = processedContent.replace(
+      fullMatch,
+      `![${altText}](${relativeLocalPath})`
+    );
+    console.log(`Updated reference for local image: ${imageFilename}`);
+  }
+  
+  return processedContent;
+}
+
 async function processMarkdownFiles(tempDir, targetDir) {
   const targetAssetsDir = path.join(targetDir, 'public/content/blog/assets');
+  const posts = [];
   
   // First copy all local images
   await copyAllImages(tempDir, targetAssetsDir);
@@ -235,9 +243,48 @@ async function processMarkdownFiles(tempDir, targetDir) {
   });
   
   try {
-    // Process markdown files
+    // First process the root README.md
+    const readmePath = path.join(tempDir, 'README.md');
+    if (fs.existsSync(readmePath)) {
+      const content = await fs.promises.readFile(readmePath, 'utf8');
+      const { data, content: mdContent } = matter(content);
+      
+      // Process content to handle all types of images
+      const processedContent = await processMarkdownContent(
+        browser, 
+        mdContent, 
+        targetAssetsDir,
+        tempDir
+      );
+      
+      // Save README.json at the root only
+      const rootReadmePath = path.join(targetDir, 'public/content/blog', 'README.json');
+      await fs.promises.writeFile(rootReadmePath, JSON.stringify({
+        title: "README",
+        date: new Date().toISOString(),
+        content: processedContent,
+        category: "",
+        tags: [],
+        slug: "readme",
+        path: "README",
+        isReadme: true
+      }, null, 2));
+      
+      // Add README to the beginning of posts array
+      posts.push({
+        title: "README",
+        date: new Date().toISOString(),
+        category: "",
+        tags: [],
+        slug: "readme",
+        path: "README",
+        preview: processedContent.substring(0, 200) + '...',
+        isReadme: true
+      });
+    }
+    
+    // Then process all other markdown files
     const files = await fs.promises.readdir(tempDir, { withFileTypes: true });
-    const posts = [];
     
     for (const file of files) {
       if (file.isDirectory() && !file.name.startsWith('.')) {
@@ -250,34 +297,70 @@ async function processMarkdownFiles(tempDir, targetDir) {
             const content = await fs.promises.readFile(mdPath, 'utf8');
             const { data, content: mdContent } = matter(content);
             
-            // Process content to handle GitHub images
-            const processedContent = await processMarkdownContent(browser, mdContent, targetAssetsDir);
+            // Process content to handle all types of images
+            const processedContent = await processMarkdownContent(
+              browser, 
+              mdContent, 
+              targetAssetsDir,
+              dirPath
+            );
+            
+            // Generate a URL-friendly slug
+            const slug = mdFile
+              .replace('.md', '')
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/(^-|-$)/g, '');
+            
+            // Create the post path using the directory structure
+            const postPath = `${file.name}/${mdFile.replace('.md', '')}`;
             
             const post = {
-              ...data,
+              title: mdFile.replace('.md', ''),
+              date: data.date || new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
               content: processedContent,
-              slug: mdFile.replace('.md', '')
+              category: file.name,
+              tags: data.tags || [],
+              slug,
+              path: postPath
             };
             
+            // Save post in its category directory
             const targetPath = path.join(targetDir, 'public/content/blog', file.name);
             await fs.promises.mkdir(targetPath, { recursive: true });
-            
-            const jsonPath = path.join(targetPath, `${post.slug}.json`);
+            const jsonPath = path.join(targetPath, `${slug}.json`);
             await fs.promises.writeFile(jsonPath, JSON.stringify(post, null, 2));
             
-            posts.push(post);
+            // Add to posts array for index
+            const indexPost = {
+              title: post.title,
+              date: post.date,
+              category: post.category,
+              tags: post.tags,
+              slug: post.slug,
+              path: post.path,
+              preview: post.content.substring(0, 200) + '...'
+            };
+            posts.push(indexPost);
+            
             console.log(`Processed: ${mdFile}`);
           }
         }
       }
     }
     
-    // Create index file
-    const index = posts.map(({ title, date, slug }) => ({ title, date, slug }));
-    const indexPath = path.join(targetDir, 'public/content/blog/index.json');
-    await fs.promises.writeFile(indexPath, JSON.stringify(index, null, 2));
+    // Sort posts by date, but keep README at the top
+    const readmePost = posts.find(p => p.isReadme);
+    const otherPosts = posts.filter(p => !p.isReadme).sort((a, b) => new Date(b.date) - new Date(a.date));
+    const sortedPosts = readmePost ? [readmePost, ...otherPosts] : otherPosts;
+    
+    // Create index file at the root of the blog directory
+    const blogDir = path.join(targetDir, 'public/content/blog');
+    await fs.promises.mkdir(blogDir, { recursive: true });
+    const indexPath = path.join(blogDir, 'index.json');
+    await fs.promises.writeFile(indexPath, JSON.stringify(sortedPosts, null, 2));
+    console.log('Created index.json with', sortedPosts.length, 'posts');
   } finally {
-    // Close browser
     await browser.close();
   }
 }
@@ -285,6 +368,20 @@ async function processMarkdownFiles(tempDir, targetDir) {
 async function cleanup() {
   console.log('Starting cleanup...');
   try {
+    // Remove README.json from category directories
+    const blogDir = path.join(process.cwd(), 'public/content/blog');
+    const dirs = await fs.promises.readdir(blogDir, { withFileTypes: true });
+    for (const dir of dirs) {
+      if (dir.isDirectory() && !dir.name.startsWith('.') && dir.name !== 'assets') {
+        const readmePath = path.join(blogDir, dir.name, 'README.json');
+        if (fs.existsSync(readmePath)) {
+          await fs.promises.unlink(readmePath);
+          console.log(`Removed README.json from ${dir.name}`);
+        }
+      }
+    }
+    
+    // Remove temp directory
     await fs.promises.rm(TEMP_CLONE_DIR, { recursive: true, force: true });
     console.log('Cleanup completed');
   } catch (error) {
@@ -313,10 +410,6 @@ async function main() {
     } finally {
       await browser.close();
     }
-    
-    console.log('\n=== Downloading authenticated images ===');
-    const targetAssetsDir = path.join(process.cwd(), 'public/content/blog/assets');
-    await downloadAuthenticatedImages(targetAssetsDir);
     
     console.log('\n=== Cleanup ===');
     await cleanup();

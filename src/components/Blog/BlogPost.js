@@ -200,9 +200,19 @@ const BlogPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`/content/blog/${slug}.json`);
-        if (!response.ok) throw new Error('Post not found');
-        const data = await response.json();
+        // First fetch the index to find the post's path
+        const indexResponse = await fetch('/content/blog/index.json');
+        if (!indexResponse.ok) throw new Error('Failed to load blog index');
+        const posts = await indexResponse.json();
+        
+        // Find the post by its path
+        const postInfo = posts.find(p => p.path === decodeURIComponent(slug));
+        if (!postInfo) throw new Error('Post not found');
+        
+        // Fetch the actual post using the category directory
+        const postResponse = await fetch(`/content/blog/${postInfo.category}/${postInfo.slug}.json`);
+        if (!postResponse.ok) throw new Error('Failed to load post content');
+        const data = await postResponse.json();
         setPost(data);
       } catch (err) {
         setError(err.message);
@@ -214,9 +224,9 @@ const BlogPost = () => {
     fetchPost();
   }, [slug]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!post) return <div>Post not found</div>;
+  if (loading) return <LoadingMessage>Loading...</LoadingMessage>;
+  if (error) return <ErrorMessage>Error: {error}</ErrorMessage>;
+  if (!post) return <ErrorMessage>Post not found</ErrorMessage>;
 
   const components = {
     img: ImageComponent
