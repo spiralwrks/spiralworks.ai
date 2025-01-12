@@ -310,15 +310,20 @@ a:hover {
 }
 
 .modal-content {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--nav-blur-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 2rem;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.3s ease-out;
   position: relative;
   max-width: 80%;
   width: 400px;
+  color: var(--text-color);
+  transition: background-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease;
 }
 
 .modal-content h2 {

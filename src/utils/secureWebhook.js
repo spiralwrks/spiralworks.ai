@@ -48,6 +48,16 @@ export const sendSecureWebhook = async (data) => {
       throw new Error('Missing required fields');
     }
 
+    // Get client IP
+    let clientIP = 'Unknown';
+    try {
+      const ipResponse = await fetch('https://api.ipify.org?format=json');
+      const ipData = await ipResponse.json();
+      clientIP = ipData.ip;
+    } catch (error) {
+      console.error('Error fetching IP:', error);
+    }
+
     // Generate timestamp for request validation
     const timestamp = Date.now();
     
@@ -58,11 +68,20 @@ export const sendSecureWebhook = async (data) => {
     ).toString();
 
     // Format the message in a readable way before encrypting
-    const formattedMessage = `New Reading Group Signup:
-Name: ${data.name}
-Email: ${data.email}
-Affiliation: ${data.affiliation}
-Timestamp: ${new Date(timestamp).toLocaleString()}`;
+    const formattedMessage = `**New Signup**
+\`Name:\` \`\`\`${data.name}\`\`\`
+\`Email:\` \`\`\`${data.email}\`\`\`
+\`Affiliation:\` \`\`\`${data.affiliation}\`\`\`
+\`Client Timestamp:\` \`\`\`${new Date(timestamp).toLocaleString('en-US', {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  timeZoneName: 'short'
+})}\`\`\`
+\`Client IP:\` \`\`\`${clientIP}\`\`\``;
 
     // Encrypt the formatted message
     const encryptedPayload = CryptoJS.AES.encrypt(
