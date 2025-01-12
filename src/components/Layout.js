@@ -17,10 +17,9 @@ function Layout() {
           <NavLink to="/reading-group" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <span>Reading Group</span>
           </NavLink>
-          <span className="nav-link coming-soon">
+          <NavLink to="/blog" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <span>Blog</span>
-            <span className="tooltip">COMING SOON</span>
-          </span>
+          </NavLink>
         </nav>
 
         <Outlet />
