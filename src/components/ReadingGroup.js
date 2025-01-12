@@ -3,6 +3,8 @@ import { useDiscordWebhook } from '../utils/webhook';
 import { ThemeContext } from '../context/ThemeContext';
 import logoBlack from '../assets/sprworks_black.png';
 import logoWhite from '../assets/sprworks_white.png';
+import { API_URL } from '../utils/config';
+import { sendSecureWebhook } from '../utils/secureWebhook';
 
 function ReadingGroup() {
   const { theme } = useContext(ThemeContext);
@@ -10,15 +12,26 @@ function ReadingGroup() {
   const [formData, setFormData] = useState({ name: '', affiliation: '', email: '' });
   const { sendToDiscord, status, resetStatus } = useDiscordWebhook();
   const [showModal, setShowModal] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await sendToDiscord(formData);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmissionStatus('loading');
+    
+    try {
+      await sendSecureWebhook(formData);
+      setFormData({ name: '', email: '', affiliation: '' });
+      setSubmissionStatus('success');
+      setShowModal(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmissionStatus('error');
+    }
   };
 
   useEffect(() => {
@@ -88,12 +101,12 @@ function ReadingGroup() {
           </div>
 
           <div className="form-group">
-            <button type="submit" className="submit-button" disabled={status.loading}>
-              {status.loading ? 'Signing Up...' : 'Sign Up'}
+            <button type="submit" className="submit-button" disabled={submissionStatus === 'loading'}>
+              {submissionStatus === 'loading' ? 'Signing Up...' : 'Sign Up'}
             </button>
           </div>
           </form>
-        {status.error && <p className="error-message">There was an error submitting the form. Please try again.</p>}
+        {submissionStatus === 'error' && <p className="error-message">There was an error submitting the form. Please try again.</p>}
       </div>
 
       {showModal && (
