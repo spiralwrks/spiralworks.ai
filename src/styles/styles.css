@@ -16,6 +16,7 @@
   --form-background: rgba(255, 255, 255, 0.1);
   --toggle-blur-background: rgba(255, 255, 255, 0.5);
   --toggle-shadow: rgba(0, 0, 0, 0.1);
+  --theme-transition-duration: 0.3s;
 }
 
 [data-theme='dark'] {
@@ -58,6 +59,8 @@
   background-color: var(--nav-blur-background);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transition: background-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease;
 }
 
 body, html {
@@ -69,6 +72,8 @@ body, html {
   color: var(--text-color);
   background-color: var(--background-color);
   overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
+  transition: color var(--theme-transition-duration) ease,
+              background-color var(--theme-transition-duration) ease;
 }
 
 b {
@@ -108,12 +113,13 @@ b {
   background-color: var(--nav-blur-background);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: background-color 0.3s ease;
+  transition: background-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease;
 }
 
 .nav-bar a {
   color: var(--nav-text-color);
-  transition: color 0.3s ease;
+  transition: color var(--theme-transition-duration) ease;
 }
 
 .nav-bar a:hover,

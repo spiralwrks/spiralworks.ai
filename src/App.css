@@ -8,6 +8,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  transition: background-color var(--theme-transition-duration) ease;
 }
 
 .main-content {
@@ -16,6 +17,7 @@
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  transition: color var(--theme-transition-duration) ease;
 }
 
 .footer {
@@ -24,6 +26,8 @@
   text-align: center;
   padding: 1rem;
   font-size: 0.875rem;
+  transition: background-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease;
 }
 
 /* Animations */

@@ -17,7 +17,7 @@
     justify-content: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 2000;
-    transition: all 0.3s ease;
+    transition: all var(--theme-transition-duration) ease;
     padding: 0.5rem;
 }
 
@@ -82,36 +82,37 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .sun-and-moon > .sun {
-    transition: transform .5s var(--ease-elastic-3);
+    transition: transform var(--theme-transition-duration) var(--ease-elastic-3);
   }
 
   .sun-and-moon > .sun-beams {
-    transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3);
+    transition: transform var(--theme-transition-duration) var(--ease-elastic-4),
+                opacity var(--theme-transition-duration) var(--ease-3);
   }
 
   .sun-and-moon .moon > circle {
-    transition: transform .25s var(--ease-out-5);
+    transition: transform var(--theme-transition-duration) var(--ease-out-5);
   }
 
   @supports (cx: 1) {
     .sun-and-moon .moon > circle {
-      transition: cx .25s var(--ease-out-5);
+      transition: cx var(--theme-transition-duration) var(--ease-out-5);
     }
   }
 
   [data-theme="dark"] .sun-and-moon > .sun {
     transition-timing-function: var(--ease-3);
-    transition-duration: .25s;
+    transition-duration: var(--theme-transition-duration);
     transform: scale(1.75);
   }
 
   [data-theme="dark"] .sun-and-moon > .sun-beams {
-    transition-duration: .15s;
+    transition-duration: var(--theme-transition-duration);
     transform: rotateZ(-25deg);
   }
 
   [data-theme="dark"] .sun-and-moon > .moon > circle {
-    transition-duration: .5s;
-    transition-delay: .25s;
+    transition-duration: var(--theme-transition-duration);
+    transition-delay: calc(var(--theme-transition-duration) * 0.5);
   }
 }
