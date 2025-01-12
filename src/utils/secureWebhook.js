@@ -69,10 +69,10 @@ export const sendSecureWebhook = async (data) => {
 
     // Format the message in a readable way before encrypting
     const formattedMessage = `**New Signup**
-\`Name:\` \`\`\`${data.name}\`\`\`
 \`Email:\` \`\`\`${data.email}\`\`\`
-\`Affiliation:\` \`\`\`${data.affiliation}\`\`\`
-\`Client Timestamp:\` \`\`\`${new Date(timestamp).toLocaleString('en-US', {
+\`\`\`Name: ${data.name}
+Affiliation: ${data.affiliation}
+Timestamp: ${new Date(timestamp).toLocaleString('en-US', {
   year: 'numeric',
   month: 'numeric',
   day: 'numeric',
@@ -80,8 +80,8 @@ export const sendSecureWebhook = async (data) => {
   minute: '2-digit',
   second: '2-digit',
   timeZoneName: 'short'
-})}\`\`\`
-\`Client IP:\` \`\`\`${clientIP}\`\`\``;
+})}
+Client IP: ${clientIP}\`\`\``;
 
     // Encrypt the formatted message
     const encryptedPayload = CryptoJS.AES.encrypt(
