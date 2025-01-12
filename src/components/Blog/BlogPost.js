@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
+import 'katex/dist/katex.min.css';
 import styled from 'styled-components';
 
 const PostContainer = styled.article`
   max-width: 800px;
   margin: 0 auto;
   line-height: 1.6;
+  padding: 0 1rem;
   
   h1, h2, h3, h4, h5, h6 {
     color: var(--heading);
@@ -38,8 +43,9 @@ const PostContainer = styled.article`
   img {
     max-width: 100%;
     height: auto;
-    margin: 2rem 0;
+    margin: 2rem auto;
     border-radius: 4px;
+    display: block;
   }
 
   pre {
@@ -61,8 +67,11 @@ const PostContainer = styled.article`
   blockquote {
     border-left: 4px solid var(--border);
     margin: 1.5rem 0;
-    padding-left: 1rem;
+    padding: 1rem;
+    padding-right: 0;
+    background: var(--background-alt);
     color: var(--text-muted);
+    font-style: italic;
   }
 
   ul, ol {
@@ -123,8 +132,18 @@ const LoadingMessage = styled.div`
 
 const ErrorMessage = styled.div`
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
+  margin: 1rem 0;
   color: var(--error);
+  background: var(--error-bg);
+  border-radius: 4px;
+  border: 1px solid var(--error-border);
+`;
+
+const ImageErrorMessage = styled(ErrorMessage)`
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
 `;
 
 const BlogPost = () => {
@@ -136,22 +155,15 @@ const BlogPost = () => {
     const loadPost = async () => {
       try {
         setError(null);
-        // Combine slug and restPath for nested routes
         const fullPath = restPath ? `${slug}/${restPath}` : slug;
-        console.log('Attempting to load post:', fullPath);
+        const decodedPath = decodeURIComponent(fullPath);
         
-        const response = await fetch(`/content/blog/${fullPath}.json`);
+        const response = await fetch(`/content/blog/${decodedPath}.json`);
         if (!response.ok) {
           throw new Error(`Post not found (${response.status})`);
         }
-        const text = await response.text();
-        try {
-          const data = JSON.parse(text);
-          setPost(data);
-        } catch (e) {
-          console.error('Invalid JSON:', text);
-          throw new Error('Invalid post data');
-        }
+        const data = await response.json();
+        setPost(data);
       } catch (error) {
         console.error('Error loading blog post:', error);
         setError(error.message);
@@ -163,6 +175,18 @@ const BlogPost = () => {
     }
   }, [slug, restPath]);
 
+  const processContent = (content) => {
+    // First replace image markdown with HTML
+    const withImages = content.replace(
+      /!\[(.*?)\]\((.*?)\)/g,
+      (match, alt, src) => {
+        const imagePath = src.startsWith('/') ? src.slice(1) : src;
+        return `<img src="/content/blog/${imagePath}" alt="${alt || ''}" />`;
+      }
+    );
+    return withImages;
+  };
+
   if (error) {
     return <ErrorMessage>Error: {error}</ErrorMessage>;
   }
@@ -170,6 +194,8 @@ const BlogPost = () => {
   if (!post) {
     return <LoadingMessage>Loading...</LoadingMessage>;
   }
+
+  const processedContent = processContent(post.content);
 
   return (
     <PostContainer>
@@ -189,26 +215,10 @@ const BlogPost = () => {
         )}
       </Meta>
       <ReactMarkdown 
-        remarkPlugins={[remarkGfm]}
-        components={{
-          a: ({ node, ...props }) => (
-            <a {...props} target="_blank" rel="noopener noreferrer" />
-          ),
-          img: ({ node, ...props }) => (
-            <img 
-              {...props} 
-              loading="lazy"
-              onError={(e) => {
-                // Try to load from assets directory if the original source fails
-                if (!e.target.src.startsWith('/content/blog/assets/')) {
-                  e.target.src = `/content/blog/assets/${props.src}`;
-                }
-              }}
-            />
-          ),
-        }}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex, rehypeRaw]}
       >
-        {post.content}
+        {processedContent}
       </ReactMarkdown>
     </PostContainer>
   );

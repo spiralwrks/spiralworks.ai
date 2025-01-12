@@ -1,5 +1,6 @@
 node_modules
 build
+public
 .env
 .env.local
 .env.development.local

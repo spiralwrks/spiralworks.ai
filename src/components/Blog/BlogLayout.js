@@ -144,8 +144,8 @@ const BlogLayout = () => {
         <li key={name}>
           {node.isFile ? (
             <PostLink
-              to={`/blog/${node.post.slug}`}
-              className={slug === node.post.slug ? 'active' : ''}
+              to={`/blog/${encodeURIComponent(node.post.path.replace(/\.md$/, ''))}`}
+              className={decodeURIComponent(slug) === node.post.path.replace(/\.md$/, '') ? 'active' : ''}
               $depth={depth}
             >
               {node.post.title || name}
