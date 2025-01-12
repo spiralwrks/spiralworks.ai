@@ -1,9 +1,63 @@
 @import 'navbar.css';
 
+/* Keep this section but update it to use CSS variables */
+/* @supports not (backdrop-filter: blur(10px)) {
+  .nav-bar {
+    background-color: var(--nav-background);
+  }
+} */
+
 :root {
   --primary-color: #8622c9;
   --text-color: #333;
   --background-color: #ffffff;
+  --nav-blur-background: rgba(255, 255, 255, 0.5);
+  --nav-text-color: rgba(0, 0, 0, 0.8);
+  --form-background: rgba(255, 255, 255, 0.1);
+  --toggle-blur-background: rgba(255, 255, 255, 0.5);
+  --toggle-shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --primary-color: #a64dff;
+  --text-color: #ffffff;
+  --background-color: #121212;
+  --nav-blur-background: rgba(18, 18, 18, 0.5);
+  --nav-text-color: rgba(255, 255, 255, 0.8);
+  --form-background: rgba(255, 255, 255, 0.05);
+  --toggle-blur-background: rgba(18, 18, 18, 0.5);
+  --toggle-shadow: rgba(0, 0, 0, 0.3);
+}
+
+
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  text-align: center;
+  padding: 1em 0;
+  background-color: var(--nav-blur-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 body, html {
@@ -31,11 +85,12 @@ b {
   position: relative;
   top: 0;
   left: 0;
-  height: 38vh; /* Changed from fixed height */
-  min-height: 200px; /* Reduced minimum height */
-  max-height: 400px; /* Added maximum height */
+  height: 38vh;
+  min-height: 200px;
+  max-height: 600px;
   width: 100%;
   z-index: 1;
+  aspect-ratio: 16/9;
 }
 
 .webgl {
@@ -50,25 +105,20 @@ b {
   z-index: 3000;
   text-align: center;
   padding: 1em 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: var(--nav-blur-background);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease;
 }
 
 .nav-bar a {
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--nav-text-color);
   transition: color 0.3s ease;
 }
 
 .nav-bar a:hover,
 .nav-bar a.active {
   color: var(--primary-color);
-}
-
-@supports not (backdrop-filter: blur(10px)) {
-  .nav-bar {
-    background-color: rgba(255, 255, 255, 0.9);
-  }
 }
 
 .coming-soon .tooltip {
@@ -165,7 +215,7 @@ a:hover {
   max-width: 400px;
   margin: 4em auto;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--form-background);
   border-radius: 10px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
@@ -180,11 +230,11 @@ a:hover {
 
 .form-group input {
   width: 100%;
-  padding: 0.625rem 0; /* 10px to rem */
-  font-size: 0.9rem; /* 16px to rem */
-  color: #333;
+  padding: 0.625rem 0;
+  font-size: 0.9rem;
+  color: var(--text-color);
   border: none;
-  border-bottom: 0.0625rem solid #999; /* 1px to rem */
+  border-bottom: 0.0625rem solid var(--text-color);
   outline: none;
   background: transparent;
   transition: 0.3s;
@@ -192,24 +242,24 @@ a:hover {
 
 .form-group label {
   position: absolute;
-  top: 0.625rem; /* 10px to rem */
+  top: 0.625rem;
   left: 0;
-  font-size: 0.8rem; /* 16px to rem */
-  color: #999;
+  font-size: 0.8rem;
+  color: var(--text-color);
   pointer-events: none;
   transition: 0.3s;
 }
 
 .form-group input:focus ~ label,
 .form-group input:valid ~ label {
-  top: -1.25rem; /* -20px to rem */
+  top: -1.25rem;
   left: 0;
-  color: #8622c9;
-  font-size: 0.75rem; /* 12px to rem */
+  color: var(--primary-color);
+  font-size: 0.75rem;
 }
 
 .form-group input:focus {
-  border-bottom: 0.0625rem solid #8622c9; /* 1px to rem */
+  border-bottom: 0.0625rem solid var(--primary-color);
 }
 
 .submit-button {
@@ -302,7 +352,8 @@ a:hover {
 
   .canvas-container {
     height: 30vh;
-    min-height: 250px;
+    min-height: 300px;
+    max-height: 400px;
   }
 
   .text-container {
@@ -318,6 +369,14 @@ a:hover {
   }
 }
 
+/* Adjust the smallest screens if needed */
+@media (max-width: 480px) {
+  .canvas-container {
+    height: 30vh;
+    min-height: 250px;
+  }
+}
+
 @media (min-width: 769px) and (max-width: 1024px) {
   .canvas-container {
     height: 35vh;
@@ -329,40 +388,45 @@ a:hover {
   body, html {
     font-size: 18px;
   }
+
+  .canvas-container {
+    height: 37vh;
+    max-height: 800px;
+  }
 }
 
 
 @media (max-height: 1080px) {
   .canvas-container {
-    height: 35vh;
+    height: 37vh;
     min-height: 300px;
   }
 }
 
 @media (max-height: 900px) {
   .canvas-container {
-    height: 35vh;
+    height: 37vh;
     min-height: 250px;
   }
 }
 
 @media (max-height: 800px) {
   .canvas-container {
-    height: 35vh;
+    height: 37vh;
     min-height: 200px;
   }
 }
 
 @media (max-height: 600px) {
   .canvas-container {
-    height: 35vh;
+    height: 37vh;
     min-height: 150px;
   }
 }
 
 @media (max-height: 400px) {
   .canvas-container {
-    height: 35vh;
+    height: 37vh;
     min-height: 100px;
   }
 }
@@ -373,7 +437,7 @@ a:hover {
   }
 
   .canvas-container {
-    height: 30vh;
+    height: 37vh;
     min-height: 250px;
   }
 
@@ -388,5 +452,13 @@ a:hover {
   .elegant-form {
     padding: 2rem;
     margin: 2em auto; /* Reduced top and bottom margin for mobile */
+  }
+
+  .elegant-form {
+    background: var(--form-background);
+  }
+  
+  .form-group input {
+    color: var(--text-color);
   }
 }

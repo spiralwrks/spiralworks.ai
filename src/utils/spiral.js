@@ -18,12 +18,12 @@ export const initializeGalaxy = (canvasRef) => {
   const isMobile = /Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   const parameters = {
-    count: isMobile ? 45000 : 90000, // Slightly reduced particle count
-    size: isMobile ? 0.011 : 0.012, // Reduced particle size
-    radius: isMobile ? 1.0 : 1.3, // Reduced galaxy radius
+    count: isMobile ? 45000 : 90000,
+    size: isMobile ? 0.015 : 0.012,
+    radius: isMobile ? 1.3 : 1.3,
     branches: 8,
     spin: 1,
-    randomness: 0.18, // Slightly reduced randomness
+    randomness: isMobile ? 0.18 : 0.18,
     randomnessPower: 2.5,
     insideColor: '#8622c9',
     outsideColor: '#3222c9'
