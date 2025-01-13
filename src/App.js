@@ -16,10 +16,10 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="reading-group" element={<ReadingGroup />} />
-          </Route>
-          <Route path="/blog" element={<BlogLayout />}>
-            <Route index element={null} />
-            <Route path=":slug/*" element={<BlogPost />} />
+            <Route path="blog" element={<BlogLayout />}>
+              <Route index element={null} />
+              <Route path=":slug/*" element={<BlogPost />} />
+            </Route>
           </Route>
         </Routes>
         <ThemeToggle />
