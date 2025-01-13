@@ -39,11 +39,14 @@ const PostLink = styled(Link)`
   font-weight: ${props => props.$isDirectory ? '600' : '400'};
 
   &:hover {
-    background: var(--hover);
+    background: rgba(138, 43, 226, 0.1);
+    color: rgb(138, 43, 226);
   }
 
   &.active {
-    background: var(--active);
+    background: rgba(138, 43, 226, 0.1);
+    color: rgb(138, 43, 226);
+    font-weight: 600;
   }
 `;
 
