@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" />
+    </marker>
+  </defs>
+  
+  <!-- Layers -->
+  <rect x="50" y="220" width="300" height="40" fill="#e6f3ff" stroke="black" />
+  <rect x="75" y="160" width="250" height="40" fill="#ccebff" stroke="black" />
+  <rect x="100" y="100" width="200" height="40" fill="#99d6ff" stroke="black" />
+  <rect x="125" y="40" width="150" height="40" fill="#66c2ff" stroke="black" />
+  
+  <!-- Labels -->
+  <text x="200" y="245" text-anchor="middle">Input Layer (LLaMA embeddings)</text>
+  <text x="200" y="185" text-anchor="middle">Lower-level features</text>
+  <text x="200" y="125" text-anchor="middle">Mid-level features</text>
+  <text x="200" y="65" text-anchor="middle">High-level concepts</text>
+  
+  <!-- Arrows -->
+  <line x1="200" y1="220" x2="200" y2="200" stroke="black" marker-end="url(#arrowhead)" />
+  <line x1="200" y1="160" x2="200" y2="140" stroke="black" marker-end="url(#arrowhead)" />
+  <line x1="200" y1="100" x2="200" y2="80" stroke="black" marker-end="url(#arrowhead)" />
+  
+  <!-- Feedback arrows -->
+  <line x1="220" y1="80" x2="220" y2="100" stroke="red" stroke-dasharray="5,5" marker-end="url(#arrowhead)" />
+  <line x1="220" y1="140" x2="220" y2="160" stroke="red" stroke-dasharray="5,5" marker-end="url(#arrowhead)" />
+  <line x1="220" y1="200" x2="220" y2="220" stroke="red" stroke-dasharray="5,5" marker-end="url(#arrowhead)" />
+</svg>
