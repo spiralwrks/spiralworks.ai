@@ -6,8 +6,8 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 
-const OBSIDIAN_REPO = 'https://github.com/spiralwrks/obsidian.git';
-const TEMP_CLONE_DIR = path.join(__dirname, '../.temp-obsidian');
+const OBSIDIAN_REPO = 'https://github.com/spiralwrks/site-blog.git';
+const TEMP_CLONE_DIR = path.join(__dirname, '../.temp-blog');
 const BLOG_CONTENT_DIR = path.join(__dirname, '../public/content/blog');
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
@@ -129,15 +129,15 @@ async function copyAllImages(tempDir, targetAssetsDir) {
     await fs.promises.mkdir(targetAssetsDir, { recursive: true });
     
     // Handle images from the repository's image directory
-    const imagesDir = path.join(tempDir, '03 imgs');
+    const imagesDir = path.join(tempDir, 'imgs');
     if (fs.existsSync(imagesDir)) {
       const files = await fs.promises.readdir(imagesDir);
-      
+
       for (const file of files) {
         if (file.match(/\.(png|jpg|jpeg|gif|svg)$/i)) {
           const sourcePath = path.join(imagesDir, file);
           const targetPath = path.join(targetAssetsDir, file);
-          
+
           await fs.promises.copyFile(sourcePath, targetPath);
           console.log(`Copied repository image: ${file}`);
         }
@@ -167,11 +167,11 @@ async function copyAllImages(tempDir, targetAssetsDir) {
   }
 }
 
-async function processMarkdownContent(browser, content, targetAssetsDir, currentDir) {
+async function processMarkdownContent(browser, content, targetAssetsDir, currentDir, tempDirRoot) {
   let processedContent = content;
   
-  // 1. Process GitHub asset URLs
-  const githubAssetRegex = /!\[(.*?)\]\((https:\/\/github\.com\/spiralwrks\/obsidian\/assets\/\d+\/[a-f0-9-]+)\)/g;
+  // 1. Process GitHub asset URLs from site-blog repository
+  const githubAssetRegex = /!\[(.*?)\]\((https:\/\/github\.com\/spiralwrks\/site-blog\/raw\/[^\/]+\/imgs\/[^)]+)\)/g;
   let match;
   
   while ((match = githubAssetRegex.exec(content)) !== null) {
@@ -197,17 +197,91 @@ async function processMarkdownContent(browser, content, targetAssetsDir, current
     }
   }
   
-  // 2. Process local image references
+  // 2. Process Obsidian-style image references ![[image.png|300]]
+  const obsidianImageRegex = /!\[\[(.*?)\|(.*?)\]\]/g;
+  while ((match = obsidianImageRegex.exec(content)) !== null) {
+    const [fullMatch, imagePath, width] = match;
+    const imageFilename = path.basename(imagePath);
+    const relativeLocalPath = `/content/blog/assets/${imageFilename}`;
+
+    // Copy the image if it exists in the imgs directory or current directory
+    const sourceOptions = [
+      path.join(tempDirRoot, 'imgs', imageFilename),
+      path.join(currentDir, imageFilename),
+      path.join(currentDir, 'imgs', imageFilename)
+    ];
+
+    let copied = false;
+    for (const sourcePath of sourceOptions) {
+      try {
+        if (fs.existsSync(sourcePath)) {
+          const targetPath = path.join(targetAssetsDir, imageFilename);
+          await fs.promises.copyFile(sourcePath, targetPath);
+          console.log(`Copied Obsidian image: ${imageFilename}`);
+          copied = true;
+          break;
+        }
+      } catch (error) {
+        console.error(`Error checking/copying Obsidian image ${sourcePath}:`, error.message);
+      }
+    }
+
+    // Replace the Obsidian format with standard markdown
+    processedContent = processedContent.replace(
+      fullMatch,
+      `![${imageFilename}](${relativeLocalPath})`
+    );
+    console.log(`Updated reference for Obsidian image: ${imageFilename}`);
+  }
+
+  // 3. Process Obsidian-style image references without width ![[image.png]]
+  const obsidianImageSimpleRegex = /!\[\[([^|]+?)\]\]/g;
+  while ((match = obsidianImageSimpleRegex.exec(content)) !== null) {
+    const [fullMatch, imagePath] = match;
+    const imageFilename = path.basename(imagePath);
+    const relativeLocalPath = `/content/blog/assets/${imageFilename}`;
+
+    // Copy the image if it exists in the imgs directory or current directory
+    const sourceOptions = [
+      path.join(tempDirRoot, 'imgs', imageFilename),
+      path.join(currentDir, imageFilename),
+      path.join(currentDir, 'imgs', imageFilename)
+    ];
+
+    let copied = false;
+    for (const sourcePath of sourceOptions) {
+      try {
+        if (fs.existsSync(sourcePath)) {
+          const targetPath = path.join(targetAssetsDir, imageFilename);
+          await fs.promises.copyFile(sourcePath, targetPath);
+          console.log(`Copied Obsidian image: ${imageFilename}`);
+          copied = true;
+          break;
+        }
+      } catch (error) {
+        console.error(`Error checking/copying Obsidian image ${sourcePath}:`, error.message);
+      }
+    }
+
+    // Replace the Obsidian format with standard markdown
+    processedContent = processedContent.replace(
+      fullMatch,
+      `![${imageFilename}](${relativeLocalPath})`
+    );
+    console.log(`Updated reference for Obsidian image: ${imageFilename}`);
+  }
+
+  // 4. Process standard markdown image references
   const localImageRegex = /!\[(.*?)\]\(((?!https?:\/\/)[^)]+\.(png|jpg|jpeg|gif|svg))\)/gi;
   while ((match = localImageRegex.exec(content)) !== null) {
     const [fullMatch, altText, imagePath] = match;
     const imageFilename = path.basename(imagePath);
     const relativeLocalPath = `/content/blog/assets/${imageFilename}`;
-    
+
     // Copy the image if it exists in the current directory
     const sourcePath = path.join(currentDir, imageFilename);
     const targetPath = path.join(targetAssetsDir, imageFilename);
-    
+
     try {
       if (fs.existsSync(sourcePath)) {
         await fs.promises.copyFile(sourcePath, targetPath);
@@ -216,7 +290,7 @@ async function processMarkdownContent(browser, content, targetAssetsDir, current
     } catch (error) {
       console.error(`Error copying local image ${imageFilename}:`, error.message);
     }
-    
+
     // Replace the local path with the new public path
     processedContent = processedContent.replace(
       fullMatch,
@@ -251,9 +325,10 @@ async function processMarkdownFiles(tempDir, targetDir) {
       
       // Process content to handle all types of images
       const processedContent = await processMarkdownContent(
-        browser, 
-        mdContent, 
+        browser,
+        mdContent,
         targetAssetsDir,
+        tempDir,
         tempDir
       );
       
@@ -285,52 +360,112 @@ async function processMarkdownFiles(tempDir, targetDir) {
     
     // Then process all other markdown files
     const files = await fs.promises.readdir(tempDir, { withFileTypes: true });
-    
+
+    // Process markdown files in the root directory
     for (const file of files) {
-      if (file.isDirectory() && !file.name.startsWith('.')) {
+      if (file.isFile() && file.name.endsWith('.md') && file.name !== 'README.md') {
+        const mdPath = path.join(tempDir, file.name);
+        const content = await fs.promises.readFile(mdPath, 'utf8');
+        const { data, content: mdContent } = matter(content);
+
+        // Process content to handle all types of images
+        const processedContent = await processMarkdownContent(
+          browser,
+          mdContent,
+          targetAssetsDir,
+          tempDir,
+          tempDir
+        );
+
+        // Generate a URL-friendly slug
+        const slug = file.name
+          .replace('.md', '')
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+
+        // Create the post path using the file name
+        const postPath = file.name.replace('.md', '');
+
+        const post = {
+          title: file.name.replace('.md', ''),
+          date: data.date || new Date().toISOString(),
+          content: processedContent,
+          category: "main",
+          tags: data.tags || [],
+          slug,
+          path: postPath
+        };
+
+        // Save post in the main category directory
+        const targetPath = path.join(targetDir, 'public/content/blog', 'main');
+        await fs.promises.mkdir(targetPath, { recursive: true });
+        const jsonPath = path.join(targetPath, `${slug}.json`);
+        await fs.promises.writeFile(jsonPath, JSON.stringify(post, null, 2));
+
+        // Add to posts array for index
+        const indexPost = {
+          title: post.title,
+          date: post.date,
+          category: post.category,
+          tags: post.tags,
+          slug: post.slug,
+          path: post.path,
+          preview: post.content.substring(0, 200) + '...'
+        };
+        posts.push(indexPost);
+
+        console.log(`Processed root file: ${file.name}`);
+      }
+    }
+
+    // Process markdown files in subdirectories
+    for (const file of files) {
+      if (file.isDirectory() && !file.name.startsWith('.') && file.name !== 'imgs') {
         const dirPath = path.join(tempDir, file.name);
         const dirFiles = await fs.promises.readdir(dirPath);
-        
+
         for (const mdFile of dirFiles) {
           if (mdFile.endsWith('.md')) {
             const mdPath = path.join(dirPath, mdFile);
             const content = await fs.promises.readFile(mdPath, 'utf8');
             const { data, content: mdContent } = matter(content);
-            
+
             // Process content to handle all types of images
             const processedContent = await processMarkdownContent(
-              browser, 
-              mdContent, 
+              browser,
+              mdContent,
               targetAssetsDir,
-              dirPath
+              dirPath,
+              tempDir
             );
-            
+
             // Generate a URL-friendly slug
             const slug = mdFile
               .replace('.md', '')
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/(^-|-$)/g, '');
-            
+
             // Create the post path using the directory structure
             const postPath = `${file.name}/${mdFile.replace('.md', '')}`;
-            
+
             const post = {
               title: mdFile.replace('.md', ''),
-              date: data.date || new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+              date: data.date || new Date().toISOString(),
               content: processedContent,
               category: file.name,
               tags: data.tags || [],
               slug,
               path: postPath
             };
-            
+
             // Save post in its category directory
             const targetPath = path.join(targetDir, 'public/content/blog', file.name);
             await fs.promises.mkdir(targetPath, { recursive: true });
             const jsonPath = path.join(targetPath, `${slug}.json`);
             await fs.promises.writeFile(jsonPath, JSON.stringify(post, null, 2));
-            
+
             // Add to posts array for index
             const indexPost = {
               title: post.title,
@@ -342,7 +477,7 @@ async function processMarkdownFiles(tempDir, targetDir) {
               preview: post.content.substring(0, 200) + '...'
             };
             posts.push(indexPost);
-            
+
             console.log(`Processed: ${mdFile}`);
           }
         }

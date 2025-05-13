@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // Check if user is authenticated
+      let authenticated = isAuthenticated();
+
+      // Check if user's email belongs to admin domain
+      let hasAdminEmail = authenticated &&
+        request.auth.token.email.matches('.*@spiralworks.ai$');
+
+      // In a production system, you would check custom claims or a roles collection
+      return hasAdminEmail;
+    }
+
+    // Simple rate limiting check - handled primarily in Cloud Functions
+    function isRateLimited() {
+      // Rate limiting is fully implemented in Cloud Functions instead of rules
+      return false;
+    }
+    
+    // Root collection access rules
+    match /waitlist/{entryId} {
+      // Users can create entries but not read or modify them
+      allow create: if
+        // Ensure required fields are present
+        request.resource.data.keys().hasAll(['name', 'email', 'createdAt']) &&
+        // Validate email format (basic check)
+        request.resource.data.email.matches('^[^@]+@[^@]+\\.[^@]+$') &&
+        // Rate limiting handled in Cloud Functions
+        !isRateLimited();
+      
+      // Only admins can read, update or delete entries
+      allow read, update, delete: if isAdmin();
+      
+      // No one can list all entries without admin rights
+      allow list: if isAdmin();
+    }
+    
+    // Rate limiting collection
+    match /rateLimits/{docId} {
+      // Allow creating rate limit entries (anyone can create to track their own usage)
+      allow create: if 
+        request.resource.data.keys().hasAll(['ip', 'timestamp', 'action']) &&
+        request.resource.data.timestamp is timestamp;
+      
+      // Only admins can read, update, delete
+      allow read, update, delete: if isAdmin();
+    }
+    
+    // Audit logs for admin actions
+    match /adminAuditLogs/{logId} {
+      // Anyone can create audit logs (for security event tracking)
+      allow create: if request.resource.data.keys().hasAll(['eventType', 'timestamp']);
+      
+      // Only admins can read audit logs
+      allow read: if isAdmin();
+      
+      // No one can update or delete audit logs
+      allow update, delete: if false;
+    }
+  }
+}

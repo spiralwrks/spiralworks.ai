@@ -14,12 +14,10 @@ function Layout() {
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>
             <span>Home</span>
           </NavLink>
-          <NavLink to="/reading-group" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-            <span>Reading Group</span>
-          </NavLink>
-          <NavLink to="/blog" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <div className="nav-link coming-soon">
             <span>Blog</span>
-          </NavLink>
+            <div className="tooltip">Coming Soon</div>
+          </div>
         </nav>
 
         <Outlet />

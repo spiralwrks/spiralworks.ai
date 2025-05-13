@@ -1,0 +1,202 @@
+.waitlist-signup {
+  max-width: 380px;
+  margin: 1.5rem auto 1rem;
+  padding: 1.25rem;
+  background: var(--form-background);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 6px 24px rgba(31, 38, 135, 0.15);
+  position: relative;
+  z-index: 1000;
+  transition: background-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease;
+}
+
+.waitlist-title {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.waitlist-description {
+  color: var(--text-color);
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  opacity: 0.9;
+}
+
+.waitlist-form {
+  width: 100%;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 0.8rem;
+  color: var(--text-color);
+  border: none;
+  border-bottom: 0.0625rem solid var(--text-color);
+  outline: none;
+  background: transparent;
+  transition: 0.3s;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--text-color);
+}
+
+.form-group label.optional {
+  color: var(--primary-color);
+}
+
+.form-group input:focus {
+  border-bottom: 0.0625rem solid var(--primary-color);
+}
+
+.waitlist-button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.waitlist-button:hover {
+  background: #6a1b9a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.waitlist-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.waitlist-button:disabled {
+  background: #b39ddb;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  color: #ff3d00;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  background-color: var(--nav-blur-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+  max-width: 80%;
+  width: 400px;
+  color: var(--text-color);
+  transition: background-color var(--theme-transition-duration) ease,
+              color var(--theme-transition-duration) ease;
+}
+
+.modal-content h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.875em;
+  cursor: pointer;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: #6a1b9a;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .waitlist-signup {
+    padding: 1.25rem;
+    margin: 1.5rem auto 0.5rem;
+    max-width: 340px;
+  }
+
+  .waitlist-title {
+    font-size: 1.1rem;
+  }
+
+  .waitlist-description {
+    font-size: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .waitlist-signup {
+    padding: 1rem;
+    margin: 1rem auto 0.5rem;
+    max-width: 320px;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group input {
+    padding: 0.35rem 0;
+  }
+}
