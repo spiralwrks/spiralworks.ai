@@ -1,6 +1,7 @@
 node_modules
 build
 public
+.specstory
 .env
 .env.local
 .env.development.local

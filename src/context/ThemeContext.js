@@ -5,8 +5,8 @@ export const ThemeContext = createContext();
 const getInitialTheme = () => {
   const savedTheme = localStorage.getItem('theme-preference');
   if (savedTheme) return savedTheme;
-  // Always default to light theme instead of checking system preference
-  return 'light';
+  // Default to dark theme
+  return 'dark';
 };
 
 export const ThemeProvider = ({ children }) => {

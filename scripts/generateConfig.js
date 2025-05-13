@@ -5,8 +5,8 @@ const crypto = require('crypto');
 const encryptionKey = crypto.randomBytes(32).toString('hex');
 const publicKey = crypto.randomBytes(32).toString('hex');
 
-// Your Discord webhook URL - I'm using REDACTED here since you should generate a new one
-const webhookUrl = 'https://discord.com/api/webhooks/1328031147606937600/7oH-64-vjhVuYaPxdlnTwDMYJuVgc8T9JJbKSB2diehwtcVcKl9ABJ6zUHnmnEIv96vj';
+// Your Discord webhook URL - Replace with your own webhook URL
+const webhookUrl = 'https://discord.com/api/webhooks/1370811189965230291/bNrdpvFI_HQcmQ_Eg1EJ0aQD14NMiLCWRQ2vIroKeAtQjQGLYtVNl6EDo-1JTQ0C4G0I';
 
 // Encrypt the webhook URL
 const encryptedWebhookUrl = CryptoJS.AES.encrypt(webhookUrl, encryptionKey).toString();

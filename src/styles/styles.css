@@ -1,4 +1,5 @@
 @import 'navbar.css';
+@import 'waitlist.css';
 
 /* Keep this section but update it to use CSS variables */
 /* @supports not (backdrop-filter: blur(10px)) {
@@ -76,8 +77,9 @@ body, html {
               background-color var(--theme-transition-duration) ease;
 }
 
-b {
+b, strong {
   color: var(--primary-color);
+  font-weight: 700;
 }
 
 .app-container {
@@ -213,148 +215,6 @@ a:hover {
   margin-top: auto;
 }
 
-.reading-group-text {
-  margin-bottom: 4rem;
-}
-
-.elegant-form {
-  max-width: 400px;
-  margin: 4em auto;
-  padding: 2rem;
-  background: var(--form-background);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-  position: relative;
-  z-index: 1000;
-}
-
-.form-group {
-  position: relative;
-  margin-bottom: 2rem;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 0.625rem 0;
-  font-size: 0.9rem;
-  color: var(--text-color);
-  border: none;
-  border-bottom: 0.0625rem solid var(--text-color);
-  outline: none;
-  background: transparent;
-  transition: 0.3s;
-}
-
-.form-group label {
-  position: absolute;
-  top: 0.625rem;
-  left: 0;
-  font-size: 0.8rem;
-  color: var(--text-color);
-  pointer-events: none;
-  transition: 0.3s;
-}
-
-.form-group input:focus ~ label,
-.form-group input:valid ~ label {
-  top: -1.25rem;
-  left: 0;
-  color: var(--primary-color);
-  font-size: 0.75rem;
-}
-
-.form-group input:focus {
-  border-bottom: 0.0625rem solid var(--primary-color);
-}
-
-.submit-button {
-  width: 100%;
-  padding: 0.625rem 1.25rem; /* 10px 20px to rem */
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 0.3125rem; /* 5px to rem */
-  font-size: 0.8em; /* Already relative, can keep as is */
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.submit-button:hover {
-  background: #6a1b9a;
-}
-
-.submit-button:disabled {
-  background: #b39ddb;
-  cursor: not-allowed;
-}
-
-.error-message {
-  color: #ff3d00;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
-}
-
-.modal-content {
-  background-color: var(--nav-blur-background);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 2rem;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  animation: slideIn 0.3s ease-out;
-  position: relative;
-  max-width: 80%;
-  width: 400px;
-  color: var(--text-color);
-  transition: background-color var(--theme-transition-duration) ease,
-              color var(--theme-transition-duration) ease;
-}
-
-.modal-content h2 {
-  color: var(--primary-color);
-  margin-bottom: 1rem;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.875em;
-  cursor: pointer;
-  color: var(--primary-color);
-  transition: color 0.3s ease;
-  line-height: 1;
-}
-
-.close-button:hover {
-  color: #6a1b9a;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideIn {
-  from { transform: translateY(-50px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
 
 @media (max-width: 768px) {
   body, html {
@@ -375,9 +235,6 @@ a:hover {
     font-size: 0.9em;
   }
 
-  .elegant-form {
-    padding: 1.5rem;
-  }
 }
 
 /* Adjust the smallest screens if needed */
@@ -460,16 +317,4 @@ a:hover {
     font-size: 0.9em;
   }
 
-  .elegant-form {
-    padding: 2rem;
-    margin: 2em auto; /* Reduced top and bottom margin for mobile */
-  }
-
-  .elegant-form {
-    background: var(--form-background);
-  }
-  
-  .form-group input {
-    color: var(--text-color);
-  }
 }
