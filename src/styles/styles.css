@@ -109,7 +109,7 @@ b, strong {
 .nav-bar {
   position: sticky;
   top: 0;
-  z-index: 3000;
+  z-index: 9999;
   text-align: center;
   padding: 1em 0;
   background-color: var(--nav-blur-background);

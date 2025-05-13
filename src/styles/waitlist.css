@@ -58,7 +58,7 @@
 }
 
 .form-group label.optional {
-  color: var(--primary-color);
+  color: var(--text-color);
 }
 
 .form-group input:focus {
