@@ -19,6 +19,9 @@ function Home() {
           <p className="content-1">
             We build <b>rigorous, high trust systems</b> informed from a meld of our computational creativity, information theory, and neurosymbolic research.
           </p>
+          <p className="content-1">
+          Each part of our OS is supported by <b>peer-reviewed research</b>, grounded in robust principles established by the <b>philosophy of science</b>, and carefully designed for <b>critical scientific workflows</b>.
+          </p>
 
           <WaitlistSignup />
         </div>
