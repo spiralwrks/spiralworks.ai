@@ -29,7 +29,7 @@ const SidebarContent = styled.div`
   padding: 1rem;
   overflow-y: auto;
   flex: 1;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {

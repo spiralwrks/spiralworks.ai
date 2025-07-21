@@ -1,0 +1,33 @@
+.scroll-reveal {
+  margin: 20px 0;
+}
+
+.scroll-reveal-text {
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.word {
+  display: inline-block;
+}
+
+/* Custom styling for content sections */
+.scroll-reveal.content-reveal {
+  margin: 0 0 1em 0;
+}
+
+.scroll-reveal.content-reveal .scroll-reveal-text {
+  font-size: 0.8em;
+  line-height: 1.6;
+  font-weight: 400;
+  margin: 0;
+}
+
+.scroll-reveal.content-reveal .scroll-reveal-text img {
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+  margin-right: 0.2em;
+  margin-bottom: 0.2em;
+}

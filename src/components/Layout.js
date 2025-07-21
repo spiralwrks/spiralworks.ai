@@ -1,31 +1,52 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import StarBorder from './StarBorder';
 import '../styles/navbar.css';
-import Galaxy from './Galaxy';
 
 function Layout() {
+  const location = useLocation();
+
   return (
     <div className="app-container">
-      <div className="canvas-container">
-        <Galaxy />
-      </div>
-      <div className="content-wrapper">
-        <nav className="nav-bar">
-          <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>
-            <span>Home</span>
-          </NavLink>
-          <div className="nav-link coming-soon">
-            <span>Blog</span>
-            <div className="tooltip">Coming Soon</div>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="navbar-logo">
+            <img src="/icons/apple-touch-icon.png" alt="Spiral Works" className="logo-icon" />
+            <span className="logo-text">Spiral Works</span>
           </div>
-        </nav>
+          
+          <div className="navbar-menu">
+            <Link 
+              to="/" 
+              className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}
+            >
+              Home
+            </Link>
+            <Link 
+              to="/about" 
+              className={`navbar-link ${location.pathname === '/about' ? 'active' : ''}`}
+            >
+              About
+            </Link>
+            <span className="navbar-link disabled">
+              Blog
+              <span className="tooltip">Coming Soon</span>
+            </span>
+          </div>
+          
+          <div className="navbar-actions">
+            <StarBorder as={Link} to="/waitlist" color="#8622c9" speed="4s" thickness={3}>
+              Get Started
+            </StarBorder>
+          </div>
+        </div>
+      </nav>
 
-        <Outlet />
+      <Outlet />
 
-        <footer className="footer">
-          &copy; 2025 Spiral Works, Inc. All Rights Reserved
-        </footer>
-      </div>
+      <footer className="footer">
+        &copy; 2025 Spiral Works, Inc. All Rights Reserved
+      </footer>
     </div>
   );
 }

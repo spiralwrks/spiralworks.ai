@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-// ensure all fonts are Montserrat
+// ensure all fonts are Chillax
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   .font-light {

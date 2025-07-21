@@ -1,0 +1,179 @@
+.fibonacci-text-container {
+  position: relative;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.fibonacci-text {
+  color: var(--text-color);
+  font-weight: 400;
+  margin: 0;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  transition: all var(--animation-duration) ease-out;
+}
+
+.fibonacci-text.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0px);
+}
+
+/* Different text sizes */
+.fibonacci-text-container.title {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+.fibonacci-text-container.subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  white-space: nowrap;
+}
+
+.fibonacci-text-container.body {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: 400;
+}
+
+/* Ambient positioning classes */
+.ambient-top-left {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  max-width: 450px;
+  width: 45%;
+  z-index: 10;
+}
+
+.ambient-top-right {
+  position: absolute;
+  top: 20%;
+  right: 5%;
+  max-width: 350px;
+}
+
+.ambient-bottom-left {
+  position: absolute;
+  bottom: 20%;
+  left: 5%;
+  max-width: 350px;
+}
+
+.ambient-bottom-right {
+  position: absolute;
+  bottom: 1%;
+  right: 5%;
+  max-width: 450px;
+  width: 45%;
+  z-index: 10;
+}
+
+.ambient-center-top {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.ambient-center-bottom {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+/* Neural connection lines */
+.neural-connection {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  height: 1px;
+  opacity: 0.3;
+  animation: connectionPulse 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes connectionPulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scaleX(1.2);
+  }
+}
+
+/* Mobile responsive adjustments - stacked layout */
+@media (max-width: 768px) {
+  .about-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 0;
+  }
+  
+  .fibonacci-text-container.subtitle {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
+  
+  /* Animation takes smaller space at very top */
+  .about-section > div:first-child {
+    height: 25vh;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: relative;
+  }
+  
+  /* Override canvas positioning on mobile */
+  .data-flow-canvas {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  .ambient-top-left {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    max-width: none !important;
+    width: 100% !important;
+    padding: 0 2rem;
+    margin: 1rem 0;
+    text-align: left;
+    z-index: 10;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  
+  .ambient-bottom-right {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    max-width: none !important;
+    width: 100% !important;
+    padding: 0 2rem;
+    margin: 1.5rem 0 0rem 0;
+    text-align: left;
+    z-index: 10;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  
+  /* Normal text sizing on mobile */
+  .ambient-top-left div,
+  .ambient-bottom-right div {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}

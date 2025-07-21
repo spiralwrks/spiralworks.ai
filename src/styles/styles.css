@@ -1,5 +1,6 @@
 @import 'navbar.css';
 @import 'waitlist.css';
+@import 'chillax.css';
 
 /* Keep this section but update it to use CSS variables */
 /* @supports not (backdrop-filter: blur(10px)) {
@@ -68,13 +69,38 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   color: var(--text-color);
   background-color: var(--background-color);
   overflow-x: hidden; /* Add this line to prevent horizontal scrolling */
   transition: color var(--theme-transition-duration) ease,
               background-color var(--theme-transition-duration) ease;
+  
+  /* Hide scrollbar for WebKit browsers (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+  
+  /* Hide scrollbar for IE and Edge Legacy */
+  -ms-overflow-style: none;
+}
+
+/* Apply scrollbar hiding to all elements */
+* {
+  /* Hide scrollbar for WebKit browsers */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+  
+  /* Hide scrollbar for IE and Edge Legacy */
+  -ms-overflow-style: none;
 }
 
 b, strong {
@@ -88,17 +114,6 @@ b, strong {
   min-height: 100vh;
 }
 
-.canvas-container {
-  position: relative;
-  top: 0;
-  left: 0;
-  height: 38vh;
-  min-height: 200px;
-  max-height: 600px;
-  width: 100%;
-  z-index: 1;
-  aspect-ratio: 16/9;
-}
 
 .webgl {
   width: 100%;
@@ -106,18 +121,6 @@ b, strong {
   display: block;
 }
 
-.nav-bar {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  text-align: center;
-  padding: 1em 0;
-  background-color: var(--nav-blur-background);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: background-color var(--theme-transition-duration) ease,
-              color var(--theme-transition-duration) ease;
-}
 
 .nav-bar a {
   color: var(--nav-text-color);
@@ -210,9 +213,137 @@ a:hover {
 
 .footer {
   text-align: center;
-  padding: 1em;
+  padding: 4em 1em 1em 1em;
   font-size: 0.8em;
   margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 1em 1em 1em 1em;
+  }
+}
+
+/* Dither Background Pattern */
+.dither-background {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(134, 34, 201, 0.03) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 70% 30%, rgba(134, 34, 201, 0.02) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 40% 80%, rgba(134, 34, 201, 0.025) 0.5px, transparent 0.5px);
+  background-size: 12px 12px, 8px 8px, 16px 16px;
+  background-position: 0 0, 4px 4px, 8px 8px;
+}
+
+/* Hero Section Styles */
+.hero-section {
+  display: flex;
+  min-height: 85vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  box-sizing: border-box;
+  margin-top: -6rem;
+  padding-top: 4rem;
+}
+
+.hero-galaxy {
+  width: 45%;
+  height: 85vh;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -6vh;
+}
+
+.hero-galaxy .webgl {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-content {
+  width: 55%;
+  padding: 0 1rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  margin-left: -3%;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 400;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
+  color: var(--text-color);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.9), 0 0 50px rgba(134, 34, 201, 0.4);
+  transition: color var(--theme-transition-duration) ease;
+  word-wrap: break-word;
+}
+
+.hero-tagline {
+  font-size: clamp(1rem, 2.2vw, 1.4rem);
+  font-weight: 300;
+  margin: 0;
+  opacity: 0.9;
+  color: var(--text-color);
+  line-height: 1.5;
+  text-shadow: 0 1px 20px rgba(0, 0, 0, 0.9), 0 0 40px rgba(134, 34, 201, 0.3);
+  transition: color var(--theme-transition-duration) ease;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.content-sections {
+  padding: 2rem 0;
+  background-color: var(--background-color);
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    min-height: 85vh;
+    gap: 1rem;
+    margin-top: -2rem;
+    padding: 2rem 1rem;
+    max-width: 100%;
+  }
+  
+  .hero-galaxy {
+    width: 350px;
+    height: 350px;
+    padding-top: 2vh;
+  }
+  
+  .hero-content {
+    width: 100%;
+    text-align: center;
+    padding: 0 1rem;
+    margin-left: 0;
+  }
+  
+  .hero-title {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .hero-tagline {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+  }
 }
 
 
@@ -237,6 +368,66 @@ a:hover {
 
 }
 
+/* Waitlist Page Styles */
+.waitlist-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.waitlist-page-container {
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.waitlist-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 2rem;
+}
+
+.waitlist-page-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.waitlist-page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+@media (max-width: 768px) {
+  .waitlist-page {
+    padding: 1rem;
+  }
+  
+  .waitlist-page-content {
+    margin-bottom: 10rem;
+  }
+  
+  .waitlist-page-title {
+    font-size: 2rem;
+  }
+  
+  .waitlist-page-subtitle {
+    font-size: 1rem;
+  }
+}
+
 /* Adjust the smallest screens if needed */
 @media (max-width: 480px) {
   .canvas-container {
@@ -246,6 +437,12 @@ a:hover {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
+  .hero-section {
+    padding: 0 1.5rem;
+    margin-top: -4rem;
+    padding-top: 3rem;
+  }
+  
   .canvas-container {
     height: 35vh;
     min-height: 300px;
@@ -255,6 +452,12 @@ a:hover {
 @media (min-width: 1025px) {
   body, html {
     font-size: 18px;
+  }
+  
+  .hero-section {
+    padding: 0 2rem;
+    margin-top: -5rem;
+    padding-top: 3rem;
   }
 
   .canvas-container {

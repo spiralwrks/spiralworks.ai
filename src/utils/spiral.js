@@ -19,12 +19,12 @@ export const initializeGalaxy = (canvasRef) => {
 
   const parameters = {
     count: isMobile ? 45000 : 90000,
-    size: isMobile ? 0.015 : 0.012,
-    radius: isMobile ? 1.3 : 1.3,
-    branches: 8,
+    size: isMobile ? 0.018 : 0.025,
+    radius: isMobile ? 1.4 : 1.6,
+    branches: 12,
     spin: 1,
     randomness: isMobile ? 0.18 : 0.18,
-    randomnessPower: 2.5,
+    randomnessPower: 2.8,
     insideColor: '#8622c9',
     outsideColor: '#3222c9'
   };
@@ -83,13 +83,13 @@ export const initializeGalaxy = (canvasRef) => {
   generateGalaxy();
 
   const sizes = {
-    width: window.innerWidth,
-    height: window.innerHeight
+    width: canvas.clientWidth || window.innerWidth,
+    height: canvas.clientHeight || window.innerHeight
   };
 
-  const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-  camera.position.set(0, 3.5, 4.5); // Adjusted camera position
-  camera.lookAt(0, -5, 0); // Adjusted look-at point
+  const camera = new THREE.PerspectiveCamera(70, sizes.width / sizes.height, 0.1, 100);
+  camera.position.set(0, 2.5, 3.2);
+  camera.lookAt(0, 0, 0);
   scene.add(camera);
 
   const renderer = new THREE.WebGLRenderer({
@@ -102,8 +102,8 @@ export const initializeGalaxy = (canvasRef) => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   const handleResize = () => {
-    sizes.width = canvas.clientWidth;
-    sizes.height = canvas.clientHeight;
+    sizes.width = canvas.clientWidth || canvas.parentElement.clientWidth;
+    sizes.height = canvas.clientHeight || canvas.parentElement.clientHeight;
 
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();

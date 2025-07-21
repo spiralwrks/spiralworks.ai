@@ -1,31 +1,34 @@
 .waitlist-signup {
-  max-width: 380px;
-  margin: 1.5rem auto 1rem;
-  padding: 1.25rem;
-  background: var(--form-background);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 6px 24px rgba(31, 38, 135, 0.15);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
   position: relative;
-  z-index: 1000;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
   transition: background-color var(--theme-transition-duration) ease,
               color var(--theme-transition-duration) ease;
 }
 
 .waitlist-title {
-  color: var(--primary-color);
-  font-size: 1.1rem;
-  margin-bottom: 0.3rem;
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
   text-align: center;
 }
 
 .waitlist-description {
-  color: var(--text-color);
-  font-size: 0.8rem;
+  color: #a3a3a3;
+  font-size: 1rem;
   text-align: center;
-  margin-bottom: 1.2rem;
+  margin-bottom: 2rem;
   opacity: 0.9;
 }
 
@@ -140,6 +143,7 @@
   color: var(--primary-color);
   margin-bottom: 1rem;
   font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .close-button {

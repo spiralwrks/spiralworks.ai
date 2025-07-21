@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { submitWaitlistData, generateCSRFToken } from '../utils/waitlistService';
+import Stepper, { Step } from './Stepper';
 
 function WaitlistSignup() {
   const [formData, setFormData] = useState({ name: '', email: '', organization: '' });
@@ -25,17 +26,26 @@ function WaitlistSignup() {
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const validateForm = () => {
-    // Basic validation
-    if (!formData.name.trim()) return false;
-    if (!formData.email || !formData.email.includes('@')) return false;
-    return true;
+  const validateStep = (step) => {
+    switch (step) {
+      case 1:
+        return formData.name.trim().length > 0;
+      case 2:
+        return formData.email && formData.email.includes('@');
+      case 3:
+        return formData.organization.trim().length > 0;
+      default:
+        return true;
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleStepChange = (step) => {
+    // Track step changes if needed for analytics
+    console.log(`Step changed to: ${step}`);
+  };
 
-    if (!validateForm()) {
+  const handleFinalSubmit = async () => {
+    if (!formData.name.trim() || !formData.email || !formData.email.includes('@') || !formData.organization.trim()) {
       setSubmissionStatus('validation_error');
       return;
     }
@@ -75,66 +85,9 @@ function WaitlistSignup() {
     setShowModal(false);
   };
 
-  return (
-    <div className="waitlist-signup">
-      <h3 className="waitlist-title">Join Our Public Beta</h3>
-      <p className="waitlist-description">Sign up to be among the first to test our research OS!</p>
-      
-      <form className="waitlist-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            placeholder="Enter your name"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            placeholder="Enter your email"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="organization" className="optional">Organization (Optional)</label>
-          <input
-            id="organization"
-            type="text"
-            name="organization"
-            value={formData.organization}
-            onChange={handleChange}
-            placeholder="Enter your organization"
-          />
-        </div>
-
-        <div className="form-group">
-          <button type="submit" className="waitlist-button" disabled={submissionStatus === 'loading'}>
-            {submissionStatus === 'loading' ? 'Signing Up...' : 'Join Waitlist'}
-          </button>
-        </div>
-      </form>
-      
-      {submissionStatus === 'validation_error' && 
-        <p className="error-message">Please fill in all required fields with valid information.</p>
-      }
-      
-      {submissionStatus === 'error' && 
-        <p className="error-message">There was an error submitting your request. Please try again.</p>
-      }
-
-      {showModal && (
+  if (submissionStatus === 'success' && showModal) {
+    return (
+      <div className="waitlist-signup">
         <div className="modal">
           <div className="modal-content">
             <span className="close-button" onClick={closeModal}>&times;</span>
@@ -142,7 +95,72 @@ function WaitlistSignup() {
             <p>We'll contact you when we're ready to onboard beta testers.</p>
           </div>
         </div>
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="waitlist-signup">
+      <Stepper
+        initialStep={1}
+        onStepChange={handleStepChange}
+        onFinalStepCompleted={handleFinalSubmit}
+        backButtonText="Previous"
+        nextButtonText="Continue"
+        validateStep={validateStep}
+      >
+        <Step>
+          <h2>What's your name?</h2>
+          <p>Let's start with your name so we can personalize your experience.</p>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Enter your full name"
+            required
+          />
+          {formData.name.length > 0 && !validateStep(1) && <p style={{ color: '#ef4444', fontSize: '0.875rem' }}>Please enter your name</p>}
+        </Step>
+        
+        <Step>
+          <h2>Your email address</h2>
+          <p>We'll use this to send you beta access and important updates.</p>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Enter your email address"
+            required
+          />
+          {formData.email.length > 0 && !validateStep(2) && <p style={{ color: '#ef4444', fontSize: '0.875rem' }}>Please enter a valid email address</p>}
+        </Step>
+        
+        <Step>
+          <h2>Organization</h2>
+          <p>Help us understand your background - what organization are you with?</p>
+          <input
+            type="text"
+            name="organization"
+            value={formData.organization}
+            onChange={handleChange}
+            placeholder="Enter your organization or company"
+            required
+          />
+          {formData.organization.length > 0 && !validateStep(3) && <p style={{ color: '#ef4444', fontSize: '0.875rem' }}>Please enter your organization</p>}
+        </Step>
+        
+        <Step>
+          <h2>Ready to join!</h2>
+          <p><span style={{ color: 'white' }}>Name:</span> {formData.name}</p>
+          <p><span style={{ color: 'white' }}>Email:</span> {formData.email}</p>
+          {formData.organization && <p><span style={{ color: 'white' }}>Organization:</span> {formData.organization}</p>}
+          <p>Click "Complete" to finish your beta signup!</p>
+          {submissionStatus === 'loading' && <p style={{ color: '#8622c9' }}>Submitting your application...</p>}
+          {submissionStatus === 'error' && <p style={{ color: '#ef4444' }}>There was an error. Please try again.</p>}
+        </Step>
+      </Stepper>
     </div>
   );
 }

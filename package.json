@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.18.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.7",
     "firebase": "^11.7.1",
+    "framer-motion": "^12.23.6",
     "gray-matter": "^4.0.3",
+    "gsap": "^3.13.0",
     "katex": "^0.16.19",
+    "maath": "^0.10.8",
     "marked": "^15.0.6",
     "node-fetch": "^3.3.2",
     "puppeteer": "^24.0.0",
@@ -31,13 +36,13 @@
   },
   "homepage": "https://spiralworks.ai",
   "scripts": {
-    "prestart": "node scripts/syncBlogContent.js",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "prestart-disabled": "node scripts/syncBlogContent.js",
+    "start": "GENERATE_SOURCEMAP=false react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sync-blog": "node scripts/syncBlogContent.js",
-    "predeploy": "npm run sync-blog && npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -61,6 +66,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.2.0",
-    "simple-git": "^3.27.0"
+    "simple-git": "^3.27.0",
+    "typescript": "^4.9.5"
   }
 }
