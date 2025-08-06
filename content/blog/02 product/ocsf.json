@@ -1,9 +1,0 @@
-{
-  "title": "OCSF",
-  "date": "2026-05-12T00:08:42.646Z",
-  "content": "#alpha-v1 \n\nThe OCSF (Open Cybersecurity Schema Framework) aims to create an industry-wide framework for ==**data exchange, aggregation, and analysis**== primarily for cybersecurity applications ==**but not exclusively**==.\n\n- Apache License 2.0\n- Extensible framework\n- Vendor-agnostic \n- Not restricted to cybersecurity domain\n- Not restricted to events\n\n## Benefits\n\nIn security operations, data must be collated/aggregated from a wide range of different sources with all differing structures with massive amounts of data and all of these sources must be correlated with each other leading to a crazy shit show.\n\nOCSF provides a ==**vendor agnostic taxonomy to normalize all these different data sources**==.\n\n\n\n## Personas\n\nOCSF defines personas which essentially just means the types of users that use OCSF:\n\n![[OCSF_personas.excalidraw|500]]\n\n```ad-question\n**How can we imbue wintermute to have an internal, global workspace to be all 4 personas?**\n```\n\n\n",
-  "category": "02 product",
-  "tags": [],
-  "slug": "ocsf",
-  "path": "02 product/OCSF"
-}
