@@ -1,6 +1,5 @@
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import StarBorder from './StarBorder';
 import '../styles/navbar.css';
 
 function Layout() {
