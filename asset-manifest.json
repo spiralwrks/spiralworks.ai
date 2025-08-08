@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.43f1d034.css",
-    "main.js": "/static/js/main.10e3f70e.js",
-    "static/js/139.af31f9f7.chunk.js": "/static/js/139.af31f9f7.chunk.js",
-    "static/js/737.7b52035a.chunk.js": "/static/js/737.7b52035a.chunk.js",
-    "static/js/206.9f1e3287.chunk.js": "/static/js/206.9f1e3287.chunk.js",
+    "main.css": "/static/css/main.4ef92840.css",
+    "main.js": "/static/js/main.085e88a4.js",
+    "static/js/139.a133cfa4.chunk.js": "/static/js/139.a133cfa4.chunk.js",
+    "static/js/737.a0633179.chunk.js": "/static/js/737.a0633179.chunk.js",
+    "static/js/206.8a6a37c0.chunk.js": "/static/js/206.8a6a37c0.chunk.js",
     "static/media/Chillax-Variable.ttf": "/static/media/Chillax-Variable.35be36f56031260cf435.ttf",
     "static/media/Chillax-Light.ttf": "/static/media/Chillax-Light.f7f01b60a17a04b97f7a.ttf",
     "static/media/Chillax-Medium.ttf": "/static/media/Chillax-Medium.bd1fdefdb415380f3f52.ttf",
@@ -29,7 +29,7 @@
     "index.html": "/index.html"
   },
   "entrypoints": [
-    "static/css/main.43f1d034.css",
-    "static/js/main.10e3f70e.js"
+    "static/css/main.4ef92840.css",
+    "static/js/main.085e88a4.js"
   ]
 }
