@@ -4,7 +4,7 @@
  * This module provides secure interfaces to the server-side Firebase functions.
  * It handles authentication, request formatting, and response processing.
  */
-import { auth, functions } from './firebase';
+import { auth, functions, isFirebaseConfigured } from './firebase';
 import { httpsCallable } from 'firebase/functions';
 
 // API base URL - uses emulator in development if available
@@ -12,8 +12,10 @@ const API_BASE_URL = process.env.NODE_ENV === 'development' && process.env.REACT
   ? 'http://localhost:5001/spiralworks-website/us-central1/api'
   : 'https://us-central1-spiralworks-website.cloudfunctions.net/api';
 
-// Direct Firebase callable functions
-const submitWaitlistEntryCallable = httpsCallable(functions, 'submitWaitlistEntry');
+// Direct Firebase callable functions - only initialize if Firebase is configured
+const submitWaitlistEntryCallable = isFirebaseConfigured() && functions 
+  ? httpsCallable(functions, 'submitWaitlistEntry') 
+  : null;
 
 /**
  * Helper function to handle API requests
@@ -31,6 +33,10 @@ const apiRequest = async (endpoint, options = {}) => {
     
     // Add auth token for admin endpoints
     if (endpoint.startsWith('/admin')) {
+      if (!isFirebaseConfigured() || !auth) {
+        throw new Error('Firebase not configured - admin features unavailable');
+      }
+      
       const currentUser = auth.currentUser;
       if (!currentUser) {
         throw new Error('Authentication required for admin endpoints');
@@ -68,14 +74,23 @@ const apiRequest = async (endpoint, options = {}) => {
  * @returns {Promise} Signup result
  */
 export const submitWaitlistSignup = async (formData, csrfToken) => {
+  // If Firebase is not configured, throw an error that will trigger fallback mechanisms
+  if (!isFirebaseConfigured()) {
+    throw new Error('Firebase not configured - cannot submit to server');
+  }
+
   try {
     // Try the direct Firebase callable function first (most secure)
-    const result = await submitWaitlistEntryCallable({
-      ...formData,
-      csrfToken,
-    });
-    
-    return result.data;
+    if (submitWaitlistEntryCallable) {
+      const result = await submitWaitlistEntryCallable({
+        ...formData,
+        csrfToken,
+      });
+      
+      return result.data;
+    } else {
+      throw new Error('Firebase callable not available');
+    }
   } catch (callableError) {
     console.warn('Callable function failed, falling back to REST API:', callableError);
     
