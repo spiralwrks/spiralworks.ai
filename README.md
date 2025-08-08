@@ -55,8 +55,4 @@ $ git push -u origin main
 - `src/assets`: Images and other static assets
 - `src/utils`: Utility functions and service modules
 - `src/context`: React context providers
-- `functions`: Firebase Cloud Functions for secure backend operations
-
-## Features
-
 
