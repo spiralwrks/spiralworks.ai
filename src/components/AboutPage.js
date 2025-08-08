@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import './FibonacciText.css';
+import StarryBackground from './StarryBackground';
 
 // Lazy load heavy components
 const DataFlowNetwork = React.lazy(() => import('./DataFlowNetwork'));
@@ -34,6 +35,7 @@ function AboutPage() {
       width: '100%',
       overflow: 'hidden'
     }}>
+      <StarryBackground />
       <Suspense fallback={<div />}>
         <DataFlowNetwork />
       </Suspense>

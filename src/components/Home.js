@@ -1,5 +1,6 @@
 import React from 'react';
 import Galaxy from './Galaxy';
+import StarryBackground from './StarryBackground';
 
 function Home() {
 
@@ -7,6 +8,7 @@ function Home() {
     <>
       {/* Hero Section */}
       <div className="hero-section dither-background">
+        <StarryBackground />
         <div className="hero-galaxy">
           <Galaxy />
         </div>

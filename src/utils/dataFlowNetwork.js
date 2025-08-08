@@ -45,7 +45,7 @@ export const initializeDataFlowNetwork = (canvasRef, themeColors = null) => {
     flowParticleCount: isMobile ? 2000 : 4000,
     nodeSize: isMobile ? 0.006 : 0.008,
     flowParticleSize: isMobile ? 0.003 : 0.004,
-    networkRadius: isMobile ? 1.4 : 1.3,
+    networkRadius: isMobile ? 1.0 : 0.9,
     connectionOpacity: 0.12,
     flowSpeed: 0.2,
     primaryColor: currentThemeColors.primary,
