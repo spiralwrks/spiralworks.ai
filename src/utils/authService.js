@@ -1,4 +1,4 @@
-import { auth, ADMIN_EMAIL_DOMAIN, ADMIN_AUTH_ENABLED } from './firebase';
+import { auth, ADMIN_EMAIL_DOMAIN, ADMIN_AUTH_ENABLED, isFirebaseConfigured } from './firebase';
 import { 
   signInWithEmailAndPassword, 
   signOut as firebaseSignOut,
@@ -25,12 +25,16 @@ export const initAuth = () => {
   // Check for existing admin token in localStorage
   tryLoadAdminToken();
   
-  // Set up Firebase auth state listener
-  onAuthStateChanged(auth, (user) => {
-    currentUser = user;
-    isAdmin = validateAdminStatus(user);
-    notifyAuthStateListeners();
-  });
+  // Only set up Firebase auth state listener if configured
+  if (isFirebaseConfigured() && auth) {
+    onAuthStateChanged(auth, (user) => {
+      currentUser = user;
+      isAdmin = validateAdminStatus(user);
+      notifyAuthStateListeners();
+    });
+  } else {
+    console.log('Firebase auth not configured - authentication features disabled');
+  }
 };
 
 /**
@@ -40,6 +44,13 @@ export const initAuth = () => {
  * @returns {Promise<Object>} Authentication result
  */
 export const signIn = async (email, password) => {
+  if (!isFirebaseConfigured() || !auth) {
+    return { 
+      success: false, 
+      error: 'Firebase not configured - authentication unavailable' 
+    };
+  }
+  
   try {
     // Remove any existing tokens
     clearAdminToken();
@@ -83,6 +94,11 @@ export const signIn = async (email, password) => {
  * @returns {Promise<boolean>} Sign out success
  */
 export const signOut = async () => {
+  if (!isFirebaseConfigured() || !auth) {
+    clearAdminToken();
+    return true;
+  }
+  
   try {
     await firebaseSignOut(auth);
     clearAdminToken();
@@ -132,6 +148,13 @@ export const subscribeToAuthState = (listener) => {
  * @returns {Promise<Object>} Reset request result
  */
 export const resetPassword = async (email) => {
+  if (!isFirebaseConfigured() || !auth) {
+    return { 
+      success: false, 
+      error: 'Firebase not configured - password reset unavailable' 
+    };
+  }
+  
   try {
     await sendPasswordResetEmail(auth, email);
     return { success: true };
