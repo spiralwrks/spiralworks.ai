@@ -24,8 +24,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Styling**: Styled Components + CSS with theme system (light/dark modes)
 - **3D Graphics**: Three.js with React Three Fiber for galaxy animations
 - **Animations**: GSAP + Framer Motion for UI animations
-- **Backend**: Firebase (Firestore, Functions, Authentication)
-- **Deployment**: GitHub Pages with Firebase Functions
+- **Deployment**: GitHub Pages
 
 ### Key Components Structure
 ```
@@ -35,8 +34,6 @@ src/
 │   ├── Galaxy.js        # Three.js galaxy background
 │   ├── Home.js          # Landing page
 │   ├── Layout.js        # Main layout wrapper
-│   ├── WaitlistPage.js  # Dedicated waitlist page
-│   ├── WaitlistSignup.js # Waitlist form component
 │   └── [UI components]  # ScrollReveal, StarBorder, Stepper
 ├── context/
 │   └── ThemeContext.js  # Global theme management (light/dark)
@@ -48,7 +45,7 @@ src/
 
 ### Routing Architecture
 - Uses HashRouter for GitHub Pages compatibility
-- Main routes: `/` (Home), `/waitlist` (Waitlist signup)
+- Main routes: `/` (Home), `/about` (About page)
 - Blog routes exist but are commented out
 - All routes wrapped in Layout component with ThemeProvider
 
@@ -59,24 +56,11 @@ src/
 - Automatic cleanup and resize handling
 - Spiral galaxy with 12 branches, color gradients, and rotation animation
 
-### Waitlist System Architecture
-- **Frontend**: React form with validation and rate limiting
-- **Backend**: Firebase Functions with security measures
-- **Database**: Firestore with security rules
-- **Notifications**: Discord webhook integration
-- **Security**: CSRF protection, rate limiting, admin authentication with @spiralworks.ai domain restriction
-
 ### Theme System
 - Context-based theme management (ThemeContext)
 - CSS custom properties for theme variables
 - Persistent theme preference in localStorage
 - Default theme is dark mode
-
-### Firebase Integration
-- **Functions**: Server-side waitlist processing and admin endpoints
-- **Firestore**: Collections for waitlist, rateLimits, adminAuditLogs
-- **Authentication**: Email/password with domain restrictions
-- **Security Rules**: Defined for all collections
 
 ## Important Development Notes
 
@@ -90,26 +74,9 @@ src/
 - Custom Chillax font family in `src/assets/fonts/`
 - CSS imports in `src/styles/chillax.css`
 
-### Environment Variables Required
-- Firebase configuration variables
-- `REACT_APP_DISCORD_WEBHOOK_URL` for waitlist notifications
-
-### Security Considerations
-- Admin access restricted to @spiralworks.ai email domain
-- Rate limiting implemented at multiple levels
-- Audit logging for admin actions
-- CSRF protection on forms
-- Firestore security rules enforce access controls
-
 ## Typical Development Workflow
 1. `npm start` for development
-2. Test waitlist functionality with Firebase emulators if needed
 3. `npm run sync-blog` when updating blog content
 4. `npm run build` before deployment
 5. Use `npm run deploy` for GitHub Pages deployment
 
-## Firebase Setup Requirements
-- Blaze plan required for Cloud Functions
-- Firestore collections: `waitlist`, `rateLimits`, `adminAuditLogs`
-- Authentication with Email/Password provider enabled
-- Security rules deployed for database protection

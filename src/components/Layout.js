@@ -34,11 +34,6 @@ function Layout() {
             </span>
           </div>
           
-          <div className="navbar-actions">
-            <StarBorder as={Link} to="/waitlist" color="#8622c9" speed="4s" thickness={3}>
-              Get Started
-            </StarBorder>
-          </div>
         </div>
       </nav>
 
