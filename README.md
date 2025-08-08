@@ -16,10 +16,10 @@ A React-based website for Spiral Works.
    npm install
    ```
 
-3. Set up environment variables:
+3. Set up environment variables (optional):
    ```bash
    cp .env.example .env
-   # Edit .env to add your Firebase and Discord webhook configurations
+   # Edit .env if you need custom configurations
    ```
 
 4. Start the development server:
@@ -36,8 +36,9 @@ In the project directory, you can run:
 - `npm start`: Runs the app in development mode.
 - `npm test`: Launches the test runner.
 - `npm run build`: Builds the app for production.
-- `npm run deploy`: Deploys the app and Firebase functions.
-- `firebase serve`: Runs Firebase function emulators locally.
+- `npm run deploy`: Deploys the app to GitHub Pages.
+- `npm run sync-blog`: Syncs blog content from external sources.
+- `npm run predeploy`: Full deployment prep (sync blog + build).
 
 ## Deployment
 
