@@ -103,8 +103,8 @@ body, html {
 }
 
 b, strong {
-  color: var(--primary-color);
-  font-weight: normal;
+  color: var(--text-color);
+  font-weight: 500; /* Subtle bold - not too thick */
 }
 
 .app-container {
