@@ -61,16 +61,51 @@ function AboutPage() {
                 duration={800}
               />
             </Suspense>
-            <div style={{ 
-              marginTop: '1rem', 
-              color: 'var(--text-color)', 
-              opacity: 0.9,
-              lineHeight: 1.6,
-              fontSize: '1rem',
-              animation: 'fadeIn 0.6s ease-out 0.2s both'
-            }}>
-              sample text sample text sample text
-            </div>
+<div style={{ 
+  marginTop: '1rem', 
+  color: 'var(--text-color)', 
+  opacity: 0.9,
+  lineHeight: 1.6,
+  fontSize: '1rem',
+  animation: 'fadeIn 0.6s ease-out 0.2s both',
+  textAlign: 'center'
+}}>
+  <p><em>Almost always the men who achieve these fundamental inventions of a new paradigm… being little committed by prior practice to the traditional rules of normal science, are particularly likely to see that <strong>those rules no longer define a playable game and to conceive another set that can replace them.</strong></em> – Thomas S. Kuhn<sup>1</sup></p>
+  
+  <p>For centuries, thinkers have distinguished between a <em>logic of discovery</em> and a <em>logic of justification</em>. One is the wild birth of an idea: mystic, unpredictable, and unexplainable. Unsurprisingly, modern science has fixated on the latter: the tidy proof or routine attempt at empirical falsification<sup>4,5</sup>. The result? Discovery and creativity have been relegated to the confines of psychology<sup>2</sup>, treated as metaphysical phenomena rather than mathematical or computational regularities.</p>
+  
+  <p><strong>Today, we’re here to change that.</strong></p>
+  
+  <p><em>"The innovators of the eighteenth and nineteenth centuries were often polymaths…"</em> – Alex Karp<sup>3</sup></p>
+  
+  <p>Before specialization became the norm, discovery thrived at intersections. Mary Somerville moved from astronomy to mathematics with no need to “switch fields.” Faraday moved from chemistry to physics without permission. These thinkers crossed boundaries freely because they recognized them for what they often were: an administrative convenience for humans<sup>5</sup>. AI systems are unbounded by these limitations, and also many more—working memory, computational horsepower, and breadth of knowledge.</p>
+  
+  <p>Yet these systems, despite being incredibly powerful, are also very brittle. They make factual errors. Unrealistic assumptions. They hallucinate. They ignore scientific best practices. The list goes on. As a result, scientists remain hesitant to outsource their most important research tasks to AI in fear of wasting time, energy, and money.</p>
+  
+  <p><strong>At Spiral Works, our polymathic team develops robust AI for scientific research, pushing the boundaries of intelligence itself — human and machine.</strong> We believe the next wave of discovery will come from dissolving disciplinary silos. From letting insights in one domain ignite revolutions in another. Above all, from refusing to play by the <em>narrow</em> rules of “normal science.”</p>
+  
+  <p>Some view large language models as mere assistants. We view them more optimistically. They are co-inventors. They hold the power to surface new patterns, analogies, and hypotheses across every discipline. In short, they are engines of the <em>logic of discovery</em>—but only if wielded carefully.</p>
+  
+  <p><em>"Science grows by a more revolutionary method than accumulation – by a method which destroys, changes, and alters the whole thing."</em> – Karl Popper<sup>5</sup></p>
+  
+  <p>We reject incrementalism. We embrace bold conjecture but also fearless refutation. When the time comes, we would rather rewrite the language of a field than simply add to it. Spiral Works is a place where ideological meritocracy reigns supreme and philosophical rigor bleeds into all we think, build, and say.</p>
+  
+  <p>We choose breadth over narrowness, and depth where it strategically matters. We have the courage to start over when necessary, but also the resolve to persevere through challenges.</p>
+  
+  <p><strong>We are not here to maintain the status quo — we are here to redefine the possible.</strong></p>
+  
+  <p><strong>Here’s to a new kind of science.</strong></p>
+  
+  <p>Royce Moon, Samuel Schapiro, &amp; Peter Graham (with our signatures below)</p>
+  
+  <small>
+    <sup>1</sup> The Structure of Scientific Revolutions, Thomas Kuhn<br />
+    <sup>2</sup> The Foundations of Scientific Inference, Wesley Salmon<br />
+    <sup>3</sup> The Technological Republic, Alex Karp<br />
+    <sup>4</sup> The Logic of Scientific Discovery, Karl Popper<br />
+    <sup>5</sup> Conjectures and Refutations: The Growth of Scientific Knowledge, Karl Popper
+  </small>
+</div>
           </div>
         )}
       </div>
