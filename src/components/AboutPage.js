@@ -95,6 +95,8 @@ function AboutPage() {
   <p><strong>We are not here to maintain the status quo — we are here to redefine the possible.</strong></p>
   
   <p><strong>Here’s to a new kind of science.</strong></p>
+
+  <p>Founders, Spiral Works </p>
                   
   <p>Royce, Samuel, &amp; Peter </p>
 
