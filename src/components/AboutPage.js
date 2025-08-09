@@ -11,7 +11,6 @@ function AboutPage() {
   
   // Refs for connection lines
   const challengeRef = useRef();
-  const solutionRef = useRef();
 
   useEffect(() => {
     // Much faster text loading - no delays
@@ -36,14 +35,11 @@ function AboutPage() {
       overflowY: 'auto'
     }}>
       <StarryBackground />
-      <Suspense fallback={<div />}>
-        <DataFlowNetwork />
-      </Suspense>
       
       {/* Central content container */}
       <div style={{
         position: 'relative',
-        paddingTop: '2rem',
+        paddingTop: '4rem',
         paddingBottom: '2rem',
         margin: '0 auto',
         textAlign: 'center',
@@ -61,6 +57,13 @@ function AboutPage() {
                 duration={800}
               />
             </Suspense>
+            
+            {/* Network animation positioned between title and content */}
+            <div style={{ height: '200px', margin: '2rem 0', position: 'relative' }}>
+              <Suspense fallback={<div />}>
+                <DataFlowNetwork />
+              </Suspense>
+            </div>
 <div style={{ 
   marginTop: '1rem', 
   color: 'var(--text-color)', 
@@ -68,15 +71,35 @@ function AboutPage() {
   lineHeight: 1.6,
   fontSize: '1rem',
   animation: 'fadeIn 0.6s ease-out 0.2s both',
-  textAlign: 'center'
+  textAlign: 'left'
 }}>
-  <p><em>Almost always the men who achieve these fundamental inventions of a new paradigm… being little committed by prior practice to the traditional rules of normal science, are particularly likely to see that <strong>those rules no longer define a playable game and to conceive another set that can replace them.</strong></em> – Thomas S. Kuhn<sup>1</sup></p>
+  <div style={{ 
+    background: 'rgba(128, 128, 128, 0.1)', 
+    backdropFilter: 'blur(10px)', 
+    border: '1px solid rgba(255, 255, 255, 0.1)', 
+    borderRadius: '12px', 
+    padding: '1.5rem', 
+    margin: '2rem 0',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+  }}>
+    <p style={{ margin: 0 }}>Almost always the men who achieve these fundamental inventions of a new paradigm… being little committed by prior practice to the traditional rules of normal science, are particularly likely to see that <strong>those rules no longer define a playable game and to conceive another set that can replace them.</strong> – Thomas S. Kuhn<sup>1</sup></p>
+  </div>
   
   <p>For centuries, thinkers have distinguished between a <em>logic of discovery</em> and a <em>logic of justification</em>. One is the wild birth of an idea: mystic, unpredictable, and unexplainable. Unsurprisingly, modern science has fixated on the latter: the tidy proof or routine attempt at empirical falsification<sup>4,5</sup>. The result? Discovery and creativity have been relegated to the confines of psychology<sup>2</sup>, treated as metaphysical phenomena rather than mathematical or computational regularities.</p>
   
   <p><strong>Today, we’re here to change that.</strong></p>
   
-  <p><em>"The innovators of the eighteenth and nineteenth centuries were often polymaths…"</em> – Alex Karp<sup>3</sup></p>
+  <div style={{ 
+    background: 'rgba(128, 128, 128, 0.1)', 
+    backdropFilter: 'blur(10px)', 
+    border: '1px solid rgba(255, 255, 255, 0.1)', 
+    borderRadius: '12px', 
+    padding: '1.5rem', 
+    margin: '2rem 0',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+  }}>
+    <p style={{ margin: 0 }}>"The innovators of the eighteenth and nineteenth centuries were often polymaths…" – Alex Karp<sup>3</sup></p>
+  </div>
   
   <p>Before specialization became the norm, discovery thrived at intersections. Mary Somerville moved from astronomy to mathematics with no need to “switch fields.” Faraday moved from chemistry to physics without permission. These thinkers crossed boundaries freely because they recognized them for what they often were: an administrative convenience for humans<sup>5</sup>. AI systems are unbounded by these limitations, and also many more—working memory, computational horsepower, and breadth of knowledge.</p>
   
@@ -86,7 +109,17 @@ function AboutPage() {
   
   <p>Some view large language models as mere assistants. We view them more optimistically. They are co-inventors. They hold the power to surface new patterns, analogies, and hypotheses across every discipline. In short, they are engines of the <em>logic of discovery</em>—but only if wielded carefully.</p>
   
-  <p><em>"Science grows by a more revolutionary method than accumulation – by a method which destroys, changes, and alters the whole thing."</em> – Karl Popper<sup>5</sup></p>
+  <div style={{ 
+    background: 'rgba(128, 128, 128, 0.1)', 
+    backdropFilter: 'blur(10px)', 
+    border: '1px solid rgba(255, 255, 255, 0.1)', 
+    borderRadius: '12px', 
+    padding: '1.5rem', 
+    margin: '2rem 0',
+    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+  }}>
+    <p style={{ margin: 0 }}>"Science grows by a more revolutionary method than accumulation – by a method which destroys, changes, and alters the whole thing." – Karl Popper<sup>5</sup></p>
+  </div>
   
   <p>We reject incrementalism. We embrace bold conjecture but also fearless refutation. When the time comes, we would rather rewrite the language of a field than simply add to it. Spiral Works is a place where ideological meritocracy reigns supreme and philosophical rigor bleeds into all we think, build, and say.</p>
   
@@ -96,11 +129,18 @@ function AboutPage() {
   
   <p><strong>Here’s to a new kind of science.</strong></p>
 
-  <p>Founders, Spiral Works </p>
+  <p style={{ marginTop: '3rem' }}>Founders, Spiral Works </p>
                   
-  <p>Royce, Samuel, &amp; Peter </p>
+  <p>Royce Moon, Samuel Schapiro, &amp; Peter Graham</p>
 
-  // signatures in order//                
+  {/* signatures in order */}
+  
+  <hr style={{ 
+    margin: '3rem 0 2rem 0', 
+    border: 'none', 
+    borderTop: '1px solid var(--text-color)', 
+    opacity: 0.3 
+  }} />
   
   <small>
     <sup>1</sup> The Structure of Scientific Revolutions, Thomas Kuhn<br />
