@@ -236,7 +236,7 @@ a:hover {
 /* Hero Section Styles */
 .hero-section {
   display: flex;
-  min-height: 85vh;
+  min-height: 100vh;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -245,8 +245,6 @@ a:hover {
   margin: 0 auto;
   padding: 0 3rem;
   box-sizing: border-box;
-  margin-top: -6rem;
-  padding-top: 4rem;
   gap: 1rem;
 }
 

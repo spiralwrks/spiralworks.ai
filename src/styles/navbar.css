@@ -8,10 +8,18 @@
   background-color: var(--nav-blur-background);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--primary-color);
   border-bottom-left-radius: 32px;
   border-bottom-right-radius: 32px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3), 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 10px 20px rgba(134, 34, 201, 0.3),
+    -10px 0 20px rgba(134, 34, 201, 0.2),
+    10px 0 20px rgba(134, 34, 201, 0.2),
+    inset 0 -10px 20px rgba(134, 34, 201, 0.1);
   transition: all 0.3s ease;
 }
 

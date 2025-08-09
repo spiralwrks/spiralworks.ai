@@ -15,7 +15,7 @@ const StarryBackground = () => {
     return stars;
   };
 
-  const stars = generateRandomStars(250);
+  const stars = generateRandomStars(500);
 
   return (
     <div className="starry-background">
