@@ -95,8 +95,10 @@ function AboutPage() {
   <p><strong>We are not here to maintain the status quo — we are here to redefine the possible.</strong></p>
   
   <p><strong>Here’s to a new kind of science.</strong></p>
-  
-  <p>Royce Moon, Samuel Schapiro, &amp; Peter Graham (with our signatures below)</p>
+                  
+  <p>Royce, Samuel, &amp; Peter </p>
+
+  // signatures in order//                
   
   <small>
     <sup>1</sup> The Structure of Scientific Revolutions, Thomas Kuhn<br />
