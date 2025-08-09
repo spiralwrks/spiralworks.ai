@@ -20,7 +20,7 @@ export const initializeGalaxy = (canvasRef) => {
   const parameters = {
     count: isMobile ? 25000 : 50000,
     size: isMobile ? 0.015 : 0.02,
-    radius: isMobile ? 1.6 : 1.92,
+    radius: isMobile ? 2.4 : 2.8,
     branches: 12,
     spin: 1,
     randomness: isMobile ? 0.18 : 0.18,
