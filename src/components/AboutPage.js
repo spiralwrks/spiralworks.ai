@@ -8,11 +8,20 @@ const FibonacciText = React.lazy(() => import('./FibonacciText'));
 
 function AboutPage() {
   const [animationPhase, setAnimationPhase] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   
   // Refs for connection lines
   const challengeRef = useRef();
 
   useEffect(() => {
+    // Check if mobile on mount and resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
     // Much faster text loading - no delays
     const timer1 = setTimeout(() => setAnimationPhase(1), 0);    // Immediate
     const timer2 = setTimeout(() => setAnimationPhase(2), 300);  // Challenge text
@@ -20,6 +29,7 @@ function AboutPage() {
     const timer4 = setTimeout(() => setAnimationPhase(4), 900);  // Final text
     
     return () => {
+      window.removeEventListener('resize', checkMobile);
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
@@ -39,12 +49,12 @@ function AboutPage() {
       {/* Central content container */}
       <div style={{
         position: 'relative',
-        paddingTop: '4rem',
+        paddingTop: isMobile ? '3rem' : '4rem', // Add a bit more gap on mobile
         paddingBottom: '2rem',
-        margin: '0 auto',
+        margin: '0 auto', // Remove negative margin
         textAlign: 'center',
         maxWidth: '1000px',
-        width: '90%',
+        width: isMobile ? '100%' : '90%',
         zIndex: 10
       }}>
         {animationPhase >= 2 && (
@@ -71,7 +81,11 @@ function AboutPage() {
   lineHeight: 1.6,
   fontSize: '1rem',
   animation: 'fadeIn 0.6s ease-out 0.2s both',
-  textAlign: 'left'
+  textAlign: 'left',
+  maxWidth: '800px',
+  margin: '1rem auto 0 auto',
+  paddingLeft: isMobile ? '1rem' : '0',
+  paddingRight: isMobile ? '1rem' : '0'
 }}>
   <div style={{ 
     background: 'rgba(128, 128, 128, 0.1)', 

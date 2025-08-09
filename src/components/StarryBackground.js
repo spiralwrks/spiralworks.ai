@@ -7,7 +7,7 @@ const StarryBackground = () => {
     const stars = [];
     for (let i = 0; i < count; i++) {
       stars.push({
-        top: Math.random() * 200, // Extended range for mobile scroll
+        top: Math.random() * 100, // Keep it simple - just cover the viewport
         left: Math.random() * 100,
         delay: Math.random() * 3
       });

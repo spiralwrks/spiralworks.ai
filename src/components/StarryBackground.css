@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 200vh;
+  height: 100vh; /* Back to full viewport height for desktop */
   pointer-events: none;
   z-index: 0;
   overflow: visible;
@@ -30,10 +30,10 @@
   }
 }
 
-/* Responsive adjustments */
+/* Hide starry background completely on mobile */
 @media (max-width: 768px) {
-  .starry-background .star {
-    font-size: 6px;
+  .starry-background {
+    display: none !important;
   }
 }
 
