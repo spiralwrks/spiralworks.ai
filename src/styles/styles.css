@@ -249,11 +249,12 @@ a:hover {
 }
 
 .hero-galaxy {
-  width: 35%;
-  height: 350px;
+  width: 45%;
+  height: 420px;
   position: relative;
   z-index: 1;
   flex-shrink: 0;
+  margin-right: 2rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -354,8 +355,9 @@ a:hover {
   }
   
   .hero-galaxy {
-    width: 30%;
-    height: 300px;
+    width: 38%;
+    height: 350px;
+    margin-right: 1rem;
   }
   
   .hero-content {
