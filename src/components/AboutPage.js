@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import './FibonacciText.css';
 import StarryBackground from './StarryBackground';
+import signaturesImg from '../assets/sigs.webp';
 
 // Lazy load heavy components
 const DataFlowNetwork = React.lazy(() => import('./DataFlowNetwork'));
@@ -147,7 +148,19 @@ function AboutPage() {
                   
   <p>Royce Moon, Samuel Schapiro, &amp; Peter Graham</p>
 
-  {/* signatures in order */}
+  <div style={{ marginTop: '1rem', textAlign: 'left' }}>
+    <img 
+      src={signaturesImg} 
+      alt="Signatures of Royce Moon, Samuel Schapiro, and Peter Graham" 
+      style={{ 
+        maxWidth: '45%', 
+        height: 'auto',
+        opacity: 0.9
+      }} 
+    />
+  </div>
+
+  <p>Reach out at join@spiralworks.ai</p>
   
   <hr style={{ 
     margin: '3rem 0 2rem 0', 
