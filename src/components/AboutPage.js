@@ -33,7 +33,7 @@ function AboutPage() {
       position: 'relative', 
       minHeight: '100vh', 
       width: '100%',
-      overflow: 'hidden'
+      overflowY: 'auto'
     }}>
       <StarryBackground />
       <Suspense fallback={<div />}>
@@ -42,12 +42,12 @@ function AboutPage() {
       
       {/* Central content container */}
       <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+        position: 'relative',
+        paddingTop: '2rem',
+        paddingBottom: '2rem',
+        margin: '0 auto',
         textAlign: 'center',
-        maxWidth: '800px',
+        maxWidth: '1000px',
         width: '90%',
         zIndex: 10
       }}>
