@@ -18,9 +18,9 @@ export const initializeGalaxy = (canvasRef) => {
   const isMobile = /Android|webOS|iPhone|iPad|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
   const parameters = {
-    count: isMobile ? 25000 : 50000,
-    size: isMobile ? 0.015 : 0.02,
-    radius: isMobile ? 1.6 : 1.92,
+    count: isMobile ? 45000 : 90000,
+    size: isMobile ? 0.024 : 0.03,
+    radius: isMobile ? 3.0 : 3.6,
     branches: 12,
     spin: 1,
     randomness: isMobile ? 0.18 : 0.18,
@@ -88,7 +88,7 @@ export const initializeGalaxy = (canvasRef) => {
   };
 
   const camera = new THREE.PerspectiveCamera(70, sizes.width / sizes.height, 0.1, 100);
-  camera.position.set(0, 2.2, 3.2);
+  camera.position.set(0, 4.2, 6.0);
   camera.lookAt(0, 0, 0);
   scene.add(camera);
 
