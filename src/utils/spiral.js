@@ -88,7 +88,7 @@ export const initializeGalaxy = (canvasRef) => {
   };
 
   const camera = new THREE.PerspectiveCamera(70, sizes.width / sizes.height, 0.1, 100);
-  camera.position.set(0, 1.8, 2.5);
+  camera.position.set(0, 2.2, 3.2);
   camera.lookAt(0, 0, 0);
   scene.add(camera);
 
