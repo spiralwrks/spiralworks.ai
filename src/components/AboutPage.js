@@ -153,7 +153,7 @@ function AboutPage() {
       src={signaturesImg} 
       alt="Signatures of Royce Moon, Samuel Schapiro, and Peter Graham" 
       style={{ 
-        maxWidth: '45%', 
+        maxWidth: '35%', 
         height: 'auto',
         opacity: 0.9
       }} 
