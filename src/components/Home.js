@@ -13,8 +13,7 @@ function Home() {
           <Galaxy />
         </div>
         <div className="hero-content">
-          <h1 className="hero-title">Spiral Works</h1>
-          <p className="hero-tagline">Towards Creative Superintelligence.</p>
+          <h1 className="hero-title">Towards Creative Superintelligence.</h1>
         </div>
       </div>
     </>
