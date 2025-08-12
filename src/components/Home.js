@@ -14,7 +14,7 @@ function Home() {
         </div>
         <div className="hero-content">
           <h1 className="hero-title">Spiral Works</h1>
-          <p className="hero-tagline">Building the first universal operating system for AI R&D.</p>
+          <p className="hero-tagline">Towards Creative Superintelligence.</p>
         </div>
       </div>
     </>
