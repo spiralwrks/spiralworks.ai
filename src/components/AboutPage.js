@@ -70,7 +70,7 @@ function AboutPage() {
             </Suspense>
             
             {/* Network animation positioned between title and content */}
-            <div style={{ height: '200px', margin: '2rem 0', position: 'relative' }}>
+            <div style={{ height: '350px', margin: '2rem 0', position: 'relative' }}>
               <Suspense fallback={<div />}>
                 <DataFlowNetwork />
               </Suspense>

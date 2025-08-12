@@ -41,11 +41,11 @@ export const initializeDataFlowNetwork = (canvasRef, themeColors = null) => {
   let currentThemeColors = getThemeColors();
 
   const parameters = {
-    nodeCount: isMobile ? 600 : 1200,
-    flowParticleCount: isMobile ? 2000 : 4000,
-    nodeSize: isMobile ? 0.006 : 0.008,
-    flowParticleSize: isMobile ? 0.003 : 0.004,
-    networkRadius: isMobile ? 2.5 : 1.8,
+    nodeCount: isMobile ? 800 : 1600,
+    flowParticleCount: isMobile ? 2500 : 5000,
+    nodeSize: isMobile ? 0.008 : 0.01,
+    flowParticleSize: isMobile ? 0.004 : 0.005,
+    networkRadius: isMobile ? 3.2 : 2.8,
     connectionOpacity: 0.12,
     flowSpeed: 0.2,
     primaryColor: currentThemeColors.primary,
@@ -365,7 +365,7 @@ export const initializeDataFlowNetwork = (canvasRef, themeColors = null) => {
   console.log('Renderer sizes:', sizes);
 
   const camera = new THREE.PerspectiveCamera(60, sizes.width / sizes.height, 0.1, 100);
-  camera.position.set(0, 1, 4);
+  camera.position.set(0, 1, 5.5);
   camera.lookAt(0, 0, 0);
   scene.add(camera);
 
@@ -399,8 +399,8 @@ export const initializeDataFlowNetwork = (canvasRef, themeColors = null) => {
 
     // Rotate camera around network
     if (objectPool.nodes) {
-      camera.position.x = Math.cos(elapsedTime * 0.1) * 4;
-      camera.position.z = Math.sin(elapsedTime * 0.1) * 4;
+      camera.position.x = Math.cos(elapsedTime * 0.1) * 5.5;
+      camera.position.z = Math.sin(elapsedTime * 0.1) * 5.5;
       camera.lookAt(0, 0, 0);
     }
 
