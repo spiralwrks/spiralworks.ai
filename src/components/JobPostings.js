@@ -11,11 +11,11 @@ const jobListings = [
     type: 'Full-time',
     description: 'We are looking for a talented ML Engineer to join our team and help build cutting-edge machine learning systems. You will work on designing, implementing, and deploying ML models at scale.',
     requirements: [
-      'Strong programming skills in Python and experience with ML frameworks (TensorFlow, PyTorch)',
-      'Experience with distributed computing and model deployment',
-      'Understanding of deep learning architectures and optimization techniques',
-      'BS/MS in Computer Science, Mathematics, or related field',
-      'Experience with cloud platforms (AWS, GCP, or Azure)'
+      'Strong engineering skills in Python, PyTorch/TensorFlow, and distributed computing architectures',
+      'Experience deploying ML models at scale and optimizing inference pipelines',
+      'Background in philosophy of mind, cognitive science, or neuroscience - we believe understanding intelligence requires questioning what intelligence means',
+      'Track record of challenging conventional approaches and reimagining what\'s possible rather than iterating on what exists',
+      'Deep interest in the human experience and how technology can amplify rather than replace human creativity'
     ]
   },
   {
@@ -26,11 +26,11 @@ const jobListings = [
     type: 'Full-time',
     description: 'Join our research team to push the boundaries of machine learning. You will conduct research, develop novel algorithms, and publish findings while working on real-world applications.',
     requirements: [
-      'PhD in Machine Learning, Computer Science, or related field (or equivalent experience)',
-      'Strong publication record in top ML conferences (NeurIPS, ICML, ICLR, etc.)',
-      'Deep understanding of statistical learning theory and optimization',
-      'Experience with large-scale experimentation and research methodologies',
-      'Excellent communication skills for presenting complex ideas'
+      'PhD or equivalent research experience in ML/AI with publications at top-tier venues',
+      'Deep technical expertise in statistical learning theory, optimization, and neural architectures',
+      'Serious interest in cognitive science, psychology, or philosophy - particularly theories of consciousness and emergence',
+      'History of paradigm-shifting research that questions fundamental assumptions rather than making incremental improvements',
+      'Ability to see AI research as both rigorous science and creative art, balancing mathematical precision with philosophical inquiry'
     ]
   },
   {
@@ -41,11 +41,11 @@ const jobListings = [
     type: 'Full-time',
     description: 'Be the bridge between our technology and our customers. You will work directly with clients to implement solutions, gather feedback, and ensure successful deployments of our ML systems.',
     requirements: [
-      'Strong engineering background with full-stack development experience',
-      'Experience with ML/AI systems and understanding of ML pipelines',
-      'Excellent client-facing communication and problem-solving skills',
-      'Ability to travel to client sites (up to 25%)',
-      'Experience with enterprise software deployments and integrations'
+      'Full-stack engineering expertise with deep understanding of ML systems and production deployments',
+      'Experience with system integration, API design, and building scalable client solutions',
+      'Background in behavioral psychology, anthropology, or human-computer interaction - understanding people is as important as understanding code',
+      'Natural inclination to question "why" before "how" - seeing technology deployment as a human and philosophical challenge',
+      'Ability to translate between technical complexity and human meaning, making the mysterious accessible without losing its magic'
     ]
   }
 ];

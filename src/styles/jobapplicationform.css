@@ -96,6 +96,7 @@
   font-weight: 500;
   color: var(--text-color);
   font-size: 0.95rem;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .form-group input[type="text"],
@@ -125,6 +126,7 @@
   color: var(--text-color);
   cursor: pointer;
   transition: border-color 0.3s ease, background 0.3s ease;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .form-group input[type="file"]:hover {
@@ -137,6 +139,7 @@
   font-size: 0.9rem;
   color: var(--primary-color);
   opacity: 0.8;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .status-message {
@@ -145,6 +148,7 @@
   text-align: center;
   font-size: 0.95rem;
   animation: slideIn 0.3s ease;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 @keyframes slideIn {
