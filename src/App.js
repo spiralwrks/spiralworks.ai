@@ -4,6 +4,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import AboutPage from './components/AboutPage';
+import JobPostings from './components/JobPostings';
 // import BlogLayout from './components/Blog/BlogLayout';
 // import BlogPost from './components/Blog/BlogPost';
 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<AboutPage />} />
+            <Route path="jobs" element={<JobPostings />} />
             {/* Blog routes temporarily disabled
             <Route path="blog" element={<BlogLayout />}>
               <Route index element={null} />

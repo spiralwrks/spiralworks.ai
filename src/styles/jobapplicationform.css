@@ -1,0 +1,266 @@
+.application-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.application-modal {
+  background: var(--background-color);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-color);
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-button:hover {
+  opacity: 1;
+  transform: rotate(90deg);
+  background: rgba(134, 34, 201, 0.1);
+}
+
+.application-modal h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.application-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"] {
+  padding: 12px 15px;
+  border: 1px solid rgba(134, 34, 201, 0.2);
+  border-radius: 10px;
+  background: var(--form-background);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: rgba(134, 34, 201, 0.05);
+}
+
+.form-group input[type="file"] {
+  padding: 10px;
+  border: 2px dashed rgba(134, 34, 201, 0.3);
+  border-radius: 10px;
+  background: var(--form-background);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.form-group input[type="file"]:hover {
+  border-color: var(--primary-color);
+  background: rgba(134, 34, 201, 0.05);
+}
+
+.file-selected {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+
+.status-message {
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.95rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.status-message.success {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.status-message.error {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.cancel-button,
+.submit-button {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.cancel-button {
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid rgba(134, 34, 201, 0.3);
+}
+
+.cancel-button:hover {
+  background: rgba(134, 34, 201, 0.05);
+  border-color: var(--primary-color);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #8622c9 0%, #a64dff 100%);
+  color: white;
+  border: none;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(134, 34, 201, 0.3);
+}
+
+.submit-button:disabled,
+.cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .application-modal {
+  background: #1a1a1a;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme='dark'] .form-group input[type="text"],
+[data-theme='dark'] .form-group input[type="email"],
+[data-theme='dark'] .form-group input[type="file"] {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(166, 77, 255, 0.3);
+}
+
+[data-theme='dark'] .form-group input[type="text"]:focus,
+[data-theme='dark'] .form-group input[type="email"]:focus {
+  background: rgba(166, 77, 255, 0.08);
+  border-color: var(--primary-color);
+}
+
+[data-theme='dark'] .cancel-button {
+  border-color: rgba(166, 77, 255, 0.3);
+}
+
+[data-theme='dark'] .cancel-button:hover {
+  background: rgba(166, 77, 255, 0.1);
+  border-color: var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .application-modal {
+    padding: 30px 20px;
+    width: 95%;
+  }
+  
+  .application-modal h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .cancel-button,
+  .submit-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,209 @@
+.job-postings-container {
+  min-height: 100vh;
+  padding: 80px 20px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.job-postings-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.job-postings-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.job-postings-header p {
+  font-size: 1.25rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+.job-listings {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.job-card {
+  background: var(--form-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid rgba(134, 34, 201, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: slideIn 0.6s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(134, 34, 201, 0.15);
+  border-color: rgba(134, 34, 201, 0.4);
+}
+
+.job-card-header {
+  margin-bottom: 20px;
+}
+
+.job-card-header h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--primary-color);
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.job-meta {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.job-meta span {
+  font-size: 0.9rem;
+  padding: 5px 12px;
+  background: rgba(134, 34, 201, 0.1);
+  border-radius: 20px;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.job-description {
+  margin-bottom: 25px;
+}
+
+.job-description p {
+  line-height: 1.7;
+  color: var(--text-color);
+  opacity: 0.9;
+}
+
+.job-requirements {
+  margin-bottom: 25px;
+}
+
+.job-requirements h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.job-requirements ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.job-requirements li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+.job-requirements li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.apply-button {
+  background: linear-gradient(135deg, #8622c9 0%, #a64dff 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.apply-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(134, 34, 201, 0.3);
+}
+
+.apply-button:active {
+  transform: translateY(0);
+}
+
+/* Dark theme adjustments */
+[data-theme='dark'] .job-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(166, 77, 255, 0.2);
+}
+
+[data-theme='dark'] .job-card:hover {
+  border-color: rgba(166, 77, 255, 0.4);
+  box-shadow: 0 10px 40px rgba(166, 77, 255, 0.1);
+}
+
+[data-theme='dark'] .job-meta span {
+  background: rgba(166, 77, 255, 0.15);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .job-postings-header h1 {
+    font-size: 2rem;
+  }
+  
+  .job-postings-header p {
+    font-size: 1.1rem;
+  }
+  
+  .job-card {
+    padding: 20px;
+  }
+  
+  .job-card-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .job-meta {
+    gap: 10px;
+  }
+  
+  .job-meta span {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+  }
+}

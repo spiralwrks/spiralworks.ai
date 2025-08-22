@@ -27,6 +27,12 @@ function Layout() {
             >
               About
             </Link>
+            <Link 
+              to="/jobs" 
+              className={`navbar-link ${location.pathname === '/jobs' ? 'active' : ''}`}
+            >
+              Jobs
+            </Link>
             <span className="navbar-link disabled">
               Blog
               <span className="tooltip">Coming Soon</span>
