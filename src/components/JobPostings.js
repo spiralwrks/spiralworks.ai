@@ -28,7 +28,7 @@ const jobListings = [
     requirements: [
       'PhD or equivalent research experience in ML/AI with publications at top-tier venues',
       'Deep technical expertise in statistical learning theory, optimization, and neural architectures',
-      'Serious interest in cognitive science, psychology, or philosophy - particularly theories of consciousness and emergence',
+      'Serious interest in cognitive science, psychology, or philosophy - particularly computational creativity and emergence',
       'History of paradigm-shifting research that questions fundamental assumptions rather than making incremental improvements',
       'Ability to see AI research as both rigorous science and creative art, balancing mathematical precision with philosophical inquiry'
     ]
