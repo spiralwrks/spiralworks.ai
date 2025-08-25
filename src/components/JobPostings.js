@@ -68,7 +68,7 @@ function JobPostings() {
     <div className="job-postings-container">
       <div className="job-postings-header">
         <h1>Join Our Team</h1>
-        <p>We're building the future of AI. Come shape it with us.</p>
+        <p>We're building towards creative superintelligence. Come shape it with us.</p>
       </div>
 
       <div className="job-listings">
