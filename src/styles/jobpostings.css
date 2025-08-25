@@ -24,7 +24,7 @@
 
 .job-postings-header h1 {
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 1rem;
   color: var(--text-color);
   font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -79,7 +79,7 @@
 
 .job-card-header h2 {
   font-size: 1.8rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 12px;
   color: var(--primary-color);
   font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -118,7 +118,7 @@
 
 .job-requirements h3 {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 15px;
   color: var(--text-color);
   font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -145,7 +145,7 @@
   position: absolute;
   left: 0;
   color: var(--primary-color);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .apply-button {
@@ -154,7 +154,7 @@
   border: none;
   padding: 12px 30px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 400;
   border-radius: 25px;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;

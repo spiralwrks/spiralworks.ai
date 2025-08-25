@@ -33,6 +33,14 @@ function Layout() {
             >
               Jobs
             </Link>
+            <a 
+              href="https://form.typeform.com/to/cHdJn1Ng"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="navbar-link"
+            >
+              Beta
+            </a>
             <span className="navbar-link disabled">
               Blog
               <span className="tooltip">Coming Soon</span>
