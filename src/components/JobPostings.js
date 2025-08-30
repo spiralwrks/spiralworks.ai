@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import JobApplicationForm from './JobApplicationForm';
+import StarryBackground from './StarryBackground';
 import '../styles/jobpostings.css';
 
 const jobListings = [
@@ -66,6 +67,7 @@ function JobPostings() {
 
   return (
     <div className="job-postings-container">
+      <StarryBackground />
       <div className="job-postings-header">
         <h1>Join Our Team</h1>
         <p>We're building towards creative superintelligence. Come shape it with us.</p>
