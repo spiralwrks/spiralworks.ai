@@ -9,18 +9,12 @@ function Layout() {
     <div className="app-container">
       <nav className="navbar">
         <div className="navbar-container">
-          <div className="navbar-logo">
+          <Link to="/" className="navbar-logo">
             <img src="/icons/apple-touch-icon.png" alt="Spiral Works" className="logo-icon" />
             <span className="logo-text">Spiral Works</span>
-          </div>
+          </Link>
           
           <div className="navbar-menu">
-            <Link 
-              to="/" 
-              className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}
-            >
-              Company
-            </Link>
             <Link 
               to="/manifesto" 
               className={`navbar-link ${location.pathname === '/manifesto' ? 'active' : ''}`}

@@ -27,13 +27,14 @@ function Research() {
       title: "Spark: A System for Scientifically Creative Idea Generation",
       authors: "Aishik Sanyal, Samuel Schapiro, Sumuk Shashidhar, Royce Moon, Lav R. Varshney, Dilek Hakkani-Tur",
       year: "2025",
+      venue: "ICCC 2025",
       arxivId: "2504.20090",
       abstract: "Recently, large language models (LLMs) have shown promising abilities to generate novel research ideas in science, a direction which coincides with many foundational principles in computational creativity (CC). We present Spark, an innovative idea generation system that leverages these capabilities.",
       keywords: ["Computational Creativity", "LLMs", "Information Retrieval"],
       highlights: [
         "Developed Spark, an innovative idea generation system leveraging computational creativity principles",
         "Coupled retrieval-augmented idea generation using large language models for scientific research",
-        "Created and trained Judge, a specialized reviewer model trained on 600K scientific reviews",
+        "Created and trained Judge, a specialized reviewer model for evaluating scientific ideas",
         "Released an annotated dataset for training idea evaluation models"
       ]
     },
@@ -42,6 +43,7 @@ function Research() {
       title: "Transformational Creativity in Science: A Graphical Theory",
       authors: "Samuel Schapiro, Jonah Black, Lav R. Varshney",
       year: "2025",
+      venue: "ICCC 2025",
       arxivId: "2504.18687",
       abstract: "Creative processes are typically divided into three types: combinatorial, exploratory, and transformational. Here, we provide a graphical theory of transformational scientific creativity, synthesizing Boden's insight that transformational creativity arises from changes in the 'enabling constraints' of a conceptual space and Kuhn's structure of scientific revolutions.",
       keywords: ["Scientific Creativity", "Conceptual Spaces", "Paradigm Shifts"],
@@ -123,16 +125,16 @@ function Research() {
         <div className="research-hero-content">
           <h1 className="research-title">Research</h1>
           <p className="research-subtitle">
-            Advancing the Frontier of Creative & Multimodal AI
+            Advancing the Frontier of Creative AI
           </p>
           <div className="research-stats">
             <div className="stat-item">
               <span className="stat-number">10+</span>
-              <span className="stat-label">Researchers</span>
+              <span className="stat-label">Research Fellows</span>
             </div>
             <div className="stat-item">
-              <span className="stat-number">600K</span>
-              <span className="stat-label">Scientific Reviews Analyzed</span>
+              <span className="stat-number">20M</span>
+              <span className="stat-label">Pages of Scientific Data Analyzed</span>
             </div>
             <div className="stat-item">
               <span className="stat-number">3</span>
@@ -174,6 +176,10 @@ function Research() {
               <h2 className="paper-title">{paper.title}</h2>
               
               <p className="paper-authors">{paper.authors}</p>
+              
+              {paper.venue && (
+                <p className="paper-venue">Accepted at {paper.venue}</p>
+              )}
               
               <p className="paper-abstract">{paper.abstract}</p>
 
