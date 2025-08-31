@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import AboutPage from './components/AboutPage';
 import JobPostings from './components/JobPostings';
+import Research from './components/Research';
 // import BlogLayout from './components/Blog/BlogLayout';
 // import BlogPost from './components/Blog/BlogPost';
 
@@ -15,8 +16,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="about" element={<AboutPage />} />
-            <Route path="jobs" element={<JobPostings />} />
+            <Route path="manifesto" element={<AboutPage />} />
+            <Route path="careers" element={<JobPostings />} />
+            <Route path="research" element={<Research />} />
             {/* Blog routes temporarily disabled
             <Route path="blog" element={<BlogLayout />}>
               <Route index element={null} />

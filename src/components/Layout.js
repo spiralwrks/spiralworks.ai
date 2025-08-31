@@ -19,19 +19,25 @@ function Layout() {
               to="/" 
               className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}
             >
-              Home
+              Company
             </Link>
             <Link 
-              to="/about" 
-              className={`navbar-link ${location.pathname === '/about' ? 'active' : ''}`}
+              to="/manifesto" 
+              className={`navbar-link ${location.pathname === '/manifesto' ? 'active' : ''}`}
             >
-              About
+              Manifesto
             </Link>
             <Link 
-              to="/jobs" 
-              className={`navbar-link ${location.pathname === '/jobs' ? 'active' : ''}`}
+              to="/careers" 
+              className={`navbar-link ${location.pathname === '/careers' ? 'active' : ''}`}
             >
-              Jobs
+              Careers
+            </Link>
+            <Link 
+              to="/research" 
+              className={`navbar-link ${location.pathname === '/research' ? 'active' : ''}`}
+            >
+              Research
             </Link>
             <a 
               href="https://form.typeform.com/to/cHdJn1Ng"
