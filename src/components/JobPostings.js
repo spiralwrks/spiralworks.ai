@@ -48,6 +48,21 @@ const jobListings = [
       'Natural inclination to question "why" before "how" - seeing technology deployment as a human and philosophical challenge',
       'Ability to translate between technical complexity and human meaning, making the mysterious accessible without losing its magic'
     ]
+  },
+  {
+    id: 4,
+    title: 'Head of Marketing & GTM',
+    department: 'External Development',
+    location: 'New York City, NY',
+    type: 'Full-time',
+    description: 'Lead our go-to-market strategy and shape how the world understands creative superintelligence. You will craft narratives that bridge cutting-edge AI research with human imagination, building movements rather than campaigns.',
+    requirements: [
+      'Proven track record leading marketing and GTM at technical startups, ideally in AI/ML or deep tech spaces',
+      'Experience building category-defining narratives and community-driven growth strategies',
+      'Background in philosophy, literature, or cultural studies - marketing AI requires understanding both technology and the human stories it enables',
+      'Ability to see marketing as cultural architecture rather than demand generation - building belief systems, not just pipelines',
+      'Deep curiosity about consciousness, creativity, and what it means to augment rather than automate human intelligence'
+    ]
   }
 ];
 
