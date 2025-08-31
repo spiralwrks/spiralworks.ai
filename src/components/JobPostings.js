@@ -12,8 +12,8 @@ const jobListings = [
     type: 'Full-time',
     description: 'We are looking for a talented ML Engineer to join our team and help build cutting-edge machine learning systems. You will work on designing, implementing, and deploying ML models at scale.',
     requirements: [
-      'Strong engineering skills in Python, PyTorch/TensorFlow, and distributed computing architectures',
-      'Experience deploying ML models at scale and optimizing inference pipelines',
+      'Strong engineering skills in Python, PyTorch/TensorFlow, distributed computing architectures, deploying ML models at scale, & optimizing inference pipelines',
+      'Maintaining clean, minimal codebases with an emphasis on simplicity and debloat over unnecessary complexity',
       'Background in philosophy of mind, cognitive science, or neuroscience - we believe understanding intelligence requires questioning what intelligence means',
       'Track record of challenging conventional approaches and reimagining what\'s possible rather than iterating on what exists',
       'Deep interest in the human experience and how technology can amplify rather than replace human creativity'
