@@ -50,7 +50,12 @@ function Research() {
         "Synthesized foundational ideas from Margaret Boden and Thomas Kuhn's work",
         "Mathematically proved that modifications to axioms have the most transformative potential",
         "Illustrated historical instances of transformational creativity using theoretical framework"
-      ]
+      ],
+      award: {
+        title: "Best Paper Award",
+        conference: "ICCC 2025",
+        category: "Scientific Creativity Research"
+      }
     }
   ];
 
@@ -148,7 +153,17 @@ function Research() {
               onMouseLeave={() => handlePaperLeave(index)}
             >
               <div className="paper-header">
-                <div className="paper-year">{paper.year}</div>
+                <div className="paper-header-left">
+                  <div className="paper-year">{paper.year}</div>
+                  {paper.award && (
+                    <div className="paper-award">
+                      <svg className="award-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l2.39 7.26L22 9.27l-5.69 4.87L18.18 22 12 17.27 5.82 22l1.87-7.86L2 9.27l7.61-.01L12 2z"/>
+                      </svg>
+                      <span className="award-text">{paper.award.title} - {paper.award.conference}</span>
+                    </div>
+                  )}
+                </div>
                 <div className="paper-keywords">
                   {paper.keywords.map((keyword, idx) => (
                     <span key={idx} className="keyword-tag">{keyword}</span>

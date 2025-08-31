@@ -133,6 +133,44 @@
   gap: 1rem;
 }
 
+.paper-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.paper-award {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #1a1a1a;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateX(2px);
+  }
+}
+
+.award-icon {
+  width: 18px;
+  height: 18px;
+  color: #1a1a1a;
+}
+
 .paper-year {
   background: var(--accent-primary);
   color: var(--bg-primary);
@@ -365,6 +403,15 @@
   .paper-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .paper-header-left {
+    width: 100%;
+  }
+
+  .paper-award {
+    font-size: 0.85rem;
+    padding: 0.35rem 0.8rem;
   }
 
   .paper-links {
