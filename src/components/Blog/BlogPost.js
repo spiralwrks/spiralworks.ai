@@ -86,13 +86,17 @@ const PostContainer = styled.article`
   }
 
   blockquote {
-    border-left: 4px solid var(--border);
-    margin: 1.5rem 0;
-    padding: 1rem;
-    padding-right: 0;
-    background: var(--background-alt);
-    color: var(--text-muted);
-    font-style: italic;
+    background: var(--form-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(134, 34, 201, 0.2);
+    border-radius: 16px;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    color: var(--text-color);
+    font-style: normal;
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 
   ul, ol {

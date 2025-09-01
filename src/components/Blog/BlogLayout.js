@@ -169,23 +169,6 @@ const BlogPostCard = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--primary-color));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover::before {
-    opacity: 1;
-  }
   
   &:hover {
     transform: translateY(-5px);
