@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.18924c05.css",
-    "main.js": "/static/js/main.b77e4a7e.js",
+    "main.js": "/static/js/main.63ba3a8c.js",
     "static/js/139.52ce517e.chunk.js": "/static/js/139.52ce517e.chunk.js",
     "static/js/737.3fe8b2a0.chunk.js": "/static/js/737.3fe8b2a0.chunk.js",
     "static/media/Chillax-Variable.ttf": "/static/media/Chillax-Variable.35be36f56031260cf435.ttf",
@@ -90,6 +90,6 @@
   },
   "entrypoints": [
     "static/css/main.18924c05.css",
-    "static/js/main.b77e4a7e.js"
+    "static/js/main.63ba3a8c.js"
   ]
 }
