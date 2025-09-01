@@ -54,7 +54,7 @@ function Research() {
         "Illustrated historical instances of transformational creativity using theoretical framework"
       ],
       award: {
-        title: "Best Paper Award",
+        title: "Best Short Paper Award",
         conference: "ICCC 2025",
         category: "Scientific Creativity Research"
       }
