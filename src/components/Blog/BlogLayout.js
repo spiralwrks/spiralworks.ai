@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+import StarryBackground from '../StarryBackground';
 
 const BlogContainer = styled.div`
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
+  display: block;
   background: var(--background);
   color: var(--text);
   margin: 0;
   width: 100%;
   position: relative;
   z-index: 1;
+  min-height: 100vh;
+  overflow-x: hidden;
 `;
 
 const Sidebar = styled.div`
@@ -43,12 +45,14 @@ const SidebarContent = styled.div`
 
 const Content = styled.div`
   overflow-y: auto;
-  padding: 1.5rem;
+  padding: 60px 20px 60px;
   box-sizing: border-box;
-  min-height: calc(100vh - 160px);
+  min-height: 100vh;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,83 +114,116 @@ const DirectoryItem = styled.div`
   user-select: none;
 `;
 
-const SearchInput = styled.input`
-  width: 100%;
-  padding: 0.5rem 0;
-  margin-bottom: 1rem;
-  border: none;
-  border-bottom: 1px solid var(--nav-text-color);
-  background: transparent;
-  color: var(--nav-text-color);
-  box-sizing: border-box;
-  font-size: 0.75rem;
-  transition: all var(--theme-transition-duration) ease;
-  outline: none;
-
-  &:focus {
-    border-color: var(--primary-color);
-  }
-
-  &::placeholder {
-    color: var(--nav-text-color);
-    opacity: 0.7;
-  }
-`;
 
 const HomeLink = styled(Link)`
   display: none; /* Hide the back button since we have the navbar */
 `;
 
+const BlogHeader = styled.div`
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--text-color) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+    font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    font-weight: 400;
+    line-height: 1.3;
+    opacity: 0.8;
+    max-width: 600px;
+  }
+`;
+
 const BlogPostsGrid = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  width: 85%;
-  max-width: 1000px;
+  gap: 3rem;
+  width: 100%;
 `;
 
 const BlogPostCard = styled.div`
-  background: var(--background-alt);
-  border-radius: 6px;
+  background: var(--form-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid var(--border);
-  height: 100%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(134, 34, 201, 0.2);
+  width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(134, 34, 201, 0.15);
+    border-color: rgba(134, 34, 201, 0.4);
   }
 `;
 
 const BlogPostContent = styled.div`
-  padding: 1rem;
+  padding: 30px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  text-align: center;
 `;
 
 const BlogPostTitle = styled.h3`
-  margin: 0 0 0.5rem;
-  font-size: 1rem;
-  color: var(--primary-color);
-  font-weight: 600;
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  color: var(--text-color);
+  font-weight: 400;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 `;
 
 const BlogPostMeta = styled.div`
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: var(--text-muted);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
 `;
 
 const BlogPostExcerpt = styled.p`
-  font-size: 0.8rem;
-  color: var(--text);
-  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
   flex: 1;
+  line-height: 1.6;
+  opacity: 0.9;
 `;
 
 const BlogPostTags = styled.div`
@@ -194,13 +231,15 @@ const BlogPostTags = styled.div`
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: auto;
+  justify-content: center;
   
   span {
     background: var(--tag-bg);
     color: var(--tag-text);
-    padding: 0.1rem 0.4rem;
-    border-radius: 3px;
-    font-size: 0.65rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(134, 34, 201, 0.2);
   }
 `;
 
@@ -230,7 +269,6 @@ const WelcomeMessage = styled.div`
 
 const BlogLayout = () => {
   const [posts, setPosts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [expandedDirs, setExpandedDirs] = useState(new Set());
   const { slug } = useParams();
 
@@ -272,13 +310,7 @@ const BlogLayout = () => {
     loadPosts();
   }, []); // Remove slug from dependencies since we want to maintain expansion state
 
-  const filteredPosts = posts.filter(post =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.path.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (post.tags && post.tags.some(tag => 
-      tag.toLowerCase().includes(searchTerm.toLowerCase())
-    ))
-  );
+  const filteredPosts = posts;
 
   const toggleDirectory = (path) => {
     setExpandedDirs(prev => {
@@ -362,29 +394,17 @@ const BlogLayout = () => {
 
   return (
     <BlogContainer>
-      <Sidebar>
-        <HomeLink to="/">← Back to Home</HomeLink>
-        <SidebarContent>
-          <SearchInput
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <PostList>
-            {posts.length > 0 ? (
-              renderDirectory(getDirectoryStructure(filteredPosts))
-            ) : (
-              <li>Loading posts...</li>
-            )}
-          </PostList>
-        </SidebarContent>
-      </Sidebar>
+      <StarryBackground />
       <Content>
         <Outlet />
         {!slug && (
           <>
-            <h1 style={{ color: 'var(--primary-color)', marginBottom: '1.5rem', marginTop: '0', textAlign: 'left', width: '85%', maxWidth: '1000px', paddingLeft: '1.5rem' }}>Blog Posts</h1>
+            <BlogHeader>
+              <h1>Blog</h1>
+              <div className="subtitle">
+                Insights on AI, creativity, and the future of scientific discovery
+              </div>
+            </BlogHeader>
             <BlogPostsGrid>
               {posts.length > 0 ? (
                 posts.map((post, index) => (

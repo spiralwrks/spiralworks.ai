@@ -102,9 +102,15 @@ body, html {
   -ms-overflow-style: none;
 }
 
-b, strong {
+/* Remove all bold styling globally */
+b, strong, h1, h2, h3, h4, h5, h6 {
   color: var(--text-color);
-  font-weight: 500; /* Subtle bold - not too thick */
+  font-weight: normal;
+}
+
+/* Override any component-specific bold styles */
+* {
+  font-weight: normal !important;
 }
 
 /* Text selection styling */
@@ -156,7 +162,7 @@ b, strong {
   white-space: nowrap;
   z-index: 1;
   font-size: 0.75em;
-  font-weight: bold;
+  font-weight: normal;
   opacity: 0;
   transition: opacity 0.3s;
 }

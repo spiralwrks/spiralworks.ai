@@ -41,10 +41,12 @@ function Layout() {
             >
               Beta
             </a>
-            <span className="navbar-link disabled">
+            <Link 
+              to="/blog" 
+              className={`navbar-link ${location.pathname.startsWith('/blog') ? 'active' : ''}`}
+            >
               Blog
-              <span className="tooltip">Coming Soon</span>
-            </span>
+            </Link>
           </div>
           
         </div>
