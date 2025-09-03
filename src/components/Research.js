@@ -133,10 +133,7 @@ function Research() {
       
       <div className="research-hero" ref={heroRef}>
         <div className="research-hero-content">
-          <h1 className="research-title">Research</h1>
-          <p className="research-subtitle">
-            Advancing the Frontier of Creative AI
-          </p>
+          <h1 className="research-title">Advancing the Frontier of Creative AI</h1>
           <div className="research-stats">
             <div className="stat-item">
               <span className="stat-number">10+</span>
