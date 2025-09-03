@@ -4,6 +4,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import StarryBackground from './StarryBackground';
 import '../styles/Research.css';
 
+// Import affiliate logos
+import stanfordLogo from '../assets/images/affiliates/stanford.svg';
+import mitLogo from '../assets/images/affiliates/mit.svg';
+import metaLogo from '../assets/images/affiliates/meta.svg';
+import amazonLogo from '../assets/images/affiliates/amazon.svg';
+import microsoftLogo from '../assets/images/affiliates/microsoft.svg';
+import mistralLogo from '../assets/images/affiliates/mistral.svg';
+import huggingfaceLogo from '../assets/images/affiliates/huggingface.svg';
+import palantirLogo from '../assets/images/affiliates/palantir.svg';
+
 gsap.registerPlugin(ScrollTrigger);
 
 function Research() {
@@ -139,6 +149,38 @@ function Research() {
             <div className="stat-item">
               <span className="stat-number">3</span>
               <span className="stat-label">Types of Creativity Modeled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="affiliates-section">
+        <div className="affiliates-container">
+          <h2 className="affiliates-title">Research Affiliates From</h2>
+          <div className="affiliates-logos">
+            <div className="affiliate-logo">
+              <img src={stanfordLogo} alt="Stanford University" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={mitLogo} alt="MIT" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={metaLogo} alt="Meta" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={amazonLogo} alt="Amazon" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={microsoftLogo} alt="Microsoft" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={mistralLogo} alt="Mistral AI" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={huggingfaceLogo} alt="Hugging Face" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={palantirLogo} alt="Palantir" />
             </div>
           </div>
         </div>

@@ -51,9 +51,13 @@
 .research-stats {
   display: flex;
   justify-content: center;
-  gap: 4rem;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   margin-top: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
 }
 
 .stat-item {
@@ -61,6 +65,8 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+  flex: 1;
+  padding: 0 1.5rem;
 }
 
 .stat-number {
@@ -71,11 +77,79 @@
 }
 
 .stat-label {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
+  max-width: 150px;
+  text-align: center;
+  line-height: 1.2;
 }
+
+.affiliates-section {
+  position: relative;
+  z-index: 2;
+  padding: 80px 20px;
+  background: transparent;
+}
+
+.affiliates-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+.affiliates-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4rem;
+  font-family: inherit;
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+
+.affiliates-logos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 3rem 2rem;
+  align-items: center;
+  justify-items: center;
+  padding: 0;
+}
+
+.affiliate-logo {
+  width: 120px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.affiliate-logo img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 1;
+  filter: grayscale(100%) brightness(1.2) contrast(1.1);
+}
+
+/* Special styling for specific logos */
+.affiliate-logo:nth-child(1) img {
+  /* Stanford - make it brighter */
+  filter: grayscale(100%) brightness(2) contrast(1.3) invert(0.8);
+}
+
+.affiliate-logo:nth-child(7) img {
+  /* Hugging Face - less brightness */
+  filter: grayscale(100%) brightness(0.9) contrast(1);
+}
+
 
 .papers-section {
   position: relative;
@@ -377,6 +451,7 @@
   box-shadow: 0 10px 40px rgba(166, 77, 255, 0.1);
 }
 
+
 @media (max-width: 768px) {
   .research-hero {
     min-height: 40vh;
@@ -389,11 +464,41 @@
   }
 
   .research-stats {
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
   }
 
   .stat-number {
-    font-size: 3rem;
+    font-size: 2.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+
+  .affiliates-section {
+    padding: 60px 15px;
+  }
+
+  .affiliates-container {
+    padding: 0 15px;
+  }
+
+  .affiliates-title {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .affiliates-logos {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 2.5rem 2rem;
+  }
+
+  .affiliate-logo {
+    width: 100px;
+    height: 45px;
   }
 
   .papers-section {
