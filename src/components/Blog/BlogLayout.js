@@ -258,7 +258,7 @@ const BlogLayout = () => {
   useEffect(() => {
     const loadPosts = async () => {
       try {
-        const response = await fetch('/content/blog/index.json');
+        const response = await fetch(`${process.env.PUBLIC_URL}/content/blog/index.json`);
         const data = await response.json();
         const validPosts = data.filter(post => post && post.path).sort((a, b) => {
           // First sort by date if available (newest first)

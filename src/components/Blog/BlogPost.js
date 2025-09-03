@@ -247,7 +247,7 @@ const BlogPost = () => {
             const pathParts = decodedSlug.split('/');
             const category = pathParts[0];
             const filename = pathParts[pathParts.length - 1];
-            const postResponse = await fetch(`/content/blog/${category}/${filename}.json`);
+            const postResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/${category}/${filename}.json`);
             if (postResponse.ok) {
               const data = await postResponse.json();
               setPost(data);
@@ -261,7 +261,7 @@ const BlogPost = () => {
         
         // Try by direct path
         try {
-          const pathResponse = await fetch(`/content/blog/${decodeURIComponent(slug)}.json`);
+          const pathResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/${decodeURIComponent(slug)}.json`);
           if (pathResponse.ok) {
             const data = await pathResponse.json();
             setPost(data);
@@ -273,7 +273,7 @@ const BlogPost = () => {
         }
 
         // Get the index to look up the post
-        const indexResponse = await fetch('/content/blog/index.json');
+        const indexResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/index.json`);
         if (!indexResponse.ok) throw new Error('Failed to load blog index');
         const posts = await indexResponse.json();
         
@@ -292,7 +292,7 @@ const BlogPost = () => {
         if (!postInfo) throw new Error('Post not found');
         
         // Fetch the post content
-        const postResponse = await fetch(`/content/blog/${postInfo.category}/${postInfo.slug}.json`);
+        const postResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/${postInfo.category}/${postInfo.slug}.json`);
         if (!postResponse.ok) throw new Error('Failed to load post content');
         const data = await postResponse.json();
         setPost(data);
