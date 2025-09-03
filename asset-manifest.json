@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.18924c05.css",
-    "main.js": "/static/js/main.63ba3a8c.js",
-    "static/js/139.52ce517e.chunk.js": "/static/js/139.52ce517e.chunk.js",
-    "static/js/737.3fe8b2a0.chunk.js": "/static/js/737.3fe8b2a0.chunk.js",
+    "main.css": "/static/css/main.c54ea6ed.css",
+    "main.js": "/static/js/main.11ad5a04.js",
+    "static/js/139.5e012acb.chunk.js": "/static/js/139.5e012acb.chunk.js",
+    "static/js/737.a0633179.chunk.js": "/static/js/737.a0633179.chunk.js",
     "static/media/Chillax-Variable.ttf": "/static/media/Chillax-Variable.35be36f56031260cf435.ttf",
     "static/media/sigs.webp": "/static/media/sigs.c8218c1536873771c24e.webp",
     "static/media/Chillax-Light.ttf": "/static/media/Chillax-Light.f7f01b60a17a04b97f7a.ttf",
@@ -58,6 +58,7 @@
     "static/media/KaTeX_SansSerif-Bold.woff": "/static/media/KaTeX_SansSerif-Bold.b9cd458ac6d5889ff9c3.woff",
     "static/media/KaTeX_SansSerif-Italic.woff": "/static/media/KaTeX_SansSerif-Italic.8d593cfaa96238d5e2f8.woff",
     "static/media/KaTeX_Typewriter-Regular.woff2": "/static/media/KaTeX_Typewriter-Regular.c295e7f71970f03c0549.woff2",
+    "static/media/huggingface.svg": "/static/media/huggingface.b36079039cf70f68aaf46e5ab5255810.svg",
     "static/media/KaTeX_Fraktur-Bold.woff": "/static/media/KaTeX_Fraktur-Bold.354501bac435c3264834.woff",
     "static/media/KaTeX_Fraktur-Regular.woff": "/static/media/KaTeX_Fraktur-Regular.6fdf0ac577be0ba82a4c.woff",
     "static/media/KaTeX_Caligraphic-Bold.ttf": "/static/media/KaTeX_Caligraphic-Bold.7489a2fbfb9bfe704420.ttf",
@@ -69,6 +70,7 @@
     "static/media/KaTeX_Size2-Regular.ttf": "/static/media/KaTeX_Size2-Regular.57f5c1837853986ea1db.ttf",
     "static/media/KaTeX_Fraktur-Bold.woff2": "/static/media/KaTeX_Fraktur-Bold.931d67ea207ab37ee693.woff2",
     "static/media/KaTeX_Fraktur-Regular.woff2": "/static/media/KaTeX_Fraktur-Regular.172d3529b26f8cedef6b.woff2",
+    "static/media/amazon.svg": "/static/media/amazon.44a9b5d869d3cc884aa77b9329fbe053.svg",
     "static/media/KaTeX_Script-Regular.woff": "/static/media/KaTeX_Script-Regular.073b3402d036714b4370.woff",
     "static/media/KaTeX_Size4-Regular.ttf": "/static/media/KaTeX_Size4-Regular.4ad7c7e8bb8d10a34bb7.ttf",
     "static/media/KaTeX_SansSerif-Regular.woff2": "/static/media/KaTeX_SansSerif-Regular.cd5e231e0cc53b2cb2c0.woff2",
@@ -80,16 +82,22 @@
     "static/media/KaTeX_Caligraphic-Regular.woff2": "/static/media/KaTeX_Caligraphic-Regular.d6484fce1ef428d5bd94.woff2",
     "static/media/KaTeX_Size1-Regular.woff": "/static/media/KaTeX_Size1-Regular.0108e89c9003e8c14ea3.woff",
     "static/media/KaTeX_Size2-Regular.woff": "/static/media/KaTeX_Size2-Regular.3a99e70aee4076660d38.woff",
+    "static/media/stanford.svg": "/static/media/stanford.d79b0e080cb1d4c99c71aa055d769ded.svg",
     "static/media/KaTeX_Size4-Regular.woff": "/static/media/KaTeX_Size4-Regular.aeffd8025cba3647f1a6.woff",
     "static/media/KaTeX_Size1-Regular.woff2": "/static/media/KaTeX_Size1-Regular.6eec866c69313624be60.woff2",
     "static/media/KaTeX_Size2-Regular.woff2": "/static/media/KaTeX_Size2-Regular.2960900c4f271311eb36.woff2",
     "static/media/KaTeX_Size4-Regular.woff2": "/static/media/KaTeX_Size4-Regular.e418bf257af1052628d8.woff2",
     "static/media/KaTeX_Size3-Regular.woff": "/static/media/KaTeX_Size3-Regular.7947224e8a9914fa332b.woff",
     "static/media/KaTeX_Size3-Regular.woff2": "/static/media/KaTeX_Size3-Regular.e1951519f6f0596f7356.woff2",
-    "index.html": "/index.html"
+    "static/media/meta.svg": "/static/media/meta.c9e967c57b166b01339c56a4062ec73f.svg",
+    "static/media/palantir.svg": "/static/media/palantir.6313b2fa89bd4ead99bf81804b4ce017.svg",
+    "index.html": "/index.html",
+    "static/media/mistral.svg": "/static/media/mistral.bd8cc5e941817cd3e091fce651868573.svg",
+    "static/media/microsoft.svg": "/static/media/microsoft.39bb81a52fca84b2d58ccbbfc04b8033.svg",
+    "static/media/mit.svg": "/static/media/mit.f9d5cdd1327437a278846d77c7838dc4.svg"
   },
   "entrypoints": [
-    "static/css/main.18924c05.css",
-    "static/js/main.63ba3a8c.js"
+    "static/css/main.c54ea6ed.css",
+    "static/js/main.11ad5a04.js"
   ]
 }
