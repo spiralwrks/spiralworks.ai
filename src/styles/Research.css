@@ -115,11 +115,16 @@
 .affiliates-logos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-rows: auto;
   gap: 3rem 2rem;
   align-items: center;
   justify-items: center;
   padding: 0;
+}
+
+/* Center the last item (Palantir) in its row */
+.affiliate-logo:last-child {
+  grid-column: 2 / 4;
 }
 
 .affiliate-logo {
@@ -147,8 +152,13 @@
   filter: grayscale(100%) brightness(2) contrast(1.3) invert(0.8);
 }
 
-.affiliate-logo:nth-child(7) img {
-  /* Hugging Face - less brightness */
+.affiliate-logo:nth-child(3) img {
+  /* Harvard - grayscale and adjust brightness */
+  filter: grayscale(100%) brightness(1.5) contrast(1.2) invert(0.8);
+}
+
+.affiliate-logo:nth-child(8) img {
+  /* Hugging Face - less brightness (now 8th position) */
   filter: grayscale(100%) brightness(0.9) contrast(1);
 }
 

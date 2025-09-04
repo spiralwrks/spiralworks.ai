@@ -13,6 +13,7 @@ import microsoftLogo from '../assets/images/affiliates/microsoft.svg';
 import mistralLogo from '../assets/images/affiliates/mistral.svg';
 import huggingfaceLogo from '../assets/images/affiliates/huggingface.svg';
 import palantirLogo from '../assets/images/affiliates/palantir.svg';
+import harvardLogo from '../assets/images/affiliates/harvard.svg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -160,6 +161,9 @@ function Research() {
             </div>
             <div className="affiliate-logo">
               <img src={mitLogo} alt="MIT" />
+            </div>
+            <div className="affiliate-logo">
+              <img src={harvardLogo} alt="Harvard University" />
             </div>
             <div className="affiliate-logo">
               <img src={metaLogo} alt="Meta" />
