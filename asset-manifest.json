@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.49b67c31.css",
-    "main.js": "/static/js/main.fb33866f.js",
-    "static/js/139.52ce517e.chunk.js": "/static/js/139.52ce517e.chunk.js",
-    "static/js/737.3fe8b2a0.chunk.js": "/static/js/737.3fe8b2a0.chunk.js",
+    "main.css": "/static/css/main.73e20e4c.css",
+    "main.js": "/static/js/main.d42b0d27.js",
+    "static/js/139.5e012acb.chunk.js": "/static/js/139.5e012acb.chunk.js",
+    "static/js/737.a0633179.chunk.js": "/static/js/737.a0633179.chunk.js",
     "static/media/Chillax-Variable.ttf": "/static/media/Chillax-Variable.35be36f56031260cf435.ttf",
     "static/media/sigs.webp": "/static/media/sigs.c8218c1536873771c24e.webp",
     "static/media/Chillax-Light.ttf": "/static/media/Chillax-Light.f7f01b60a17a04b97f7a.ttf",
@@ -78,6 +78,7 @@
     "static/media/KaTeX_Caligraphic-Bold.woff": "/static/media/KaTeX_Caligraphic-Bold.d757c535a2e5902f1325.woff",
     "static/media/KaTeX_Caligraphic-Regular.woff": "/static/media/KaTeX_Caligraphic-Regular.db074fa22cf224af93d7.woff",
     "static/media/KaTeX_Size3-Regular.ttf": "/static/media/KaTeX_Size3-Regular.8d6b6822586eea3d3b20.ttf",
+    "static/media/harvard.svg": "/static/media/harvard.f0f08e32ec6b7856c90cfc9d032873ee.svg",
     "static/media/KaTeX_Caligraphic-Bold.woff2": "/static/media/KaTeX_Caligraphic-Bold.a1abf90dfd72792a577a.woff2",
     "static/media/KaTeX_Caligraphic-Regular.woff2": "/static/media/KaTeX_Caligraphic-Regular.d6484fce1ef428d5bd94.woff2",
     "static/media/KaTeX_Size1-Regular.woff": "/static/media/KaTeX_Size1-Regular.0108e89c9003e8c14ea3.woff",
@@ -97,7 +98,7 @@
     "static/media/mit.svg": "/static/media/mit.f9d5cdd1327437a278846d77c7838dc4.svg"
   },
   "entrypoints": [
-    "static/css/main.49b67c31.css",
-    "static/js/main.fb33866f.js"
+    "static/css/main.73e20e4c.css",
+    "static/js/main.d42b0d27.js"
   ]
 }
