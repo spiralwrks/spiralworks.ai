@@ -350,6 +350,7 @@ const BlogPost = () => {
     <PostContainer>
       <h1>{post.title}</h1>
       <Meta>
+        {post.author && <span>{post.author} • </span>}
         <time>{new Date(post.date).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',

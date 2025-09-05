@@ -121,7 +121,7 @@ const HomeLink = styled(Link)`
 
 const BlogHeader = styled.div`
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -154,7 +154,7 @@ const BlogPostsGrid = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  gap: 3rem;
+  gap: 1.5rem;
   width: 100%;
 `;
 
@@ -178,7 +178,7 @@ const BlogPostCard = styled.div`
 `;
 
 const BlogPostContent = styled.div`
-  padding: 30px;
+  padding: 20px 25px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -186,26 +186,26 @@ const BlogPostContent = styled.div`
 `;
 
 const BlogPostTitle = styled.h3`
-  margin: 0 0 1rem;
-  font-size: 2rem;
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
   color: var(--text-color);
   font-weight: 400;
   font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 `;
 
 const BlogPostMeta = styled.div`
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   opacity: 0.8;
 `;
 
 const BlogPostExcerpt = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--text-color);
-  margin-bottom: 1.5rem;
+  margin: 0.25rem 0 0.75rem 0;
   flex: 1;
-  line-height: 1.6;
+  line-height: 1.5;
   opacity: 0.9;
 `;
 
@@ -385,7 +385,7 @@ const BlogLayout = () => {
             <BlogHeader>
               <h1>Blog</h1>
               <div className="subtitle">
-                Insights on AI, creativity, and the future of scientific discovery
+                Insights on AI, Humanity, & the Future of Creative Scientific Discovery
               </div>
             </BlogHeader>
             <BlogPostsGrid>
@@ -395,16 +395,17 @@ const BlogLayout = () => {
                     <BlogPostLink to={`/blog/${encodeURIComponent(post.path)}`}>
                       <BlogPostContent>
                         <BlogPostTitle>{post.title.replace(" Manifesto", "\u00A0Manifesto")}</BlogPostTitle>
+                        <BlogPostExcerpt>
+                          {post.excerpt || (post.content ? `${post.content.substring(0, 120)}...` : 'Read more...')}
+                        </BlogPostExcerpt>
                         <BlogPostMeta>
+                          {post.author && <span>{post.author} • </span>}
                           {post.date && new Date(post.date).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long',
                             day: 'numeric'
                           })}
                         </BlogPostMeta>
-                        <BlogPostExcerpt>
-                          {post.excerpt || (post.content ? `${post.content.substring(0, 120)}...` : 'Read more...')}
-                        </BlogPostExcerpt>
                         {post.tags && post.tags.length > 0 && (
                           <BlogPostTags>
                             {post.tags.slice(0, 3).map((tag, idx) => (

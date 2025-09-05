@@ -500,6 +500,12 @@
     height: 45px;
   }
 
+  /* Fix Palantir logo positioning on mobile */
+  .affiliate-logo:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
   .papers-section {
     padding: 60px 20px;
   }
