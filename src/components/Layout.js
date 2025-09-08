@@ -9,29 +9,29 @@ function Layout() {
     <div className="app-container">
       <nav className="navbar">
         <div className="navbar-container">
-          <div className="navbar-logo">
+          <Link to="/" className="navbar-logo">
             <img src="/icons/apple-touch-icon.png" alt="Spiral Works" className="logo-icon" />
             <span className="logo-text">Spiral Works</span>
-          </div>
+          </Link>
           
           <div className="navbar-menu">
             <Link 
-              to="/" 
-              className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}
+              to="/manifesto" 
+              className={`navbar-link ${location.pathname === '/manifesto' ? 'active' : ''}`}
             >
-              Home
+              Manifesto
             </Link>
             <Link 
-              to="/about" 
-              className={`navbar-link ${location.pathname === '/about' ? 'active' : ''}`}
+              to="/careers" 
+              className={`navbar-link ${location.pathname === '/careers' ? 'active' : ''}`}
             >
-              About
+              Careers
             </Link>
             <Link 
-              to="/jobs" 
-              className={`navbar-link ${location.pathname === '/jobs' ? 'active' : ''}`}
+              to="/research" 
+              className={`navbar-link ${location.pathname === '/research' ? 'active' : ''}`}
             >
-              Jobs
+              Research
             </Link>
             <a 
               href="https://form.typeform.com/to/cHdJn1Ng"
@@ -41,10 +41,12 @@ function Layout() {
             >
               Beta
             </a>
-            <span className="navbar-link disabled">
+            <Link 
+              to="/blog" 
+              className={`navbar-link ${location.pathname.startsWith('/blog') ? 'active' : ''}`}
+            >
               Blog
-              <span className="tooltip">Coming Soon</span>
-            </span>
+            </Link>
           </div>
           
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import JobApplicationForm from './JobApplicationForm';
+import StarryBackground from './StarryBackground';
 import '../styles/jobpostings.css';
 
 const jobListings = [
@@ -11,8 +12,8 @@ const jobListings = [
     type: 'Full-time',
     description: 'We are looking for a talented ML Engineer to join our team and help build cutting-edge machine learning systems. You will work on designing, implementing, and deploying ML models at scale.',
     requirements: [
-      'Strong engineering skills in Python, PyTorch/TensorFlow, and distributed computing architectures',
-      'Experience deploying ML models at scale and optimizing inference pipelines',
+      'Strong engineering skills in Python, PyTorch/TensorFlow, distributed computing architectures, deploying ML models at scale, & optimizing inference pipelines',
+      'Maintaining clean, minimal codebases with an emphasis on simplicity and debloat over unnecessary complexity',
       'Background in philosophy of mind, cognitive science, or neuroscience - we believe understanding intelligence requires questioning what intelligence means',
       'Track record of challenging conventional approaches and reimagining what\'s possible rather than iterating on what exists',
       'Deep interest in the human experience and how technology can amplify rather than replace human creativity'
@@ -47,6 +48,21 @@ const jobListings = [
       'Natural inclination to question "why" before "how" - seeing technology deployment as a human and philosophical challenge',
       'Ability to translate between technical complexity and human meaning, making the mysterious accessible without losing its magic'
     ]
+  },
+  {
+    id: 4,
+    title: 'Head of Marketing & GTM',
+    department: 'External Development',
+    location: 'New York City, NY',
+    type: 'Full-time',
+    description: 'Lead our go-to-market strategy and shape how the world understands creative superintelligence. You will craft narratives that bridge cutting-edge AI research with human imagination, building movements rather than campaigns.',
+    requirements: [
+      'Proven track record leading marketing and GTM at technical startups, ideally in AI/ML or deep tech spaces',
+      'Experience building category-defining narratives and community-driven growth strategies',
+      'Background in philosophy, literature, or cultural studies - marketing AI requires understanding both technology and the human stories it enables',
+      'Ability to see marketing as cultural architecture rather than demand generation - building belief systems, not just pipelines',
+      'Deep curiosity about consciousness, creativity, and what it means to augment rather than automate human intelligence'
+    ]
   }
 ];
 
@@ -66,6 +82,7 @@ function JobPostings() {
 
   return (
     <div className="job-postings-container">
+      <StarryBackground />
       <div className="job-postings-header">
         <h1>Join Our Team</h1>
         <p>We're building towards creative superintelligence. Come shape it with us.</p>

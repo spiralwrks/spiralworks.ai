@@ -160,7 +160,7 @@ function AboutPage() {
     />
   </div>
 
-  <p>Reach out at join@spiralworks.ai</p>
+  <p>Reach out at <a href="mailto:join@spiralworks.ai" style={{ color: 'var(--accent-primary)', textDecoration: 'none' }}>join@spiralworks.ai</a></p>
   
   <hr style={{ 
     margin: '3rem 0 2rem 0', 

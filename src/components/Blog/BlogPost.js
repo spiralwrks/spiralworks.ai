@@ -9,21 +9,32 @@ import 'katex/dist/katex.min.css';
 import styled from 'styled-components';
 
 const PostContainer = styled.article`
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   line-height: 1.6;
-  padding: 0 1rem;
-  font-size: 0.95rem;
+  padding: 80px 20px 40px;
+  font-size: 1rem;
+  min-height: 100vh;
   
-  h1, h2, h3, h4, h5, h6 {
+  h1 {
+    font-size: 3rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    margin-top: 0;
+    line-height: 1.3;
+    font-weight: 400;
+    text-align: center;
+    font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h2, h3, h4, h5, h6 {
     color: var(--primary-color);
     margin-top: 2rem;
     margin-bottom: 1rem;
     line-height: 1.3;
-    font-weight: 700;
+    font-weight: 400;
   }
 
-  h1 { font-size: 2.2rem; }
   h2 { font-size: 1.8rem; }
   h3 { font-size: 1.5rem; }
   h4 { font-size: 1.3rem; }
@@ -66,14 +77,26 @@ const PostContainer = styled.article`
     font-size: 0.9em;
   }
 
+  strong, b {
+    font-weight: normal;
+  }
+
+  em, i {
+    font-style: normal;
+  }
+
   blockquote {
-    border-left: 4px solid var(--border);
-    margin: 1.5rem 0;
-    padding: 1rem;
-    padding-right: 0;
-    background: var(--background-alt);
-    color: var(--text-muted);
-    font-style: italic;
+    background: var(--form-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(134, 34, 201, 0.2);
+    border-radius: 16px;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    color: var(--text-color);
+    font-style: normal;
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 
   ul, ol {
@@ -126,22 +149,27 @@ const ImageWrapper = styled.div`
 `;
 
 const Meta = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0.8;
 `;
 
 const Tags = styled.div`
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  text-align: center;
   
   span {
     display: inline-block;
     background: var(--tag-bg);
     color: var(--tag-text);
-    padding: 0.2rem 0.5rem;
-    border-radius: 3px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
     margin-right: 0.5rem;
-    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid rgba(134, 34, 201, 0.2);
   }
 `;
 
@@ -219,7 +247,7 @@ const BlogPost = () => {
             const pathParts = decodedSlug.split('/');
             const category = pathParts[0];
             const filename = pathParts[pathParts.length - 1];
-            const postResponse = await fetch(`/content/blog/${category}/${filename}.json`);
+            const postResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/${category}/${filename}.json`);
             if (postResponse.ok) {
               const data = await postResponse.json();
               setPost(data);
@@ -233,7 +261,7 @@ const BlogPost = () => {
         
         // Try by direct path
         try {
-          const pathResponse = await fetch(`/content/blog/${decodeURIComponent(slug)}.json`);
+          const pathResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/${decodeURIComponent(slug)}.json`);
           if (pathResponse.ok) {
             const data = await pathResponse.json();
             setPost(data);
@@ -245,7 +273,7 @@ const BlogPost = () => {
         }
 
         // Get the index to look up the post
-        const indexResponse = await fetch('/content/blog/index.json');
+        const indexResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/index.json`);
         if (!indexResponse.ok) throw new Error('Failed to load blog index');
         const posts = await indexResponse.json();
         
@@ -264,7 +292,7 @@ const BlogPost = () => {
         if (!postInfo) throw new Error('Post not found');
         
         // Fetch the post content
-        const postResponse = await fetch(`/content/blog/${postInfo.category}/${postInfo.slug}.json`);
+        const postResponse = await fetch(`${process.env.PUBLIC_URL}/content/blog/${postInfo.category}/${postInfo.slug}.json`);
         if (!postResponse.ok) throw new Error('Failed to load post content');
         const data = await postResponse.json();
         setPost(data);
@@ -322,6 +350,7 @@ const BlogPost = () => {
     <PostContainer>
       <h1>{post.title}</h1>
       <Meta>
+        {post.author && <span>{post.author} • </span>}
         <time>{new Date(post.date).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
