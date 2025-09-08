@@ -148,7 +148,7 @@ function AboutPage() {
                   
   <p>Royce Moon &amp; Samuel Schapiro</p>
 
-  <div style={{ marginTop: '1rem', textAlign: 'left' }}>
+  {/* <div style={{ marginTop: '1rem', textAlign: 'left' }}>
     <img 
       src={signaturesImg} 
       alt="Signatures of Royce Moon, Samuel Schapiro, and Peter Graham" 
@@ -158,7 +158,7 @@ function AboutPage() {
         opacity: 0.9
       }} 
     />
-  </div>
+  </div> */}
 
   <p>Reach out at <a href="mailto:join@spiralworks.ai" style={{ color: 'var(--accent-primary)', textDecoration: 'none' }}>join@spiralworks.ai</a></p>
   
