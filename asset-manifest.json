@@ -1,11 +1,10 @@
 {
   "files": {
     "main.css": "/static/css/main.8b1ea898.css",
-    "main.js": "/static/js/main.6ddd6911.js",
+    "main.js": "/static/js/main.5fead14e.js",
     "static/js/139.52ce517e.chunk.js": "/static/js/139.52ce517e.chunk.js",
     "static/js/737.3fe8b2a0.chunk.js": "/static/js/737.3fe8b2a0.chunk.js",
     "static/media/Chillax-Variable.ttf": "/static/media/Chillax-Variable.35be36f56031260cf435.ttf",
-    "static/media/sigs.webp": "/static/media/sigs.290ecd144d2c13e57c1c.webp",
     "static/media/Chillax-Light.ttf": "/static/media/Chillax-Light.f7f01b60a17a04b97f7a.ttf",
     "static/media/KaTeX_AMS-Regular.ttf": "/static/media/KaTeX_AMS-Regular.853be92419a6c3766b9a.ttf",
     "static/media/Chillax-Medium.ttf": "/static/media/Chillax-Medium.bd1fdefdb415380f3f52.ttf",
@@ -16,6 +15,7 @@
     "static/media/Chillax-Variable.woff2": "/static/media/Chillax-Variable.9cf7581f93eb915d1c88.woff2",
     "static/media/KaTeX_Main-Regular.ttf": "/static/media/KaTeX_Main-Regular.9eba1d77abcf2aa6e94e.ttf",
     "static/media/KaTeX_Main-Bold.ttf": "/static/media/KaTeX_Main-Bold.8169508bf58f8bd92ad8.ttf",
+    "static/media/sigs.webp": "/static/media/sigs.065aca41c12bf478744a.webp",
     "static/media/KaTeX_Main-Italic.ttf": "/static/media/KaTeX_Main-Italic.fa675e5e4bec9eb250b6.ttf",
     "static/media/KaTeX_AMS-Regular.woff": "/static/media/KaTeX_AMS-Regular.d562e886c52f12660a41.woff",
     "static/media/KaTeX_Main-BoldItalic.ttf": "/static/media/KaTeX_Main-BoldItalic.828abcb200061cffbaae.ttf",
@@ -99,6 +99,6 @@
   },
   "entrypoints": [
     "static/css/main.8b1ea898.css",
-    "static/js/main.6ddd6911.js"
+    "static/js/main.5fead14e.js"
   ]
 }
