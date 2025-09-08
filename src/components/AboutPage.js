@@ -146,7 +146,7 @@ function AboutPage() {
 
   <p style={{ marginTop: '3rem' }}>Founders, Spiral Works </p>
                   
-  <p>Royce Moon, Samuel Schapiro, &amp; Peter Graham</p>
+  <p>Royce Moon &amp; Samuel Schapiro</p>
 
   <div style={{ marginTop: '1rem', textAlign: 'left' }}>
     <img 
