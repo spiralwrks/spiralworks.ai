@@ -15,6 +15,7 @@ const PostContainer = styled.article`
   padding: 80px 20px 40px;
   font-size: 1rem;
   min-height: 100vh;
+  background: transparent;
   
   h1 {
     font-size: 3rem;
@@ -86,16 +87,16 @@ const PostContainer = styled.article`
   }
 
   blockquote {
-    background: var(--form-background);
+    background: rgba(128, 128, 128, 0.1);
     backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 2px solid rgba(134, 34, 201, 0.2);
-    border-radius: 16px;
-    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
     padding: 1.5rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     font-style: normal;
-    font-size: 1.05rem;
+    font-size: 1rem;
     line-height: 1.6;
   }
 

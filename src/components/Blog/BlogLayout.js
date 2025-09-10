@@ -5,7 +5,7 @@ import StarryBackground from '../StarryBackground';
 
 const BlogContainer = styled.div`
   display: block;
-  background: var(--background);
+  background: transparent;
   color: var(--text);
   margin: 0;
   width: 100%;
@@ -13,6 +13,18 @@ const BlogContainer = styled.div`
   z-index: 1;
   min-height: 100vh;
   overflow-x: hidden;
+  
+  /* Override body background for blog pages */
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1;
+  }
 `;
 
 
@@ -56,7 +68,7 @@ const BlogHeader = styled.div`
   }
 
   .subtitle {
-    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
     color: var(--text-muted);
     margin-bottom: 3rem;
     font-weight: 400;
