@@ -6,7 +6,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const puppeteer = require('puppeteer');
 require('dotenv').config();
 
-const OBSIDIAN_REPO = 'https://github.com/spiralwrks/site-blog.git';
+const OBSIDIAN_REPO = 'https://github.com/spiralwrks/blog.git';
 const TEMP_CLONE_DIR = path.join(__dirname, '../.temp-blog');
 const BLOG_CONTENT_DIR = path.join(__dirname, '../public/content/blog');
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -170,8 +170,8 @@ async function copyAllImages(tempDir, targetAssetsDir) {
 async function processMarkdownContent(browser, content, targetAssetsDir, currentDir, tempDirRoot) {
   let processedContent = content;
   
-  // 1. Process GitHub asset URLs from site-blog repository
-  const githubAssetRegex = /!\[(.*?)\]\((https:\/\/github\.com\/spiralwrks\/site-blog\/raw\/[^\/]+\/imgs\/[^)]+)\)/g;
+  // 1. Process GitHub asset URLs from blog repository
+  const githubAssetRegex = /!\[(.*?)\]\((https:\/\/github\.com\/spiralwrks\/blog\/raw\/[^\/]+\/imgs\/[^)]+)\)/g;
   let match;
   
   while ((match = githubAssetRegex.exec(content)) !== null) {
