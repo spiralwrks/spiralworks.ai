@@ -214,7 +214,7 @@ const BlogLayout = () => {
             <BlogHeader>
               <h1>Blog</h1>
               <div className="subtitle">
-                Insights on the Future of Creative Scientific Creativity, Creative AI, and Open-Ended Discovery
+                Insights on the Future of Creative Scientific Discovery, Creative AI, and Open-Endedness
               </div>
             </BlogHeader>
             <BlogPostsGrid>
