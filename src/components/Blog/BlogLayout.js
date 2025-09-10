@@ -395,9 +395,6 @@ const BlogLayout = () => {
                     <BlogPostLink to={`/blog/${encodeURIComponent(post.path)}`}>
                       <BlogPostContent>
                         <BlogPostTitle>{post.title.replace(" Manifesto", "\u00A0Manifesto")}</BlogPostTitle>
-                        <BlogPostExcerpt>
-                          {post.preview || 'Read more...'}
-                        </BlogPostExcerpt>
                         <BlogPostMeta>
                           {post.author && <span>{post.author} • </span>}
                           {post.date && new Date(post.date).toLocaleDateString('en-US', {
