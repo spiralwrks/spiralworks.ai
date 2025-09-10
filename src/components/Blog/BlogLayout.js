@@ -396,7 +396,7 @@ const BlogLayout = () => {
                       <BlogPostContent>
                         <BlogPostTitle>{post.title.replace(" Manifesto", "\u00A0Manifesto")}</BlogPostTitle>
                         <BlogPostExcerpt>
-                          {post.excerpt || (post.content ? `${post.content.substring(0, 120)}...` : 'Read more...')}
+                          {post.preview || 'Read more...'}
                         </BlogPostExcerpt>
                         <BlogPostMeta>
                           {post.author && <span>{post.author} • </span>}
