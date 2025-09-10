@@ -388,13 +388,13 @@ async function processMarkdownFiles(tempDir, targetDir) {
         const postPath = file.name.replace('.md', '');
 
         const post = {
-          title: file.name.replace('.md', ''),
+          title: data.title,
           date: data.date || new Date().toISOString(),
           content: processedContent,
           category: "main",
-          tags: data.tags || [],
           slug,
-          path: postPath
+          path: postPath,
+          author: data.author
         };
 
         // Save post in the main category directory
@@ -408,10 +408,10 @@ async function processMarkdownFiles(tempDir, targetDir) {
           title: post.title,
           date: post.date,
           category: post.category,
-          tags: post.tags,
           slug: post.slug,
           path: post.path,
-          preview: post.content.substring(0, 200) + '...'
+          preview: post.content.substring(0, 200) + '...',
+          author: post.author
         };
         posts.push(indexPost);
 
