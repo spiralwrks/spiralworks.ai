@@ -15,33 +15,6 @@ const BlogContainer = styled.div`
   overflow-x: hidden;
 `;
 
-const Sidebar = styled.div`
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid var(--border);
-  background: transparent;
-  overflow: hidden;
-  height: calc(100vh - 160px);
-  position: sticky;
-  top: 80px;
-  z-index: 2;
-`;
-
-const SidebarContent = styled.div`
-  padding: 1rem;
-  overflow-y: auto;
-  flex: 1;
-  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-`;
 
 const Content = styled.div`
   overflow-y: auto;
@@ -59,65 +32,8 @@ const Content = styled.div`
   justify-content: flex-start;
 `;
 
-const PostList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const PostLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  padding: 0.35rem 0;
-  padding-left: ${props => `${props.$depth * 0.75}rem`};
-  color: var(--nav-text-color);
-  text-decoration: ${props => props.$isDirectory ? 'none' : 'underline'};
-  text-decoration-color: ${props => props.$isDirectory ? 'transparent' : 'var(--primary-color)'};
-  font-size: ${props => props.$isDirectory ? '0.8rem' : '0.75rem'};
-  font-weight: ${props => props.$isDirectory ? '600' : '400'};
-  width: 100%;
-  position: relative;
-  z-index: 3;
-  transition: color var(--theme-transition-duration) ease;
-
-  &:hover {
-    color: var(--primary-color);
-    background: transparent;
-    text-decoration: none;
-  }
-
-  &.active {
-    color: var(--primary-color);
-    background: transparent;
-    font-weight: 700;
-  }
-`;
-
-const TreeIcon = styled.span`
-  display: inline-flex;
-  width: 12px;
-  height: 12px;
-  align-items: center;
-  justify-content: center;
-  margin-right: 6px;
-  font-size: 7px;
-  color: var(--nav-text-color);
-  transition: color var(--theme-transition-duration) ease;
-
-  ${PostLink}:hover & {
-    color: var(--primary-color);
-  }
-`;
-
-const DirectoryItem = styled.div`
-  cursor: pointer;
-  user-select: none;
-`;
 
 
-const HomeLink = styled(Link)`
-  display: none; /* Hide the back button since we have the navbar */
-`;
 
 const BlogHeader = styled.div`
   text-align: center;
@@ -140,13 +56,16 @@ const BlogHeader = styled.div`
   }
 
   .subtitle {
-    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
     color: var(--text-muted);
     margin-bottom: 3rem;
     font-weight: 400;
-    line-height: 1.3;
+    line-height: 1.2;
     opacity: 0.8;
-    max-width: 600px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
@@ -186,7 +105,7 @@ const BlogPostContent = styled.div`
 `;
 
 const BlogPostTitle = styled.h3`
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.75rem;
   font-size: 1.75rem;
   color: var(--text-color);
   font-weight: 400;
@@ -200,14 +119,6 @@ const BlogPostMeta = styled.div`
   opacity: 0.8;
 `;
 
-const BlogPostExcerpt = styled.p`
-  font-size: 1rem;
-  color: var(--text-color);
-  margin: 0.25rem 0 0.75rem 0;
-  flex: 1;
-  line-height: 1.5;
-  opacity: 0.9;
-`;
 
 const BlogPostTags = styled.div`
   display: flex;
@@ -252,7 +163,6 @@ const WelcomeMessage = styled.div`
 
 const BlogLayout = () => {
   const [posts, setPosts] = useState([]);
-  const [expandedDirs, setExpandedDirs] = useState(new Set());
   const { slug } = useParams();
 
   useEffect(() => {
@@ -271,20 +181,6 @@ const BlogLayout = () => {
           return pathA.localeCompare(pathB);
         });
         setPosts(validPosts);
-        
-        // Expand all directories by default
-        const allDirs = new Set();
-        validPosts.forEach(post => {
-          const parts = post.path.split('/');
-          let path = '';
-          parts.forEach((part, index) => {
-            if (index < parts.length - 1) {
-              path = path ? `${path}/${part}` : part;
-              allDirs.add(path);
-            }
-          });
-        });
-        setExpandedDirs(allDirs);
       } catch (error) {
         console.error('Error loading blog posts:', error);
       }
@@ -293,87 +189,8 @@ const BlogLayout = () => {
     loadPosts();
   }, []); // Remove slug from dependencies since we want to maintain expansion state
 
-  const filteredPosts = posts;
 
-  const toggleDirectory = (path) => {
-    setExpandedDirs(prev => {
-      const next = new Set(prev);
-      if (next.has(path)) {
-        next.delete(path);
-      } else {
-        next.add(path);
-      }
-      return next;
-    });
-  };
 
-  const getDirectoryStructure = (posts) => {
-    const structure = {};
-    
-    posts.forEach(post => {
-      const parts = post.path.split('/');
-      let current = structure;
-      let currentPath = '';
-      
-      parts.forEach((part, index) => {
-        currentPath = currentPath ? `${currentPath}/${part}` : part;
-        if (!current[part]) {
-          current[part] = {
-            isFile: index === parts.length - 1,
-            post: index === parts.length - 1 ? post : null,
-            path: currentPath,
-            children: {}
-          };
-        }
-        current = current[part].children;
-      });
-    });
-    
-    return structure;
-  };
-
-  const renderDirectory = (structure, depth = 0) => {
-    return Object.entries(structure).map(([name, node]) => {
-      const hasChildren = Object.keys(node.children).length > 0;
-      const isExpanded = expandedDirs.has(node.path);
-      
-      if (node.isFile) {
-        return (
-          <li key={name}>
-            <PostLink
-              to={`/blog/${encodeURIComponent(node.post.path)}`}
-              className={slug && decodeURIComponent(slug) === node.post.path ? 'active' : ''}
-              $depth={depth}
-            >
-              {node.post.title || name}
-            </PostLink>
-          </li>
-        );
-      }
-      
-      return (
-        <li key={name}>
-          <DirectoryItem>
-            <PostLink
-              as="div"
-              $depth={depth}
-              $isDirectory
-              onClick={() => toggleDirectory(node.path)}
-              style={{ cursor: 'pointer' }}
-            >
-              <TreeIcon>{isExpanded ? '▼' : '▶'}</TreeIcon>
-              {name}
-            </PostLink>
-          </DirectoryItem>
-          {hasChildren && isExpanded && (
-            <PostList>
-              {renderDirectory(node.children, depth + 1)}
-            </PostList>
-          )}
-        </li>
-      );
-    });
-  };
 
   return (
     <BlogContainer>
@@ -385,7 +202,7 @@ const BlogLayout = () => {
             <BlogHeader>
               <h1>Blog</h1>
               <div className="subtitle">
-                Insights on AI, Humanity, & the Future of Creative Scientific Discovery
+                Insights on the Future of Creative Scientific Creativity, Creative AI, and Open-Ended Discovery
               </div>
             </BlogHeader>
             <BlogPostsGrid>
@@ -397,7 +214,7 @@ const BlogLayout = () => {
                         <BlogPostTitle>{post.title.replace(" Manifesto", "\u00A0Manifesto")}</BlogPostTitle>
                         <BlogPostMeta>
                           {post.author && <span>{post.author} • </span>}
-                          {post.date && new Date(post.date).toLocaleDateString('en-US', {
+                          {post.date && new Date(post.date + 'T12:00:00').toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long',
                             day: 'numeric'

@@ -1,13 +1,19 @@
 # Spiral Works Website
 
-A React-based website for Spiral Works.
+## Technology Stack
+
+- **Frontend**: React 18 with React Router DOM 6
+- **Styling**: Styled Components + CSS
+- **3D Graphics**: Three.js with React Three Fiber
+- **Animations**: GSAP + Framer Motion
+- **Blog**: React Markdown with GFM, Math (KaTeX), and Raw HTML support
+- **Deployment**: GitHub Pages
 
 ## Setup Instructions
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/spiralwrks/spiralworks.ai.git
-   git checkout react
    cd spiralworks.ai
    ```
 
@@ -16,44 +22,45 @@ A React-based website for Spiral Works.
    npm install
    ```
 
-3. Set up environment variables (optional):
-   ```bash
-   cp .env.example .env
-   # Edit .env if you need custom configurations
-   ```
-
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm start
    ```
 
-5. Open your browser and visit `http://localhost:3000` to view the website.
+4. Open your browser and visit `http://localhost:3000` to view the website.
 
 ## Available Scripts
 
-In the project directory, you can run:
+### Development
+- `npm start`: Start development server (runs on localhost:3000 with source maps disabled)
+- `npm test`: Run Jest tests
+- `npm run build`: Build for production (source maps disabled)
 
-- `npm start`: Runs the app in development mode.
-- `npm test`: Launches the test runner.
-- `npm run build`: Builds the app for production.
-- `npm run deploy`: Deploys the app to GitHub Pages.
-- `npm run sync-blog`: Syncs blog content from external sources.
-- `npm run predeploy`: Full deployment prep (sync blog + build).
+### Blog Management
+- `npm run sync-blog`: Sync blog content from external sources
+- `npm run predeploy`: Full deployment prep (sync blog + build)
+- `npm run deploy`: Deploy to GitHub Pages
+
+## Core Structure
+```
+src/
+├── components/           # React components
+│   ├── Blog/            # Blog system components
+│   ├── Galaxy.js        # Three.js galaxy background
+│   ├── Home.js          # Landing page
+│   └── Layout.js        # Main layout wrapper
+├── styles/              # CSS files
+├── utils/
+│   └── spiral.js        # Three.js galaxy generation
+└── assets/fonts/        # Custom Chillax font family
+```
 
 ## Deployment
 
-Push to github:
-```shell
-$ git add .
-$ git commit -m "commit msg"
-$ git push -u origin main
+The site automatically deploys to GitHub Pages. For manual deployment:
+
+```bash
+npm run predeploy  # Sync blog content and build
+npm run deploy     # Deploy to GitHub Pages
 ```
-
-## Project Structure
-
-- `src/components`: React components
-- `src/styles`: CSS stylesheets
-- `src/assets`: Images and other static assets
-- `src/utils`: Utility functions and service modules
-- `src/context`: React context providers
 
