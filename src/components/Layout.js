@@ -27,22 +27,14 @@ function Layout() {
             >
               Careers
             </Link>
-            <Link 
-              to="/research" 
+            <Link
+              to="/research"
               className={`navbar-link ${location.pathname === '/research' ? 'active' : ''}`}
             >
               Research
             </Link>
-            <a 
-              href="https://form.typeform.com/to/cHdJn1Ng"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="navbar-link"
-            >
-              Beta
-            </a>
-            <Link 
-              to="/blog" 
+            <Link
+              to="/blog"
               className={`navbar-link ${location.pathname.startsWith('/blog') ? 'active' : ''}`}
             >
               Blog

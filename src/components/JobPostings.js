@@ -6,13 +6,13 @@ import '../styles/jobpostings.css';
 const jobListings = [
   {
     id: 1,
-    title: 'ML Engineer',
-    department: 'Product Development',
+    title: 'AI Engineer',
+    department: 'Model Development',
     location: 'New York City, NY',
     type: 'Full-time',
-    description: 'We are looking for a talented ML Engineer to join our team and help build cutting-edge machine learning systems. You will work on designing, implementing, and deploying ML models at scale.',
+    description: 'We are looking for a talented AI Engineer to join our team and help build frontier pushing AI systems. You will work on designing, implementing, and deploying AI models at scale.',
     requirements: [
-      'Strong engineering skills in Python, PyTorch/TensorFlow, distributed computing architectures, deploying ML models at scale, & optimizing inference pipelines',
+      'Strong engineering skills in Python, PyTorch/TensorFlow, distributed computing architectures, deploying AI models at scale, & optimizing inference pipelines',
       'Maintaining clean, minimal codebases with an emphasis on simplicity and debloat over unnecessary complexity',
       'Background in philosophy of mind, cognitive science, or neuroscience - we believe understanding intelligence requires questioning what intelligence means',
       'Track record of challenging conventional approaches and reimagining what\'s possible rather than iterating on what exists',
@@ -21,13 +21,13 @@ const jobListings = [
   },
   {
     id: 2,
-    title: 'ML Scientist',
+    title: 'AI Scientist',
     department: 'Research Development',
     location: 'New York City, NY',
     type: 'Full-time',
-    description: 'Join our research team to push the boundaries of machine learning. You will conduct research, develop novel algorithms, and publish findings while working on real-world applications.',
+    description: 'Join our research team to push the boundaries of AI. You will conduct research, develop novel algorithms, and publish findings while working on real-world applications.',
     requirements: [
-      'PhD or equivalent research experience in ML/AI with publications at top-tier venues',
+      'PhD or equivalent research experience in AI with publications at top-tier venues',
       'Deep technical expertise in statistical learning theory, optimization, and neural architectures',
       'Serious interest in cognitive science, psychology, or philosophy - particularly creativity and scientific intelligence',
       'History of paradigm-shifting research that questions fundamental assumptions rather than making incremental improvements',

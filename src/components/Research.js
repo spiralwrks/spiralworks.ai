@@ -21,49 +21,39 @@ function Research() {
   const papersRef = useRef([]);
   const heroRef = useRef(null);
 
-  const copyBibtex = (paper) => {
-    const bibtex = `@article{${paper.authors.split(',')[0].split(' ').pop().toLowerCase()}${paper.year},
-  title={${paper.title}},
-  author={${paper.authors}},
-  journal={arXiv preprint arXiv:${paper.arxivId}},
-  year={${paper.year}}
-}`;
-    navigator.clipboard.writeText(bibtex);
-    alert('BibTeX citation copied to clipboard!');
-  };
 
   const papers = [
     {
       id: 1,
+      title: "Combinatorial Creativity: A New Frontier in Generalization Abilities",
+      authors: "Samuel Schapiro, Sumuk Shashidhar, Alexi Gladstone, Jonah Black, Royce Moon, Dilek Hakkani-Tur, Lav R. Varshney",
+      year: "2025",
+      venue: "Under Review",
+      landingPageUrl: "https://cc.spiralworks.ai",
+      abstract: "LLMs are increasingly used for creative tasks, yet we lack proper ways to evaluate and understand their creative abilities. We provide the first systematic evaluation framework for combinatorial creativity (CC), uncovering fundamental limitations that persist even as models scale.",
+      keywords: ["Combinatorial Creativity", "Generalization", "AI Capabilities"]
+    },
+    {
+      id: 2,
       title: "Spark: A System for Scientifically Creative Idea Generation",
       authors: "Aishik Sanyal, Samuel Schapiro, Sumuk Shashidhar, Royce Moon, Lav R. Varshney, Dilek Hakkani-Tur",
       year: "2025",
       venue: "ICCC 2025",
       arxivId: "2504.20090",
-      abstract: "Recently, large language models (LLMs) have shown promising abilities to generate novel research ideas in science, a direction which coincides with many foundational principles in computational creativity (CC). We present Spark, an innovative idea generation system that leverages these capabilities.",
-      keywords: ["Computational Creativity", "LLMs", "Information Retrieval"],
-      highlights: [
-        "Developed Spark, an innovative idea generation system leveraging computational creativity principles",
-        "Coupled retrieval-augmented idea generation using large language models for scientific research",
-        "Created and trained Judge, a specialized reviewer model for evaluating scientific ideas",
-        "Released an annotated dataset for training idea evaluation models"
-      ]
+      alphaXivUrl: "https://www.alphaxiv.org/overview/2504.20090v2",
+      abstract: "We present SPARK, a new AI system that integrates literature retrieval and LLM-based idea generation with a specialized JUDGE model for critical evaluation, effectively producing and filtering over 10,000 AI-focused research ideas. We trained the JUDGE model on 600K scientific peer reviews, demonstrating superior critical assessment compared to general-purpose LLMs, addressing the 'agreeableness bias.'",
+      keywords: ["Computational Creativity", "LLMs", "Scientific Idea Generation"]
     },
     {
-      id: 2,
+      id: 3,
       title: "Transformational Creativity in Science: A Graphical Theory",
       authors: "Samuel Schapiro, Jonah Black, Lav R. Varshney",
       year: "2025",
       venue: "ICCC 2025",
       arxivId: "2504.18687",
-      abstract: "Creative processes are typically divided into three types: combinatorial, exploratory, and transformational. Here, we provide a graphical theory of transformational scientific creativity, synthesizing Boden's insight that transformational creativity arises from changes in the 'enabling constraints' of a conceptual space and Kuhn's structure of scientific revolutions.",
-      keywords: ["Scientific Creativity", "Conceptual Spaces", "Paradigm Shifts"],
-      highlights: [
-        "Developed a novel graphical theory of transformational scientific creativity",
-        "Synthesized foundational ideas from Margaret Boden and Thomas Kuhn's work",
-        "Mathematically proved that modifications to axioms have the most transformative potential",
-        "Illustrated historical instances of transformational creativity using theoretical framework"
-      ],
+      alphaXivUrl: "https://www.alphaxiv.org/overview/2504.18687v2",
+      abstract: "We developed a graphical theory to model transformational creativity in science, demonstrating that modifications to foundational axioms have the most extensive impact on scientific conceptual spaces. We provide a rigorous, formal understanding of how fundamental changes in scientific thought lead to paradigm shifts.",
+      keywords: ["Computational Creativity", "Scientific Creativity", "Paradigm Shifts"],
       award: {
         title: "Best Short Paper Award",
         conference: "ICCC 2025",
@@ -110,7 +100,6 @@ function Research() {
     const paper = papersRef.current[index];
     if (paper) {
       gsap.to(paper, {
-        scale: 1.02,
         duration: 0.3,
         ease: "power2.out"
       });
@@ -121,7 +110,6 @@ function Research() {
     const paper = papersRef.current[index];
     if (paper) {
       gsap.to(paper, {
-        scale: 1,
         duration: 0.3,
         ease: "power2.out"
       });
@@ -135,20 +123,6 @@ function Research() {
       <div className="research-hero" ref={heroRef}>
         <div className="research-hero-content">
           <h1 className="research-title">Advancing the Frontier of Creative AI</h1>
-          <div className="research-stats">
-            <div className="stat-item">
-              <span className="stat-number">10+</span>
-              <span className="stat-label">Research Fellows</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">20M</span>
-              <span className="stat-label">Pages of Scientific Data Analyzed</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">3</span>
-              <span className="stat-label">Types of Creativity Modeled</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -221,45 +195,48 @@ function Research() {
               <p className="paper-authors">{paper.authors}</p>
               
               {paper.venue && (
-                <p className="paper-venue">Accepted at {paper.venue}</p>
+                <p className="paper-venue">{paper.venue === "Under Review" ? "Under Review" : `Accepted at ${paper.venue}`}</p>
               )}
               
               <p className="paper-abstract">{paper.abstract}</p>
 
-              <div className="paper-highlights">
-                <h3 className="highlights-title">Key Contributions</h3>
-                <ul className="highlights-list">
-                  {paper.highlights.map((highlight, idx) => (
-                    <li key={idx}>{highlight}</li>
-                  ))}
-                </ul>
-              </div>
 
               <div className="paper-links">
-                <a 
-                  href={`https://arxiv.org/abs/${paper.arxivId}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="paper-link arxiv-link"
-                >
-                  <svg className="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                  Read on arXiv
-                </a>
-                <button 
-                  className="paper-link cite-link"
-                  onClick={() => copyBibtex(paper)}
-                >
-                  <svg className="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M9 11H3v2h6v-2zm0-4H3v2h6V7zm0 8H3v2h6v-2zm12-4h-6v2h6v-2zm0-4h-6v2h6V7zm0 8h-6v2h6v-2z" />
-                  </svg>
-                  Cite
-                </button>
+                {paper.landingPageUrl ? (
+                  <a
+                    href={paper.landingPageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="paper-link landing-page-link"
+                  >
+                    <svg className="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                    Landing Page
+                  </a>
+                ) : (
+                  <>
+                    <a
+                      href={paper.alphaXivUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="paper-link alphaxiv-link"
+                    >
+                      <i className="fas fa-file-pdf link-icon"></i>
+                      alphaXiv
+                    </a>
+                    <a
+                      href={`https://arxiv.org/abs/${paper.arxivId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="paper-link arxiv-link"
+                    >
+                      <i className="ai ai-arxiv link-icon"></i>
+                      arXiv
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           ))}
@@ -270,8 +247,7 @@ function Research() {
         <div className="footer-content">
           <h2 className="footer-title">Collaborate With Us</h2>
           <p className="footer-text">
-            We're always looking for talented researchers and engineers to join our mission
-            of advancing creative superintelligence.
+            We're always looking for talented researchers and engineers to join our mission of working towards creative superintelligence.
           </p>
           <a href="mailto:join@spiralworks.ai" className="footer-email">
             join@spiralworks.ai
