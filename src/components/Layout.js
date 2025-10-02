@@ -15,14 +15,14 @@ function Layout() {
           </Link>
           
           <div className="navbar-menu">
-            <Link 
-              to="/manifesto" 
+            {/* <Link
+              to="/manifesto"
               className={`navbar-link ${location.pathname === '/manifesto' ? 'active' : ''}`}
             >
               Manifesto
-            </Link>
-            <Link 
-              to="/careers" 
+            </Link> */}
+            <Link
+              to="/careers"
               className={`navbar-link ${location.pathname === '/careers' ? 'active' : ''}`}
             >
               Careers

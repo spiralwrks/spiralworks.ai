@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Landscape Vectors</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('./src/styles/chillax.css');
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: rgba(19, 15, 22, 0.8);
+            overflow: hidden;
+            font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: white;
+        }
+
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .visualization-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .text-box {
+            position: absolute;
+            background:
+                radial-gradient(circle at 25% 25%, rgba(134, 34, 201, 0.08) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 75% 25%, rgba(50, 34, 201, 0.06) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 25% 75%, rgba(166, 77, 255, 0.10) 0.5px, transparent 0.5px),
+                radial-gradient(circle at 75% 75%, rgba(134, 34, 201, 0.08) 0.5px, transparent 0.5px),
+                linear-gradient(135deg, rgba(134, 34, 201, 0.35) 0%, rgba(50, 34, 201, 0.25) 50%, rgba(166, 77, 255, 0.30) 100%);
+            background-size: 2px 2px, 3px 3px, 2.5px 2.5px, 2px 2px, 100% 100%;
+            background-position: 0 0, 1px 1px, 0.5px 0.5px, 1.5px 1.5px, 0 0;
+            backdrop-filter: blur(20px) saturate(1.1);
+            -webkit-backdrop-filter: blur(20px) saturate(1.1);
+            border: 1px solid rgba(134, 34, 201, 0.6);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.6),
+                0 0 60px rgba(134, 34, 201, 0.3),
+                inset 0 1px 0 rgba(134, 34, 201, 0.4);
+            z-index: 10;
+            opacity: 0.98;
+            transition: all 0.3s ease;
+        }
+
+        .text-box:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.5),
+                0 0 80px rgba(134, 34, 201, 0.2),
+                inset 0 1px 0 rgba(134, 34, 201, 0.3);
+        }
+
+        .creativity-box {
+            top: 25%;
+            left: 15%;
+            width: 300px;
+        }
+
+        .reasoning-box {
+            bottom: 25%;
+            right: 15%;
+            width: 300px;
+        }
+
+        .box-title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 24px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        .box-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 0;
+        }
+
+        .trait {
+            margin-bottom: 16px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, rgba(134, 34, 201, 0.4) 0%, rgba(166, 77, 255, 0.25) 100%);
+            border: 1px solid rgba(166, 77, 255, 0.7);
+            border-radius: 8px;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(134, 34, 201, 0.3);
+            text-align: center;
+        }
+
+        .trait:hover {
+            background: linear-gradient(135deg, rgba(134, 34, 201, 0.25) 0%, rgba(166, 77, 255, 0.15) 100%);
+            border-color: rgba(166, 77, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(134, 34, 201, 0.2);
+        }
+
+
+        @media (max-width: 1200px) {
+            .creativity-box {
+                width: 280px;
+                left: 8%;
+                top: 20%;
+            }
+
+            .reasoning-box {
+                width: 280px;
+                right: 8%;
+                bottom: 20%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="canvas-container">
+            <canvas class="visualization-canvas" id="visualization"></canvas>
+        </div>
+
+        <div class="text-box creativity-box">
+            <h3 class="box-title">Creativity</h3>
+            <div class="box-content">
+                <div class="trait">Open-ended</div>
+                <div class="trait">Cognitive leaps</div>
+                <div class="trait">Novel and useful</div>
+            </div>
+        </div>
+
+        <div class="text-box reasoning-box">
+            <h3 class="box-title">Reasoning</h3>
+            <div class="box-content">
+                <div class="trait">Closed-ended</div>
+                <div class="trait">Multi-step reasoning</div>
+                <div class="trait">Useful</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Three.js scene setup
+        const canvas = document.getElementById('visualization');
+        const scene = new THREE.Scene();
+
+        // Camera setup
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(5, 3, 5);
+        camera.lookAt(0, 0, 0);
+
+        // Renderer setup
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            alpha: true,
+            antialias: true
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create layered grid with enhanced depth
+        const gridGroup = new THREE.Group();
+
+        // Main grid
+        const gridHelper1 = new THREE.GridHelper(10, 20, 0x8622c9, 0x8622c9);
+        gridHelper1.material.opacity = 0.4;
+        gridHelper1.material.transparent = true;
+        gridHelper1.position.y = -2;
+        gridGroup.add(gridHelper1);
+
+        // Secondary grid for depth
+        const gridHelper2 = new THREE.GridHelper(12, 24, 0x3222c9, 0x3222c9);
+        gridHelper2.material.opacity = 0.15;
+        gridHelper2.material.transparent = true;
+        gridHelper2.position.y = -2.2;
+        gridGroup.add(gridHelper2);
+
+        // Tertiary grid for more depth
+        const gridHelper3 = new THREE.GridHelper(8, 16, 0xa64dff, 0xa64dff);
+        gridHelper3.material.opacity = 0.08;
+        gridHelper3.material.transparent = true;
+        gridHelper3.position.y = -1.8;
+        gridGroup.add(gridHelper3);
+
+        scene.add(gridGroup);
+
+        // Create orthogonal vectors from center origin (properly positioned and centered)
+        const axesGroup = new THREE.Group();
+        const origin = new THREE.Vector3(1.5, -1, 1); // Move origin down and to the right, closer to viewer
+
+        // Create vectors from the repositioned origin (rotated counterclockwise on both X and Y axes)
+        const creativityVector = new THREE.Vector3(-1, 1.5, 2.5); // Rotated counterclockwise on X and Y
+        const reasoningVector = new THREE.Vector3(3, 0.5, -0.5); // Rotated counterclockwise on X and Y, orthogonal to creativity
+
+        // Creativity axis (dashed line with glow effect)
+        const creativityMaterial = new THREE.LineDashedMaterial({
+            color: 0xa64dff,
+            dashSize: 0.15,
+            gapSize: 0.1,
+            transparent: true,
+            opacity: 0.9
+        });
+
+        // Add glow effect for creativity line
+        const creativityGlowMaterial = new THREE.LineDashedMaterial({
+            color: 0xa64dff,
+            dashSize: 0.15,
+            gapSize: 0.1,
+            transparent: true,
+            opacity: 0.3,
+            linewidth: 3
+        });
+
+        const creativityPoints = [origin, creativityVector];
+        const creativityGeometry = new THREE.BufferGeometry().setFromPoints(creativityPoints);
+        const creativityLine = new THREE.Line(creativityGeometry, creativityMaterial);
+        creativityLine.computeLineDistances();
+        axesGroup.add(creativityLine);
+
+        // Add glow line for creativity
+        const creativityGlowGeometry = new THREE.BufferGeometry().setFromPoints(creativityPoints);
+        const creativityGlow = new THREE.Line(creativityGlowGeometry, creativityGlowMaterial);
+        creativityGlow.computeLineDistances();
+        axesGroup.add(creativityGlow);
+
+        // Creativity arrow (simple original design)
+        const creativityArrowGeometry = new THREE.ConeGeometry(0.04, 0.15);
+        const creativityArrowMaterial = new THREE.MeshBasicMaterial({ color: 0xa64dff });
+        const creativityArrow = new THREE.Mesh(creativityArrowGeometry, creativityArrowMaterial);
+        creativityArrow.position.copy(creativityVector);
+
+        // Calculate direction from origin to arrow tip and align properly
+        const creativityDirection = creativityVector.clone().sub(origin).normalize();
+        creativityArrow.lookAt(creativityVector.clone().add(creativityDirection));
+        creativityArrow.rotateX(Math.PI / 2); // Rotate to align with vector direction
+        axesGroup.add(creativityArrow);
+
+        // Reasoning axis (dashed line with glow effect)
+        const reasoningMaterial = new THREE.LineDashedMaterial({
+            color: 0x8622c9,
+            dashSize: 0.15,
+            gapSize: 0.1,
+            transparent: true,
+            opacity: 0.9
+        });
+
+        // Add glow effect for reasoning line
+        const reasoningGlowMaterial = new THREE.LineDashedMaterial({
+            color: 0x8622c9,
+            dashSize: 0.15,
+            gapSize: 0.1,
+            transparent: true,
+            opacity: 0.3,
+            linewidth: 3
+        });
+
+        const reasoningPoints = [origin, reasoningVector];
+        const reasoningGeometry = new THREE.BufferGeometry().setFromPoints(reasoningPoints);
+        const reasoningLine = new THREE.Line(reasoningGeometry, reasoningMaterial);
+        reasoningLine.computeLineDistances();
+        axesGroup.add(reasoningLine);
+
+        // Add glow line for reasoning
+        const reasoningGlowGeometry = new THREE.BufferGeometry().setFromPoints(reasoningPoints);
+        const reasoningGlow = new THREE.Line(reasoningGlowGeometry, reasoningGlowMaterial);
+        reasoningGlow.computeLineDistances();
+        axesGroup.add(reasoningGlow);
+
+        // Reasoning arrow (simple original design)
+        const reasoningArrowGeometry = new THREE.ConeGeometry(0.04, 0.15);
+        const reasoningArrowMaterial = new THREE.MeshBasicMaterial({ color: 0x8622c9 });
+        const reasoningArrow = new THREE.Mesh(reasoningArrowGeometry, reasoningArrowMaterial);
+        reasoningArrow.position.copy(reasoningVector);
+
+        // Calculate direction from origin to arrow tip and align properly
+        const reasoningDirection = reasoningVector.clone().sub(origin).normalize();
+        reasoningArrow.lookAt(reasoningVector.clone().add(reasoningDirection));
+        reasoningArrow.rotateX(Math.PI / 2); // Rotate to align with vector direction
+        axesGroup.add(reasoningArrow);
+
+        scene.add(axesGroup);
+
+        // Add ambient lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+        scene.add(ambientLight);
+
+        // Add directional light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(10, 10, 5);
+        scene.add(directionalLight);
+
+
+        // Static render (no animation)
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize
+        function handleResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            render(); // Re-render on resize
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        // Initial render
+        render();
+    </script>
+</body>
+</html>
