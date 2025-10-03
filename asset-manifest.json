@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f303898b.css",
-    "main.js": "/static/js/main.dfc9b9ac.js",
+    "main.css": "/static/css/main.7fbb3dc8.css",
+    "main.js": "/static/js/main.a02760de.js",
     "static/js/139.52ce517e.chunk.js": "/static/js/139.52ce517e.chunk.js",
     "static/js/737.3fe8b2a0.chunk.js": "/static/js/737.3fe8b2a0.chunk.js",
     "static/media/Chillax-Variable.ttf": "/static/media/Chillax-Variable.35be36f56031260cf435.ttf",
@@ -98,7 +98,7 @@
     "static/media/mit.svg": "/static/media/mit.f9d5cdd1327437a278846d77c7838dc4.svg"
   },
   "entrypoints": [
-    "static/css/main.f303898b.css",
-    "static/js/main.dfc9b9ac.js"
+    "static/css/main.7fbb3dc8.css",
+    "static/js/main.a02760de.js"
   ]
 }
