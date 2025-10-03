@@ -147,26 +147,37 @@
   font-weight: 400;
 }
 
-.apply-button {
-  background: linear-gradient(135deg, #8622c9 0%, #a64dff 100%);
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  font-size: 1rem;
+.job-postings-footer {
+  text-align: center;
+  padding: 60px 20px;
+  margin-top: 40px;
+}
+
+.job-postings-footer h2 {
+  font-size: 2rem;
   font-weight: 400;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1rem;
+  color: var(--text-color);
   font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.apply-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(134, 34, 201, 0.3);
+.job-postings-footer p {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  opacity: 0.9;
+  font-family: 'Chillax Variable', 'Chillax', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.apply-button:active {
-  transform: translateY(0);
+.job-postings-footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.3s ease;
+}
+
+.job-postings-footer a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
 /* Dark theme adjustments */

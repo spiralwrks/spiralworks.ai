@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import JobApplicationForm from './JobApplicationForm';
+import React from 'react';
 import StarryBackground from './StarryBackground';
 import '../styles/jobpostings.css';
 
@@ -37,19 +36,6 @@ const jobListings = [
 ];
 
 function JobPostings() {
-  const [selectedJob, setSelectedJob] = useState(null);
-  const [showApplicationForm, setShowApplicationForm] = useState(false);
-
-  const handleApplyClick = (job) => {
-    setSelectedJob(job);
-    setShowApplicationForm(true);
-  };
-
-  const handleCloseForm = () => {
-    setShowApplicationForm(false);
-    setSelectedJob(null);
-  };
-
   return (
     <div className="job-postings-container">
       <StarryBackground />
@@ -83,22 +69,14 @@ function JobPostings() {
               </ul>
             </div>
 
-            <button 
-              className="apply-button"
-              onClick={() => handleApplyClick(job)}
-            >
-              Apply Now
-            </button>
           </div>
         ))}
       </div>
 
-      {showApplicationForm && (
-        <JobApplicationForm 
-          job={selectedJob}
-          onClose={handleCloseForm}
-        />
-      )}
+      <div className="job-postings-footer">
+        <h2>Ready to Join?</h2>
+        <p>Reach out to us at <a href="mailto:join@spiralworks.ai">join@spiralworks.ai</a></p>
+      </div>
     </div>
   );
 }
