@@ -30,35 +30,35 @@ function Research() {
       year: "2025",
       venue: "Under Review",
       landingPageUrl: "https://cc.spiralworks.ai",
-      abstract: "LLMs are increasingly used for creative tasks, yet we lack proper ways to evaluate and understand their creative abilities. We provide the first systematic evaluation framework for combinatorial creativity (CC), uncovering fundamental limitations that persist even as models scale.",
+      abstract: "We establish \"combinatorial creativity\" as an entirely new category of AI generalization that goes far beyond existing frameworks. Unlike traditional generalization which has fixed correct answers, we show that combinatorial creativity is open-ended and evaluated on degrees of novelty and utility, mirroring how humans actually create and discover. By systematically studying this new form of generalization, we reveal fundamental architectural insights (optimal width-to-depth ratios) and discover a persistent novelty-utility tradeoff that suggests current scaling approaches may be insufficient for creative tasks. Our work represents a paradigm shift from viewing creativity as a fuzzy human trait to understanding it as a measurable, systematic form of generalization, opening entirely new research directions for building AI systems capable of genuine scientific discovery and innovation.",
       keywords: ["Combinatorial Creativity", "Generalization", "AI Capabilities"]
     },
     {
       id: 2,
-      title: "Spark: A System for Scientifically Creative Idea Generation",
-      authors: "Aishik Sanyal, Samuel Schapiro, Sumuk Shashidhar, Royce Moon, Lav R. Varshney, Dilek Hakkani-Tur",
-      year: "2025",
-      venue: "ICCC 2025",
-      arxivId: "2504.20090",
-      alphaXivUrl: "https://www.alphaxiv.org/overview/2504.20090v2",
-      abstract: "We present SPARK, a new AI system that integrates literature retrieval and LLM-based idea generation with a specialized JUDGE model for critical evaluation, effectively producing and filtering over 10,000 AI-focused research ideas. We trained the JUDGE model on 600K scientific peer reviews, demonstrating superior critical assessment compared to general-purpose LLMs, addressing the 'agreeableness bias.'",
-      keywords: ["Computational Creativity", "LLMs", "Scientific Idea Generation"]
-    },
-    {
-      id: 3,
       title: "Transformational Creativity in Science: A Graphical Theory",
       authors: "Samuel Schapiro, Jonah Black, Lav R. Varshney",
       year: "2025",
       venue: "ICCC 2025",
       arxivId: "2504.18687",
       alphaXivUrl: "https://www.alphaxiv.org/overview/2504.18687v2",
-      abstract: "We developed a graphical theory to model transformational creativity in science, demonstrating that modifications to foundational axioms have the most extensive impact on scientific conceptual spaces. We provide a rigorous, formal understanding of how fundamental changes in scientific thought lead to paradigm shifts.",
+      abstract: "We present a formal graphical theory that fundamentally reframes how transformational scientific creativity occurs, proving that modifications to the foundational axioms of a conceptual space have the greatest transformative potential. By modeling scientific conceptual spaces as directed acyclic graphs where axioms are sink nodes and rules depend on these foundational assumptions, we demonstrate mathematically why paradigm shifts like Einstein's relativity, the Copernican revolution, and non-Euclidean geometry were so revolutionary: they transformed the very axioms upon which entire scientific domains were built. Our framework not only provides the first rigorous formalization of Boden's insight about \"enabling constraints\" and Kuhn's structure of scientific revolutions, but also opens a promising pathway toward building AI super-scientists capable of making transformative breakthroughs by explicitly modeling and manipulating the dependency structures that govern scientific knowledge. This work provides the first formal treatment of the notion that the most impactful scientific discoveries restructure the fundamental assumptions that make entire classes of artifacts and theories possible.",
       keywords: ["Computational Creativity", "Scientific Creativity", "Paradigm Shifts"],
       award: {
         title: "Best Short Paper Award",
         conference: "ICCC 2025",
         category: "Scientific Creativity Research"
       }
+    },
+    {
+      id: 3,
+      title: "Spark: A System for Scientifically Creative Idea Generation",
+      authors: "Aishik Sanyal, Samuel Schapiro, Sumuk Shashidhar, Royce Moon, Lav R. Varshney, Dilek Hakkani-Tur",
+      year: "2025",
+      venue: "ICCC 2025",
+      arxivId: "2504.20090",
+      alphaXivUrl: "https://www.alphaxiv.org/overview/2504.20090v2",
+      abstract: "We demonstrate through SPARK that large language models can be effectively combined with computational creativity principles to generate and evaluate scientific research ideas at scale. Our system integrates three key components: literature retrieval through XPLOR, structured idea generation using LLMs, and automated peer review through our JUDGE model trained on 600K OpenReview papers, to create a unified workflow for scientific ideation. We show that specialized training on academic review data enables more rigorous evaluation of research proposals compared to general-purpose LLMs, while our retrieval-augmented approach grounds idea generation in existing literature to improve novelty and feasibility. Most significantly, we establish that AI systems can move beyond simple text generation to engage in the foundational creative processes of science, though we acknowledge current limitations in generating truly transformational ideas that restructure entire conceptual spaces. By releasing our annotated dataset and demonstrating scalable idea evaluation, we provide the computational creativity community with both practical tools and a framework for exploring how AI can augment human scientific discovery while maintaining the critical assessment standards essential to research quality.",
+      keywords: ["Computational Creativity", "LLMs", "Scientific Idea Generation"]
     }
   ];
 
